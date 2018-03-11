@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>SkillsCraft</title>
+  <meta charset="utf-8">
+  <meta name="SkillsCraft" content="Index">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/item.css">
+  <link rel="stylesheet" href="css/addnew.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/editItem.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <!--<link rel="stylesheet" href="css/fontawesome-all.min.css">-->
+
+</head>
+<body>
+  <div class="navigation">
+    <div class="nav-logo-wrapper">
+      <a href="index.html"><img class="nav-logo" src="img/logoWhite.svg"></a>
+      <form class="nav-logout-wrapper" action="./index.html">
+        <button class="button button-logout btn-white" type="submit" value="Submit">Logout</button>
+      </form>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#">Equipment</a></li>
+      <li><a href="./adminWorkshop.html">Workshops</a></li>
+      <li><a href="Category">Category</a></li>
+    </ul>
+  </div>
+  <div class="searchbar">
+    <div class="taskbar-inner">
+      <button class="taskbar-btn button btn-red">Confirmation Email</button>
+      <button class="taskbar-btn button btn-red">End Workshop</button>
+      <button class="taskbar-btn button btn-red">Delete Workshop</button>
+    </div>
+    <form action="/action_page.php">
+      <button class="button-round search-submit" type="submit" value="Submit"><i class="fas fa-arrow-right"></i></button>
+      <input class="input search-input" type="text" name="workshops" placeholder="Crafting, Sewing...">
+    </form>
+  </div>
+
+  <div class="wrapper cont-item">
+    <div class="cont-item-wrapper">
+      <form action="./adminWorkshop.html">
+        <div class="cont-left">
+          <h class="item-desc-title">Description</h>
+          <textarea class="input input-item input-desc" type="text" name="description" ></textarea>
+          <button class="popup-register-btn button btn-red" data-popup-open="popup-1">Save Changes</button>
+        </div>
+        <div class="cont-right">
+          <input class="item-row input-item" type="text" name="title" placeholder="Title">
+          <input class="item-row input-item" type="text" name="category" placeholder="category">
+          <input class="item-row input-item" type="text" name="date" placeholder="date">
+          <input class="item-row input-item" type="text" name="time" placeholder="time">
+          <input class="item-row input-item" type="text" name="Level" placeholder="Level">
+        </div>
+      </form>
+    </div>
+
+    <div class="cont-registered">
+      <ul class="edit-list-wrapper">
+        <li class="edit-item dashboard-title">
+          <span class="col name-title">Name</span>
+          <span class="col contact-title">Contact</span>
+          <span class="col email">Email</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="popup" data-popup="popup-1">
+  <div class="popup-inner  popup-register">
+    <h class="popup-text">Created</h>
+    <p class="popup-smalltext">The workshop has been created. Browse workshops to edit the workshop.</p>
+    <button class="popup-register-btn button btn-red"  type="submit" value="Submit">Confirm</button>
+    <a class="popup-close" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
+  </div>
+</div>
+
+<script src="js/modal.js"></script>
+<script src="js/editItem.js"></script>
+
+
+</body>
+</html>

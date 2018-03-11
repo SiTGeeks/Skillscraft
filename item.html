@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>SkillsCraft</title>
+  <meta charset="utf-8">
+  <meta name="SkillsCraft" content="Index">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="css/general.css">
+  <link rel="stylesheet" href="css/navigation.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/item.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <!--<link rel="stylesheet" href="css/fontawesome-all.min.css">-->
+
+</head>
+
+<body>
+  <div class="navigation">
+    <div class="nav-logo-wrapper">
+      <a href="index.html"><img class="nav-logo" src="img/logoWhite.svg"></a>
+      <form class="nav-logout-wrapper" action="./index.html">
+        <button class="button button-logout btn-white" type="submit" value="Submit">Logout</button>
+      </form>
+    </div>
+  </div>
+  <div class="searchbar">
+    <form action="/action_page.php">
+      <button class="button-round search-submit" type="submit" value="Submit"><i class="fas fa-arrow-right"></i></button>
+      <input class="input search-input" type="text" name="workshops" placeholder="Crafting, Sewing...">
+    </form>
+  </div>
+  <div class="banner">
+    <h class="banner-title">Crafting</h>
+  </div>
+
+  <div class="wrapper cont-item">
+    <div class="cont-item-wrapper">
+      <div class="cont-left">
+        <h class="item-desc-title">Description</h>
+        <p class="item-desc">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque pulvinar velit nibh, vel viverra est consectetur et. Maecenas consequat elit lectus, vitae fringilla leo vulputate nec. Vivamus sagittis accumsan magna, vitae molestie dui pulvinar eleifend. Ut sodales quam in ligula facilisis, ac pulvinar tellus placerat. Suspendisse imperdiet, leo at maximus pulvinar, eros purus bibendum nulla, at tincidunt sem tellus et metus. Sed elementum diam eu nisi viverra imperdiet.
+        </p>
+        <div class="register-btn button btn-red"  data-popup-open="popup-1">Register</div>
+      </div>
+
+      <div class="cont-right">
+        <div class="item-row"><i class="far fa-user item-icon"></i>24/50</div>
+        <div class="item-row"><i class="fas fa-map-marker item-icon"></i>SR1C</div>
+        <div class="item-row"><i class="far fa-calendar item-icon"></i>24 Aug 2017</div>
+        <div class="item-row"><i class="far fa-clock item-icon"></i>Every Wed, 15:00 - 16:00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="popup" data-popup="popup-1">
+    <div class="popup-inner  popup-register">
+      <h class="popup-text">Register</h>
+      <p class="popup-smalltext">Indicated your interest for the workshop. We will inform you once the class is confirmed.</p>
+      <form action="/action_page.php">
+        <input class="input register-input" type="text" name="username" placeholder="Username">
+        <input class="input register-input" type="text" name="email" placeholder="email">
+        <input class="input register-input" type="text" name="contact" placeholder="contact">
+        <button class="popup-register-btn button btn-red"  data-popup-open="popup-2" data-popup-close="popup-1">Register</button>
+      </form>
+      <a class="popup-close" data-popup-close="popup-1" href="#"><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+
+  <div class="popup" data-popup="popup-2">
+    <div class="popup-inner  popup-register">
+      <h class="popup-text">Success</h>
+      <p class="popup-smalltext">Register success! Click to return to the home page.</p>
+      <a href="./workshop.html"><button class="popup-register-btn button btn-red">Home</button></a>
+      <a class="popup-close" data-popup-close="popup-2" href="#"><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+
+  <script src="js/modal.js"></script>
+  <script src="js/modal.js"></script>
+
+</body>
+</html>
