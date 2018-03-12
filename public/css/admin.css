@@ -1,0 +1,19 @@
+.admin-username{
+  width:100%;
+}
+
+.admin-password{
+  width:100%;
+}
+
+.admin-login{
+  padding-top:0px;
+  margin-top: 10px;
+}
+
+.admin-link-wrapper{
+  max-width: 400px;
+  width:100%;
+  height: auto;
+  margin: 48px auto;
+}

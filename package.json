@@ -1,0 +1,19 @@
+{
+  "name": "skillcraft",
+  "version": "1.0.0",
+  "description": "Portal for Skill Craft spaces",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "*",
+    "client-sessions": "^0.8.0",
+    "ejs": "^2.5.7",
+    "express": "*",
+    "firebase": "^4.10.1",
+    "client-sessions": "*"
+  }
+}
