@@ -22,7 +22,10 @@ module.exports = function(app){
 
 	app.get("/sc-admin/home", function(req, res){
 		//admin logged in home
-		res.render('dashboard');
+		res.render('dashboard',
+		{
+			bannerText:"Admin Dashboard"
+		});
 	});
 
 	app.get("/sc-admin/workshop", function(req, res){
