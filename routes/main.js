@@ -1,3 +1,5 @@
+const dbUtil = require('../firebaseCollection');
+
 module.exports = function(app){
 	//get functions
 	app.get("/", function(req, res){
@@ -16,12 +18,15 @@ module.exports = function(app){
 		res.end();
 	});
 
-	app.get("/workshop/ws", function(req, res){
-		//workshop details
-		console.log(req.query.ws);
+	app.get("/workshop/ws/:ws", function(req, res){
 		//fetch db using ws
-		res.render('item');
-		res.end();
+		workshopPromise = dbUtil.getWorkshopWithId(req.params.ws, function(data){
+			console.log(data);
+			res.render('item',{ws: data});
+			res.end;
+		});
+		// res.render('item');
+		// res.end();
 	});
 
 	//post functions

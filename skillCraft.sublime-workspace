@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"workshopS",
+				"workshopsSnapshot"
+			],
+			[
+				"workshopN",
+				"workshopsSnapshot"
+			],
+			[
+				"workshops",
+				"workshopsSnapshot"
+			],
+			[
+				"workshop",
+				"workshopSnapshot"
+			],
+			[
 				"getCourse",
 				"getCourseParticipants"
 			],
@@ -498,78 +514,78 @@
 			[
 				"pre",
 				"prev_follow_up\tstatement"
-			],
-			[
-				"prev_",
-				"prev_follow_upKey\tstatement"
-			],
-			[
-				"follo",
-				"follow_up\tstatement"
-			],
-			[
-				"que",
-				"questionSet\tstatement"
-			],
-			[
-				"cv",
-				"cvList\tstatement"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "package.json",
+			"file": "public/js/workshops.js",
 			"settings":
 			{
-				"buffer_size": 410,
+				"buffer_size": 1899,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/dashboard.ejs",
+			"settings":
+			{
+				"buffer_size": 2080,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/admin.ejs",
+			"settings":
+			{
+				"buffer_size": 1533,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/addnew.ejs",
+			"settings":
+			{
+				"buffer_size": 3201,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/adminWorkshop.ejs",
+			"settings":
+			{
+				"buffer_size": 1951,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "firebaseCollection.js",
+			"settings":
+			{
+				"buffer_size": 4300,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/Dong Xiang/Desktop/skillCraft/db/FirebaseApp/server.js",
+			"settings":
+			{
+				"buffer_size": 1192,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "app.js",
 			"settings":
 			{
-				"buffer_size": 1456,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "FirebaseConfig.js",
-			"settings":
-			{
-				"buffer_size": 357,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "QRUtils.js",
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "module.exports = {\n\t//sc-admin\n\tloginValidate: function loginValidate(){\n\t\t//db function, admin check, return user obj\n\n\t\tdelete user.password\n\t\treturn user\n\t},\n\n\tgetAdminDetail: function getAdminDetail(user){\n\n\t},\n\n\t//main\n\tsignUpCourse: function signUpCourse(course,name , email, contact){\n\n\t}\n\n\t//ajax\n\n\n}\n\n\n",
-			"file": "databaseInterface.js",
-			"file_size": 335,
-			"file_write_time": 131647790249638348,
-			"settings":
-			{
-				"buffer_size": 311,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "routes/index.js",
-			"settings":
-			{
-				"buffer_size": 111,
+				"buffer_size": 1591,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -578,7 +594,7 @@
 			"file": "routes/main.js",
 			"settings":
 			{
-				"buffer_size": 569,
+				"buffer_size": 698,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -587,24 +603,19 @@
 			"file": "routes/sc-admin.js",
 			"settings":
 			{
-				"buffer_size": 972,
+				"buffer_size": 1599,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "# ict2105-team02-2018-glass\nGoogle glass app for Sound Glasses\n\nDevelopment: [![Build Status](https://travis-ci.com/sgtech-ict2105/ict2105-team02-2018-glass.svg?token=QvRx6SwCcNBgpZykHKJz&branch=development)](https://travis-ci.com/sgtech-ict2105/ict2105-team02-2018-glass)\n",
-			"settings":
-			{
-				"buffer_size": 273,
-				"line_ending": "Windows"
-			}
-		},
-		{
+			"contents": "const dbUtil = require('../firebaseCollection');\nvar res;\n\nmodule.exports = function(app){\n\tapp.get(\"/ajax\", function(req, resp){\n\t\tres = resp\n\t\tajaxReply = handleAjax(req.query.action,req.query.param);\n\t\t//res.json(ajaxReply);\n\t\t//res.end();\n\t});\n}\n\nfunction handleAjax(action, param,res){\n\treply = \"\";\n\t\n\tif(action == \"getAllWorkshops\"){\n\t\tgetAllWorkshops();\n\t}else if(action == \"getAllCourseAdmin\"){\n\t\treply = getAllCourseAdmin();\n\t}else if(action == \"getCourseDetails\"){\n\t\treply = getCourseDetails(param);\n\t}else if(action == \"getCheckedInUsers\"){\n\t\treply = getCheckedInUsers();\n\t}else if(action == \"signup\"){\n\t\treply = signUpForCourse(param);\n\t}else if(action == \"getCourseParticipants\"){\n\t\treply = getCourseParticipants(param);\n\t}\n\n\treturn reply;\n}\n\nfunction getAllWorkshops(){\n\t//get all course from db\n\tworkshopPromise = dbUtil.getWorkshop(function(data){\n\t\t//work with data here\n\t\tres.send(data);\n\t\tres.end;\n\t});\n}\n\nfunction getAllCourseAdmin(){\n\t//get all course from db\n}\n\nfunction getCourse(courseIdentity){\n\t//get specific course from db\n}\n\nfunction getCheckedInUsers(){\n\t//get all checked in users & details from db\n\n}\n\nfunction signUpForCourse(userDetails){\n\t//add user details to users signed up for the course\n}\n\nfunction getCourseParticipants(courseIdentity){\n\t//get all users interested in a course\n}\n\n",
 			"file": "routes/ajax.js",
+			"file_size": 1405,
+			"file_write_time": 131653823221242707,
 			"settings":
 			{
-				"buffer_size": 1147,
+				"buffer_size": 1321,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -849,9 +860,25 @@
 	},
 	"file_history":
 	[
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/views/admin.ejs",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/views/dashboard.ejs",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/views/item.ejs",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/views/index.ejs",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/databaseInterface.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/db/FirebaseApp/firebaseCollection.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/routes/index.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/db/FirebaseApp/package.json",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/routes/main.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/package.json",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/QRUtils.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/FirebaseConfig.js",
+		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/skill_graph_interface/try_it/static/try_it/js/try.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/public/js/workshops.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/public/js/modal.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/public/js/navigation_script.js",
+		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/public/css/navigation.css",
 		"/C/Users/Dong Xiang/Desktop/ICT2105-MobileApplicationDevelopment/assignment/.travis.yml",
 		"/C/Users/Dong Xiang/Desktop/ICT2105-MobileApplicationDevelopment/assignmentGlass/soundGlass/.travis.yml",
-		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/FirebaseConfig.js",
 		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/dbInterface.js",
 		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/index.js",
 		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/ajax.js",
@@ -960,23 +987,7 @@
 		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/skill_graph_interface/views.py",
 		"/C/Users/Dong Xiang/Desktop/skill_graph/Integration/yomamabot/settings.py",
 		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/views.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/consumers.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/routing.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/sub_routing.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/manage.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/db.sqlite3",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/add_skill/tests.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/add_skill/urls.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/add_skill/views.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/models.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/tests.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/urls.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/apps.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/admin.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/update_skill/views.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/update_skill/urls.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/update_skill/tests.py",
-		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/update_skill/models.py"
+		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/chat/consumers.py"
 	],
 	"find":
 	{
@@ -994,6 +1005,10 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"console",
+			"      });",
+			"ajaxReply",
+			"workshop",
 			"start"
 		],
 		"highlight": true,
@@ -1012,178 +1027,31 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "package.json",
+					"file": "public/js/workshops.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 410,
+						"buffer_size": 1899,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								376,
-								376
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1456,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								991,
-								991
+								1191,
+								1191
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "FirebaseConfig.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 357,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "QRUtils.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 8,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "databaseInterface.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 311,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								311,
-								311
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 102.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 3,
-			"sheets":
-			[
-				{
-					"buffer": 5,
-					"file": "routes/index.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 111,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								107,
-								107
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1193,26 +1061,57 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "routes/main.js",
+					"buffer": 1,
+					"file": "views/dashboard.ejs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 569,
+						"buffer_size": 2080,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								568,
-								568
+								1148,
+								1148
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 9.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/admin.ejs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1533,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								917,
+								917
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1222,69 +1121,12 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "routes/sc-admin.js",
+					"buffer": 3,
+					"file": "views/addnew.ejs",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 972,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								583,
-								583
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 8,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 273,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								273
-							]
-						],
-						"settings":
-						{
-							"parser": "github",
-							"syntax": "Packages/Markdown/Markdown.sublime-syntax",
-							"target": "browser"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 9,
-					"file": "routes/ajax.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1147,
+						"buffer_size": 3201,
 						"regions":
 						{
 						},
@@ -1297,13 +1139,227 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax"
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 153.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/adminWorkshop.ejs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1951,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1083,
+								1093
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 204.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "firebaseCollection.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4300,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1623,
+								1623
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/C/Users/Dong Xiang/Desktop/skillCraft/db/FirebaseApp/server.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1192,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1192,
+								1192
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 7,
+					"file": "app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1591,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1514,
+								1514
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 510.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "routes/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 698,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								430,
+								430
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "routes/sc-admin.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1599,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								975,
+								975
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 380.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "routes/ajax.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1321,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								933,
+								933
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 307.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -1337,7 +1393,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.505691109951,
 			1.0
 		],
 		"rows":
@@ -1487,7 +1543,7 @@
 		[
 			[
 				"",
-				"C:\\Users\\Dong Xiang\\Desktop\\skill_graph\\integration_development\\yomamabot.sublime-project"
+				"C:\\Users\\Dong Xiang\\Desktop\\skill_graph\\integration_neptune\\yomamabot.sublime-project"
 			]
 		],
 		"width": 475.0

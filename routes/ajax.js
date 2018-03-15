@@ -1,18 +1,18 @@
 const dbUtil = require('../firebaseCollection');
+var res;
 
 module.exports = function(app){
-	app.get("/ajax", function(req, res){
+	app.get("/ajax", function(req, resp){
+		res = resp
 		ajaxReply = handleAjax(req.query.action,req.query.param);
-		res.json(ajaxReply);
-		res.end();
 	});
 }
 
-function handleAjax(action, param){
+function handleAjax(action, param,res){
 	reply = "";
 	
 	if(action == "getAllWorkshops"){
-		reply = getAllWorkshops();
+		getAllWorkshops();
 	}else if(action == "getAllCourseAdmin"){
 		reply = getAllCourseAdmin();
 	}else if(action == "getCourseDetails"){
@@ -20,9 +20,11 @@ function handleAjax(action, param){
 	}else if(action == "getCheckedInUsers"){
 		reply = getCheckedInUsers();
 	}else if(action == "signup"){
-		reply = signUpForCourse(param);
+		signUpForWorkshop(param);
 	}else if(action == "getCourseParticipants"){
 		reply = getCourseParticipants(param);
+	}else if(action == "checkin"){
+		checkInOut(param);
 	}
 
 	return reply;
@@ -30,13 +32,11 @@ function handleAjax(action, param){
 
 function getAllWorkshops(){
 	//get all course from db
-	var workshops = dbUtil.getWorkshop().then(result => {
-  		console.log("result: "+ result);
-  		resolve( result);
+	workshopPromise = dbUtil.getWorkshop(function(data){
+		//work with data here
+		res.send(data);
+		res.end;
 	});
-	console.log(workshops);
-
-	return workshops;
 }
 
 function getAllCourseAdmin(){
@@ -52,11 +52,19 @@ function getCheckedInUsers(){
 
 }
 
-function signUpForCourse(userDetails){
+function signUpForWorkshop(userDetails){
 	//add user details to users signed up for the course
+	dbUtil.signUpWorkshop(userDetails)
 }
 
 function getCourseParticipants(courseIdentity){
 	//get all users interested in a course
 }
 
+function checkInOut(authCode){
+	//check in/out user
+	dbUtil.checkInOut(authCode);
+	//do db function to
+	// 1. check if user is alr check in
+	// 2. if yes, remove. if no. add in.
+}

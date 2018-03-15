@@ -215,6 +215,13 @@ a, a:hover, a:active, a:visited{
   animation: spin 0.5s ease infinite;
 }
 
+.qrVideo{
+  z-index: 1;
+  margin:50px auto;
+  width: 160px;
+  height: 160px;
+}
+
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }

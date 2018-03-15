@@ -5,17 +5,65 @@ const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
 
 module.exports = {
+  checkInOut: function(authCode){
+    console.log(authCode);
+
+
+  },
+
+  //SIGN USER UP FOR COURSE
+  signUpWorkshop: function(data){
+    console.log(data);
+    
+  },
+
+  //LOOK FOR COURSE WITH ID 
+  getWorkshopWithId: function(id, callback){
+    var ref = database.ref(DB_WORKSHOP).child(id);
+    return ref.once('value', function(workshopSnapshot) {
+      //success callback
+      var workshopDetails = workshopSnapshot.val();
+      var formattedWorkshop = {};
+      if(workshopDetails){
+        formattedWorkshop = {
+          "title": workshopDetails.workshopName,
+          "desc": workshopDetails.workshopDescription,
+          "occupied": workshopDetails.workshopOccupied,
+          "vacancy": workshopDetails.workshopVacancy,
+          "location": workshopDetails.workshopLocation,
+          "image": workshopDetails.workshopImage,
+          "date": workshopDetails.workshopDate,
+          "time": workshopDetails.workshopTiming,
+          "id":workshopSnapshot.key
+        };
+      }
+      callback(formattedWorkshop);
+    });
+  },
+
   //READ WORKSHOPS FROM FIREBASE
-  getWorkshop: function (){
+  getWorkshop: function (callback){
   	//Get all workshop info
-  	var workshops = [];
     var ref = database.ref(DB_WORKSHOP);
-    return ref.once('value').then((workshopsSnapshot) =>{
-      //success callback     
+    return ref.once('value', function(workshopsSnapshot) {
+      //success callback
+      var workshops = [];     
       workshopsSnapshot.forEach(workshop=>{
-        workshops.push(workshop.val());
+        var workshopDetails = workshop.val();
+        var formattedWorkshop = {
+          "title": workshopDetails.workshopName,
+          "desc": workshopDetails.workshopDescription,
+          "occupied": workshopDetails.workshopOccupied,
+          "vacancy": workshopDetails.workshopVacancy,
+          "location": workshopDetails.workshopLocation,
+          "image": workshopDetails.workshopImage,
+          "date": workshopDetails.workshopDate,
+          "time": workshopDetails.workshopTiming,
+          "id":workshop.key
+        };
+        workshops.push(formattedWorkshop);
       });
-      return workshops;
+      callback(workshops);
     });
   },
   //ADDD WORKSHOP TO DATABASE

@@ -30,6 +30,11 @@ module.exports = function(app){
 		res.render('adminworkshop');
 	});
 
+	app.get("/sc-admin/workshop/ws/:ws", function(req, res){
+			
+		res.render('edititem');
+	});
+
 	app.get("/sc-admin/create-workshop", function(req, res){
 		//admin logged in home
 		res.render('addnew');
