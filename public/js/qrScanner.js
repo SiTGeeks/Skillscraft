@@ -22,39 +22,50 @@ function onQRScan(content){
   //DO SOME CHECKS HERE
 
   $.ajax({
-      url: "/ajax/",
-      data: {
-          action: "checkin",
-          param: content
-      },
-      dataType: "json",
-      success: function(data) {
+    url: "/ajax/",
+    data: {
+      action: "checkin",
+      param: content
+    },
+    dataType: "json",
+    success: function(data) {
 
-      },
-      error: function(xhr, status){
-          console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
-      }
+    },
+    error: function(xhr, status){
+      console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+    }
   });
 }
 
+/*
 //Outputcheck in message and time, refresh page after timer countdown
-function checkinTime(time){
-  //Replace html content to show time
-  $("#qrVideo").hide();
-  $(".popup-text").html("Check in Success!")
-  $(".popup-smalltext").html("You have successfully checked in at " + time);
+//Params:
+(bool) Result: true == success, false == fail
+(bool) Mode: true == CheckIn mode, false == CheckOut mode
+(string) time: Output time as html text
+*/
+function scanResult(result, mode, time){
 
-  //Timeout after 5 seconds torefresh page
-  setTimeout(function(){ window.location = "/"; }, 5000);
-}
+  //If ajax returns fail
+  if(result == false){
+    $(".popup-text").html("Scan Unsuccessful")
+    $(".popup-smalltext").html("Please try scanning again");
+    //TODO: Reset webcam here if needed
 
-//Outputcheck out message and time, refresh page after timer countdown
-function checkoutTime(time){
-  //Replace html content to show time
-  $("#qrVideo").hide();
-  $(".popup-text").html("Check out Success!")
-  $(".popup-smalltext").html("You have successfully checked out at " + time)
+  } else {  //If ajax returns success
 
-  //Timeout after 5 seconds torefresh page
-  setTimeout(function(){ window.location = "/"; }, 5000);
+    if(mode == true){
+      //Replace html content to show time
+      $("#qrVideo").hide();
+      $(".popup-text").html("Check in Success!")
+      $(".popup-smalltext").html("You have successfully checked in at " + time);
+    } else {
+      //Replace html content to show time
+      $("#qrVideo").hide();
+      $(".popup-text").html("Check out Success!")
+      $(".popup-smalltext").html("You have successfully checked out at " + time)
+    }
+    //Timeout after 5 seconds torefresh page
+    setTimeout(function(){ window.location = "/"; }, 5000);
+  }
 }
