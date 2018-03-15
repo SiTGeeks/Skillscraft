@@ -111,9 +111,9 @@
   margin: 0 auto;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 961px) {
   .workshop-item{
-  width: calc((100% - 20px)/2);
+    width: calc((100% - 20px)/2);
   }
 
   .workshop-item:nth-child(3n+1), .workshop-item:nth-child(3n+2){
@@ -122,6 +122,15 @@
 
   .workshop-item:nth-child(2n+1){
     margin-right:20px;
+  }
+}
 
+@media (max-width: 641px) {
+  .workshop-item{
+    width: 100%;
+    margin-right:0px;
+  }
+  .workshop-item:nth-child(2n+1){
+    margin-right:0;
   }
 }

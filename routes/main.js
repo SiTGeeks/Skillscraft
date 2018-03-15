@@ -14,30 +14,35 @@ module.exports = function(app){
 
 	app.get("/workshop/", function(req, res){
 		//browse workshops
-		res.render('workshop');
-		res.end();
-	});
+		res.render("workshop",
+		{user:"non-admin",
+		bannerText:"Browse all workshops"}
+	);
+	res.end();
+});
 
-	app.get("/workshop/ws/:ws", function(req, res){
-		//fetch db using ws
-		workshopPromise = dbUtil.getWorkshopWithId(req.params.ws, function(data){
-			console.log(data);
-			res.render('item',{ws: data});
-			res.end;
-		});
-		// res.render('item');
-		// res.end();
+app.get("/workshop/ws/:ws", function(req, res){
+	//fetch db using ws
+	workshopPromise = dbUtil.getWorkshopWithId(req.params.ws, function(data){
+		console.log(data);
+		res.render('item',
+		{
+			ws: data,
+			bannerText: data['title']}
+		);
+		res.end;
 	});
+	// res.render('item');
+	// res.end();
+});
 
-	//post functions
-	app.post("/workshp/signup/ws", function(req,res){
-		course = "";
-		name = req.body.name;
-		email = req.body.email;
-		contact = req.body.contact;
-		
-		db.signUpCourse(course, name, email, contact);
-	});
+//post functions
+app.post("/workshp/signup/ws", function(req,res){
+	course = "";
+	name = req.body.name;
+	email = req.body.email;
+	contact = req.body.contact;
+
+	db.signUpCourse(course, name, email, contact);
+});
 };
-
-

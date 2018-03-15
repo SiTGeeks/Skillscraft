@@ -27,11 +27,14 @@ module.exports = function(app){
 
 	app.get("/sc-admin/workshop", function(req, res){
 		//admin logged in home
-		res.render('adminworkshop');
+		res.render("adminworkshop",
+		{
+			bannerText:"Browse all workshops"
+		});
 	});
 
 	app.get("/sc-admin/workshop/ws/:ws", function(req, res){
-			
+
 		res.render('edititem');
 	});
 
@@ -76,4 +79,3 @@ function requireLogin(req,res,next){
 		next();
 	}
 }
-

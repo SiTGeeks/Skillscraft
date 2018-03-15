@@ -55,6 +55,10 @@ button:focus {
     outline:!important none ;
 }
 
+button{
+  padding:0 !important;
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -76,6 +80,7 @@ a, a:hover, a:active, a:visited{
 }
 
 .button{
+  display:block;
   height: 40px;
   width: 100%;
   margin: 0 auto;
@@ -215,13 +220,6 @@ a, a:hover, a:active, a:visited{
   animation: spin 0.5s ease infinite;
 }
 
-.qrVideo{
-  z-index: 1;
-  margin:50px auto;
-  width: 160px;
-  height: 160px;
-}
-
 @-webkit-keyframes spin {
   0% { -webkit-transform: rotate(0deg); }
   100% { -webkit-transform: rotate(360deg); }
@@ -320,4 +318,10 @@ a, a:hover, a:active, a:visited{
   font-size:40px;
   color:white;
   font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .search-input{
+    width: calc( 100% - 60px );
+  }
 }

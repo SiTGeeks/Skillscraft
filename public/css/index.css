@@ -61,6 +61,18 @@
   margin-right:24px;
 }
 
+.popup-webcam{
+  max-width:500px;
+  width: calc( 100% - 40px );
+}
+
+.qrVideo{
+  z-index: 1;
+  margin:50px auto;
+  max-width:400px;
+  width:100%;
+}
+
 @media (max-width: 600px) {
   .index-link-item{
     width: 100%;
