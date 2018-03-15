@@ -1,5 +1,6 @@
 var firebase = require('./firebaseConfig');
 const database = firebase.database;
+
 const DB_WORKSHOP = "Workshop";
 const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
@@ -7,18 +8,36 @@ const DB_CHECKED_IN = "CheckedIn";
 module.exports = {
   checkInOut: function(authCode){
     console.log(authCode);
-
-
   },
 
   //SIGN USER UP FOR COURSE
   signUpWorkshop: function(data){
-    console.log(data);
-    
+    let workshopId = data.workshopId
+    //Get workshop
+    return database.ref(DB_WORKSHOP + '/' + workshopId).once("value", function(workshopSnapshot) {
+      workshop = workshopSnapshot.val();
+      //Remove workshopid
+      data.workshopId = null;
+      if(workshop.signedUp === undefined)
+      {
+         //Add to list
+         workshop.signedUp = [data];
+       }else{
+         //Alr have sign ups add to list
+        workshop.signedUp.push(data);
+       }
+       //Update db
+       database.ref(DB_WORKSHOP + '/' + workshopId).update(workshop).then(function(result) {
+         callback("Success");
+       }, function(error) {
+         callback(error);
+       });
+     });
   },
 
-  //LOOK FOR COURSE WITH ID 
+  //LOOK FOR COURSE WITH ID
   getWorkshopWithId: function(id, callback){
+    console.log("get workshop with id: " + id);
     var ref = database.ref(DB_WORKSHOP).child(id);
     return ref.once('value', function(workshopSnapshot) {
       //success callback
@@ -47,7 +66,7 @@ module.exports = {
     var ref = database.ref(DB_WORKSHOP);
     return ref.once('value', function(workshopsSnapshot) {
       //success callback
-      var workshops = [];     
+      var workshops = [];
       workshopsSnapshot.forEach(workshop=>{
         var workshopDetails = workshop.val();
         var formattedWorkshop = {
