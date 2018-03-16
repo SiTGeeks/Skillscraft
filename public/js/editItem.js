@@ -18,4 +18,11 @@ $( document ).ready(function() {
   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
+
+
+  $("textarea").keyup(function(e) {
+      while($(this).outerHeight() < this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth"))) {
+          $(this).height($(this).height()+1);
+      };
+  });
 });

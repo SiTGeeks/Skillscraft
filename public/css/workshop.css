@@ -91,19 +91,21 @@
 }
 
 .btn-add-workshop{
+  /*Center align*/
+  display: flex;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+
   margin-top: 30px;
   height:40px;
   width:40px;
   outline:none !important;
-  padding-top:8px;
   font-size:20px;
-  display:block;
   float:right;
   -webkit-transition: 400ms ease;
   -ms-transition:400ms ease;
   transition: 400ms ease;
 }
-
 
 .row-btn{
   max-width: 1000px;

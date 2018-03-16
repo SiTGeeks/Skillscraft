@@ -27,30 +27,25 @@
   <div class="popup" data-popup="popup-1">
     <div class="popup-inner  popup-register">
       <h class="popup-text">Register</h>
-      <p class="popup-smalltext">Indicated your interest for the workshop. We will inform you once the class is confirmed.</p>
-      <form action="/action_page.php">
+      <p class="popup-smalltext">Indicate your interest for the workshop. We will inform you once the class is confirmed.</p>
+      <form id="registerForm" name="registerForm">
         <input id="name" class="input register-input" type="text" name="username" placeholder="Full Name">
+        <span class="error err-name"></span>
         <input id="email" class="input register-input" type="text" name="email" placeholder="E-mail">
+        <span class="error err-email"></span>
         <input id="contact" class="input register-input" type="text" name="contact" placeholder="Contact Number">
-        <button class="popup-register-btn button btn-red"  data-popup-open="popup-2" data-popup-close="popup-1" onclick="register(<%- "ws['id']" %>)">Register</button>
+        <span class="error err-contact"></span>
+        <button id="btn-registerForm" class="popup-register-btn button btn-red" onclick="register(<%- "ws['id']" %>)">Register</button>
       </form>
       <a class="popup-close" data-popup-close="popup-1" href="#"><i class="fas fa-times"></i></a>
     </div>
   </div>
 
-  <div class="popup" data-popup="popup-2">
-    <div class="popup-inner  popup-register">
-      <h class="popup-text">Success</h>
-      <p class="popup-smalltext">Register success! Click to return to the home page.</p>
-      <a href="/"><button class="popup-register-btn button btn-red">Home</button></a>
-      <a class="popup-close" data-popup-close="popup-2" href="#"><i class="fas fa-times"></i></a>
-    </div>
-  </div>
 
   <script src="/js/item.js"></script>
   <script src="/js/modal.js"></script>
   <script type='text/javascript'>
-    var ws = <%-JSON.stringify(ws)%>
+  var ws = <%-JSON.stringify(ws)%>
   </script>
 
 </body>

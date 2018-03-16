@@ -59,6 +59,15 @@
   margin-right:10px;
 }
 
+.input-desc{
+  overflow: hidden;
+  resize: none;
+  min-height:60px;
+  border-radius: 5px;
+  font-size:12px;
+  line-height:1.5;
+  font-family: sans-serif;
+}
 
 .taskbar{
   width:100%;

@@ -1,4 +1,9 @@
 $( document ).ready(function() {
+  initScanner();
+});
+
+//Initialise Scanner
+function initScanner(){
   let scanner = new Instascan.Scanner({ video: document.getElementById('qrVideo') });
   scanner.addListener('scan', function (content) {
     /*
@@ -15,8 +20,7 @@ $( document ).ready(function() {
   }).catch(function (e) {
     console.error(e);
   });
-});
-
+}
 
 function onQRScan(content){
   //DO SOME CHECKS HERE
@@ -50,7 +54,6 @@ function scanResult(result, mode, time){
   if(result == false){
     $(".popup-text").html("Scan Unsuccessful")
     $(".popup-smalltext").html("Please try scanning again");
-    //TODO: Reset webcam here if needed
 
   } else {  //If ajax returns success
 

@@ -207,6 +207,17 @@ a, a:hover, a:active, a:visited{
   background-color:#ff848a;
 }
 
+.error{
+  width:100%;
+  text-align: center;
+  font-size: 11px;
+  color: red;
+  margin: 2px 0 2px 0;
+}
+
+.error-icon{
+  margin-right: 4px;
+}
 
 .loader {
   z-index: 1;

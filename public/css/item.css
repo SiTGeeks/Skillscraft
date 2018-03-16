@@ -13,6 +13,7 @@
 
 .cont-left{
   float:left;
+  margin-bottom:20px;
   margin-right:20px;
   width: calc((100% / 2) - 10px);
   background-color:white;
