@@ -2,16 +2,8 @@
 <% include ../partials/headAdmin %>
 <body>
   <% include ../partials/navigationAdmin %>
-  <div class="searchbar">
-    <form action="./workshop.html">
-      <button class="button-round search-submit" type="submit" value="Submit"><i class="fas fa-arrow-right"></i></button >
-        <input class="input search-input" type="text" name="search" placeholder="Crafting, Sewing...">
-      </form>
-    </div>
-  </div>
-  <div class="banner">
-    <h class="banner-title">Browse all workshops</h>
-  </div>
+  <% include ../partials/searchbar %>
+  <% include ../partials/banner %>
 
   <div class="wrapper cont-workshop">
 

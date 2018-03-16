@@ -4,30 +4,28 @@ var res;
 module.exports = function(app){
 	app.get("/ajax", function(req, resp){
 		res = resp
-		ajaxReply = handleAjax(req.query.action,req.query.param);
+		handleAjax(req.query.action,req.query.param);
 	});
 }
 
-function handleAjax(action, param,res){
-	reply = "";
-	
+function handleAjax(action, param){
 	if(action == "getAllWorkshops"){
 		getAllWorkshops();
 	}else if(action == "getAllCourseAdmin"){
-		reply = getAllCourseAdmin();
+		getAllCourseAdmin();
 	}else if(action == "getCourseDetails"){
-		reply = getCourseDetails(param);
+		getCourseDetails(param);
 	}else if(action == "getCheckedInUsers"){
-		reply = getCheckedInUsers();
+		getCheckedInUsers();
 	}else if(action == "signup"){
 		signUpForWorkshop(param);
 	}else if(action == "getCourseParticipants"){
-		reply = getCourseParticipants(param);
+		getCourseParticipants(param);
 	}else if(action == "checkin"){
 		checkInOut(param);
+	}else if(action == "unregister"){
+		unregister(param);
 	}
-
-	return reply;
 }
 
 function getAllWorkshops(){
@@ -37,14 +35,6 @@ function getAllWorkshops(){
 		res.send(data);
 		res.end;
 	});
-}
-
-function getAllCourseAdmin(){
-	//get all course from db
-}
-
-function getCourse(courseIdentity){
-	//get specific course from db
 }
 
 function getCheckedInUsers(){
@@ -63,8 +53,19 @@ function getCourseParticipants(courseIdentity){
 
 function checkInOut(authCode){
 	//check in/out user
-	dbUtil.checkInOut(authCode);
+	checkInOut = dbUtil.checkInOut(authCode, function(success){
+		res.send(success);
+		res.end;
+	});
 	//do db function to
-	// 1. check if user is alr check in
-	// 2. if yes, remove. if no. add in.
+
+	// 3. return false if invalid, true if valid
+}
+
+function unregister(registrationEntry){
+	console.log(registrationEntry);
+	dbUtil.unregister(registrationEntry, function(success){
+		res.send(success);
+		res.end;
+	});
 }

@@ -1,5 +1,5 @@
 <!doctype html>
-<% include ../partials/head %>
+<% include ../partials/headAdmin %>
 <body>
   <div class="wrapper cont-index">
     <div class="cont-index-inner">
@@ -10,9 +10,9 @@
         <h class="index-subtitle">Admin Portal</h>
       </div>
       <div class="row admin-link-wrapper">
-        <form action="./dashboard.html">
-          <input class="input admin-username" type="text" name="username" placeholder="Username">
-          <input class="input admin-password" type="text" name="password" placeholder="Password">
+        <form action="./sc-admin/login" method="POST">
+          <input class="input admin-username" type="text" name="email" placeholder="E-mail address">
+          <input class="input admin-password" type="password" name="password" placeholder="Password">
           <button class="button admin-login btn-red" type="submit" value="Submit">Login</button>
       </form>
       </div>
