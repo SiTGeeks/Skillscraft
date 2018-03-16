@@ -109,18 +109,25 @@ module.exports = function(app){
 				res.redirect('/sc-admin/workshop', success);
 				res.end();
 			});
+	});
 
-<<<<<<< HEAD
-=======
-		//auth here
-		user = loginValidate();
-		if(!user){
-			res.render('/sc-admin/login',{error: "Invalid E-mail or password"})
-		}else{
-			res.session.user = user;
-			res.redirect('/sc-admin/home')
-		}
->>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
+	//post functions
+	app.post("/sc-admin/login", function(req, res){
+		//admin login action
+		//res.redirect('/sc-admin/home')
+		var email = req.body.email;
+		var password = req.body.password;
+		dbUtil.loginUser(email, password, function(user){
+			if(!user){
+				res.render('/sc-admin',{error: "Invalid E-mail or password"});
+			}else{
+				req.session.user = user;
+				res.redirect('/sc-admin/home');
+			
+			}
+			res.end();
+		});
+
 	});
 
 	app.post("/sc-admin/editWorkshop",function(req,res){
