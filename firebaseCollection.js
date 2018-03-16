@@ -187,7 +187,7 @@ module.exports = {
   	});
   },
   //Login User
-  loginUser: function(emailAddress, password){
+  loginUser: function(emailAddress, password, callback){
     //Get checked in user
     return database.ref(DB_USERS).once('value').then(function(snapshots) {
       snapshots.forEach(function(snapshot) {
@@ -195,7 +195,7 @@ module.exports = {
         if(user.emailAddress===emailAddress && user.password===password && user.isAdmin){
           var user = {
             emailAddress: user.emailAddress,
-            isAdmin: user.isAdmin;
+            isAdmin: user.isAdmin
           }
           callback(user);
         }
