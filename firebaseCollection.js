@@ -123,8 +123,10 @@ module.exports = {
       callback(workshops);
     });
   },
+
   //ADDD WORKSHOP TO DATABASE
   //0 is bronze, 1 is silver, 2 is gold
+
   createWorkshop: function (workshopName, workshopDescription, workshopVacancy,
      workshopTiming, workshopLocation, workshopCompletionLevel) {
   	var values =
@@ -187,17 +189,29 @@ module.exports = {
   //Login User
   loginUser: function(emailAddress, password){
     //Get checked in user
-    database.ref(DB_USERS).once('value').then(function(snapshots) {
+    return database.ref(DB_USERS).once('value').then(function(snapshots) {
       snapshots.forEach(function(snapshot) {
         var user = snapshot.val();
         if(user.emailAddress===emailAddress && user.password===password){
-          console.log("login user");
-          return;
+          callback("Success");
         }
         console.log("user not fond");
       });
     }, function(error) {
+        callback("Error");
+    });
+  },
+  //GET CHECKED IN USERS
+  getCheckedInUsers: function (){
+    database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
+      //Retrievd workshops
+      snapshots.forEach(function(snapshot) {
+        var checkedInUser = snapshot.val();
+        console.log(JSON.stringify(checkedInUser.key));
+      });
+    }, function(error) {
       console.error(error);
+      return null;
     });
   },
   //Check IN USER

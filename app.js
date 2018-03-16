@@ -63,6 +63,8 @@ app.use(bodyParser.urlencoded({extended:false}));
 
 
 app.listen(port, function(){
+
 	console.log("Listening to port "+port);
+	dbUtil.loginUser("skillcraft@sc.com","skillcraft");
 })
 
