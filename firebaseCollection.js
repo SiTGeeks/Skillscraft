@@ -192,13 +192,17 @@ module.exports = {
     return database.ref(DB_USERS).once('value').then(function(snapshots) {
       snapshots.forEach(function(snapshot) {
         var user = snapshot.val();
-        if(user.emailAddress===emailAddress && user.password===password){
-          callback("Success");
+        if(user.emailAddress===emailAddress && user.password===password && user.isAdmin){
+          var user = {
+            emailAddress: user.emailAddress,
+            isAdmin: user.isAdmin;
+          }
+          callback();
         }
-        console.log("user not fond");
+        console.log(user);
       });
     }, function(error) {
-        callback("Error");
+        callback(null);
     });
   },
   //GET CHECKED IN USERS
