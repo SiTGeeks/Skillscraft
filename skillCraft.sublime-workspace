@@ -531,16 +531,12 @@
 			"file": "firebaseCollection.js",
 			"settings":
 			{
+<<<<<<< HEAD
 				"buffer_size": 8369,
+=======
+				"buffer_size": 7898,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/admin.ejs",
-			"settings":
-			{
-				"buffer_size": 823,
 				"line_ending": "Windows"
 			}
 		},
@@ -548,30 +544,65 @@
 			"file": "views/editItem.ejs",
 			"settings":
 			{
+<<<<<<< HEAD
+				"buffer_size": 823,
+=======
+				"buffer_size": 3328,
+				"encoding": "UTF-8",
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
+				"line_ending": "Windows"
+			}
+		},
+		{
+<<<<<<< HEAD
+			"file": "views/editItem.ejs",
+			"settings":
+			{
 				"buffer_size": 3057,
+=======
+			"file": "public/js/qrScanner.js",
+			"settings":
+			{
+				"buffer_size": 1628,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
+<<<<<<< HEAD
 			"file": "public/js/qrScanner.js",
 			"settings":
 			{
 				"buffer_size": 1885,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
+=======
 			"file": "views/item.ejs",
 			"settings":
 			{
 				"buffer_size": 2489,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
+<<<<<<< HEAD
+			"file": "views/item.ejs",
+			"settings":
+			{
+				"buffer_size": 2489,
+=======
+			"file": "routes/main.js",
+			"settings":
+			{
+				"buffer_size": 935,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+<<<<<<< HEAD
 			"file": "routes/main.js",
 			"settings":
 			{
@@ -581,6 +612,8 @@
 			}
 		},
 		{
+=======
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 			"file": "routes/ajax.js",
 			"settings":
 			{
@@ -593,7 +626,11 @@
 			"file": "emailUtils.js",
 			"settings":
 			{
+<<<<<<< HEAD
 				"buffer_size": 2484,
+=======
+				"buffer_size": 2880,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -602,7 +639,11 @@
 			"file": "routes/sc-admin.js",
 			"settings":
 			{
+<<<<<<< HEAD
 				"buffer_size": 2825,
+=======
+				"buffer_size": 2721,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -856,7 +897,10 @@
 	},
 	"file_history":
 	[
+<<<<<<< HEAD
 		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/firebaseCollection.js",
+=======
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/partials/navigationAdmin.ejs",
 		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/partials/headAdmin.ejs",
 		"/C/Users/Dong Xiang/Desktop/skillCraft/skillCraftProject/views/index.ejs",
@@ -983,7 +1027,12 @@
 		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/skill_graph_interface/skill_graph_interface/static/imports.html",
 		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/skill_graph_interface/try_it/urls.py",
 		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/skill_graph_interface/shared/humanizeText.py",
+<<<<<<< HEAD
 		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/shared/skill_tree.py"
+=======
+		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/shared/skill_tree.py",
+		"/C/Users/Dong Xiang/Desktop/skill_graph/ver5/Skill_Graph_Interface/shared/QuestionGetter.py"
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 	],
 	"find":
 	{
@@ -1047,9 +1096,12 @@
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.15.region_keys":
 							[
 							],
+=======
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							"SL.16.region_keys":
 							[
 							],
@@ -1061,7 +1113,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< HEAD
 					"stack_index": 1,
+=======
+					"stack_index": 9,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 					"type": "text"
 				},
 				{
@@ -1070,23 +1126,36 @@
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< HEAD
 						"buffer_size": 8369,
+=======
+						"buffer_size": 7898,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								6581,
 								6581
+=======
+								2420,
+								2420
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.16.region_keys":
 							[
 							],
 							"SL.28.region_keys":
+=======
+							"SL.18.region_keys":
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							[
 							],
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
@@ -1094,7 +1163,11 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 2715.0,
+=======
+						"translation.y": 0.0,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1102,24 +1175,37 @@
 				},
 				{
 					"buffer": 2,
-					"file": "views/admin.ejs",
+					"file": "views/editItem.ejs",
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< HEAD
 						"buffer_size": 823,
+=======
+						"buffer_size": 3328,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								582,
 								582
+=======
+								1622,
+								1622
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.27.region_keys":
+=======
+							"SL.19.region_keys":
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							[
 							],
 							"syntax": "Packages/HTML/HTML.sublime-syntax",
@@ -1135,68 +1221,125 @@
 				},
 				{
 					"buffer": 3,
+<<<<<<< HEAD
 					"file": "views/editItem.ejs",
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 3057,
+=======
+					"file": "public/js/qrScanner.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1628,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								0,
 								0
+=======
+								1376,
+								1376
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.19.region_keys":
 							[
 							],
 							"syntax": "Packages/HTML/HTML.sublime-syntax",
+=======
+							"SL.24.region_keys":
+							[
+							],
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 9,
+=======
+						"translation.y": 255.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 4,
+			"sheets":
+			[
 				{
 					"buffer": 4,
+<<<<<<< HEAD
 					"file": "public/js/qrScanner.js",
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 1885,
+=======
+					"file": "views/item.ejs",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2489,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								0,
 								0
+=======
+								911,
+								928
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.24.region_keys":
 							[
 							],
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+=======
+							"SL.15.region_keys":
+							[
+							],
+							"syntax": "Packages/HTML/HTML.sublime-syntax",
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 255.0,
+=======
+						"translation.y": 0.0,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1207,23 +1350,37 @@
 			[
 				{
 					"buffer": 5,
+<<<<<<< HEAD
 					"file": "views/item.ejs",
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 2489,
+=======
+					"file": "routes/main.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 935,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								911,
 								928
+=======
+								405,
+								405
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.15.region_keys":
 							[
 							],
@@ -1233,33 +1390,58 @@
 							"syntax": "Packages/HTML/HTML.sublime-syntax",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
+=======
+							"SL.22.region_keys":
+							[
+							],
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< HEAD
 					"stack_index": 7,
+=======
+					"stack_index": 5,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 					"type": "text"
 				},
 				{
 					"buffer": 6,
+<<<<<<< HEAD
 					"file": "routes/main.js",
 					"semi_transient": false,
 					"settings":
 					{
 						"buffer_size": 935,
+=======
+					"file": "routes/ajax.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1603,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								405,
 								405
+=======
+								1596,
+								1596
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.22.region_keys":
 							[
 							],
@@ -1297,11 +1479,16 @@
 							],
 							"SL.23.region_keys":
 							[
+=======
+							"SL.23.region_keys":
+							[
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							],
 							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 603.0,
 						"zoom_level": 1.0
 					},
@@ -1310,26 +1497,48 @@
 				},
 				{
 					"buffer": 8,
+=======
+						"translation.y": 153.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 					"file": "emailUtils.js",
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< HEAD
 						"buffer_size": 2484,
+=======
+						"buffer_size": 2880,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								396,
 								396
+=======
+								1757,
+								1757
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.22.region_keys":
 							[
 							],
+=======
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							"SL.25.region_keys":
 							[
 							],
@@ -1339,34 +1548,50 @@
 						"translation.y": 561.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< HEAD
 					"stack_index": 4,
+=======
+					"stack_index": 8,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 8,
 					"file": "routes/sc-admin.js",
 					"semi_transient": false,
 					"settings":
 					{
+<<<<<<< HEAD
 						"buffer_size": 2825,
+=======
+						"buffer_size": 2721,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
+<<<<<<< HEAD
 								1614,
 								1614
+=======
+								2194,
+								2194
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							]
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.23.region_keys":
 							[
 							],
 							"SL.24.region_keys":
 							[
 							],
+=======
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							"SL.26.region_keys":
 							[
 							],
@@ -1374,6 +1599,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
+<<<<<<< HEAD
 						"translation.y": 687.0,
 						"zoom_level": 1.0
 					},
@@ -1382,6 +1608,16 @@
 				},
 				{
 					"buffer": 10,
+=======
+						"translation.y": 1071.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 					"file": "public/js/editItem.js",
 					"semi_transient": false,
 					"settings":
@@ -1399,9 +1635,12 @@
 						],
 						"settings":
 						{
+<<<<<<< HEAD
 							"SL.24.region_keys":
 							[
 							],
+=======
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 							"SL.35.region_keys":
 							[
 							],
@@ -1413,7 +1652,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
+<<<<<<< HEAD
 					"stack_index": 6,
+=======
+					"stack_index": 7,
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 					"type": "text"
 				}
 			]

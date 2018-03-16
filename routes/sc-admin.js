@@ -110,6 +110,49 @@ module.exports = function(app){
 				res.end();
 			});
 
+<<<<<<< HEAD
+=======
+		//auth here
+		user = loginValidate();
+		if(!user){
+			res.render('/sc-admin/login',{error: "Invalid E-mail or password"})
+		}else{
+			res.session.user = user;
+			res.redirect('/sc-admin/home')
+		}
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
+	});
+
+	app.post("/sc-admin/editWorkshop",function(req,res){
+		//back to edit item with message
+		var host = req.headers.host;
+		var hostParts = host.split("/");
+		var workshopId = hostParts[hostParts.length-1];
+
+		var workshopName = req.body.title;
+		var workshopCategory = req.body.category;
+		var workshopDate = req.body.date;
+		var workshopTime = req.body.time;
+		var workshopLevel = req.body.level;
+		var workshopDescription = req.body.description;
+		
+		dbUtil.updateWorkshop(workshopId, 
+				workshopName, 
+				workshopDescription,
+				-1,
+				workshopTime,
+				workshopLocation,
+			function(success){
+				var msg = "";
+				if(success){
+					msg = "";
+				}else{
+					msg = "";
+				}
+				res.redirect('/sc-admin/workshop', success);
+				res.end();
+			});
+
 	});
 
 	app.post("/sc-admin/createAccounts",requireLogin, function(req,res){

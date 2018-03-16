@@ -61,7 +61,13 @@ app.use(bodyParser.urlencoded({extended:false}));
 require('./routes')(app);
 
 app.listen(port, function(){
+
 	console.log("Listening to port "+port);
+<<<<<<< HEAD
 	//dbUtil.loginUser("skillcraft@sc.com","skillcraft");
 });
+=======
+	dbUtil.loginUser("skillcraft@sc.com","skillcraft");
+})
+>>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 
