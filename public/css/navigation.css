@@ -30,6 +30,14 @@
   color:white;
 }
 
+.nav-links li .disabled{
+  color: grey;
+}
+
+.nav-links li .disabled:hover{
+  color: grey;
+}
+
 @media (max-width: 720px) {
   .nav-links{
     float:right;
