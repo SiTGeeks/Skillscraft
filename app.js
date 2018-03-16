@@ -46,9 +46,6 @@ app.use(function(req, res, next) {
 	}
 });
 
-
-require('./routes')(app);
-
 //view engine
 app.set('view engine', 'ejs');
 app.set('views',path.join(__dirname, 'views'));
@@ -61,8 +58,11 @@ app.use(express.static('./public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
+require('./routes')(app);
 
 app.listen(port, function(){
 	console.log("Listening to port "+port);
-})
+	//dbUtil.loginUser("skillcraft@sc.com","skillcraft");
+});
+
 

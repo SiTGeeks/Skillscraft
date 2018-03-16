@@ -6,8 +6,19 @@ const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
 
 module.exports = {
-  checkInOut: function(authCode){
+  unregister: function(registrationEntry, callback){
+    console.log(registrationEntry);
+    var success = true;
+
+    callback(success);
+  },
+
+  checkInOut: function(authCode, callback){
     console.log(authCode);
+    var success = true;
+    // 1. check if user is alr check in
+	// 2. if yes, remove. if no. add in.
+    callback(success);
   },
 
   //SIGN USER UP FOR COURSE
@@ -34,10 +45,9 @@ module.exports = {
        });
      });
   },
-
-  //LOOK FOR COURSE WITH ID
+  
+  //LOOK FOR COURSE WITH ID 
   getWorkshopWithId: function(id, callback){
-    console.log("get workshop with id: " + id);
     var ref = database.ref(DB_WORKSHOP).child(id);
     return ref.once('value', function(workshopSnapshot) {
       //success callback
@@ -60,6 +70,34 @@ module.exports = {
     });
   },
 
+  getAdminWorkshopWithId: function(id, callback){
+    var ref = database.ref(DB_WORKSHOP).child(id);
+    return ref.once('value', function(workshopSnapshot) {
+      //success callback
+      var workshopDetails = workshopSnapshot.val();
+      var formattedWorkshop = {};
+      if(workshopDetails){
+        formattedWorkshop = {
+          "title": workshopDetails.workshopName,
+          "desc": workshopDetails.workshopDescription,
+          "occupied": workshopDetails.workshopOccupied,
+          "vacancy": workshopDetails.workshopVacancy,
+          "location": workshopDetails.workshopLocation,
+          "image": workshopDetails.workshopImage,
+          "date": workshopDetails.workshopDate,
+          "time": workshopDetails.workshopTiming,
+          "id":workshopSnapshot.key,
+        };
+        //var registrations = workshopDetails.workshopRegistrations;
+        var registrations = [{
+          'name': 'dx',
+          'contact': 123,
+          'email': 'dx@dx.com'
+        }];
+      }
+      callback(formattedWorkshop, registrations);
+    });
+  },
   //READ WORKSHOPS FROM FIREBASE
   getWorkshop: function (callback){
   	//Get all workshop info
@@ -85,8 +123,10 @@ module.exports = {
       callback(workshops);
     });
   },
+
   //ADDD WORKSHOP TO DATABASE
   //0 is bronze, 1 is silver, 2 is gold
+
   createWorkshop: function (workshopName, workshopDescription, workshopVacancy,
      workshopTiming, workshopLocation, workshopCompletionLevel) {
   	var values =
@@ -105,7 +145,7 @@ module.exports = {
   	});
   },
   //UPDATE WORKSHOP
-  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy, workshopTiming, workshopLocation){
+  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy, workshopTiming, workshopLocation, callback){
   	var values =
   	{
       workshopName: workshopName,
@@ -117,8 +157,10 @@ module.exports = {
 
   	database.ref(DB_WORKSHOP + '/' + key).update(values).then(function(result) {
     	console.log("Workshop Update Success: " + result);
+      callback(true);
   	}, function(error) {
     	console.log("Workshop Update: " + error);
+      callback(false);
   	});
   },
   //DELETE WORKSHOP FROM DATABASE
@@ -145,19 +187,34 @@ module.exports = {
   	});
   },
   //Login User
-  loginUser: function(emailAddress, password){
+  loginUser: function(emailAddress, password, callback){
     //Get checked in user
-    database.ref(DB_USERS).once('value').then(function(snapshots) {
+    return database.ref(DB_USERS).once('value').then(function(snapshots) {
       snapshots.forEach(function(snapshot) {
         var user = snapshot.val();
-        if(user.emailAddress===emailAddress && user.password===password){
-          console.log("login user");
-          return;
+        if(user.emailAddress===emailAddress && user.password===password && user.isAdmin){
+          var user = {
+            emailAddress: user.emailAddress,
+            isAdmin: user.isAdmin
+          }
+          callback(user);
         }
-        console.log("user not fond");
+      });
+    }, function(error) {
+        callback(null);
+    });
+  },
+  //GET CHECKED IN USERS
+  getCheckedInUsers: function (){
+    database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
+      //Retrievd workshops
+      snapshots.forEach(function(snapshot) {
+        var checkedInUser = snapshot.val();
+        console.log(JSON.stringify(checkedInUser.key));
       });
     }, function(error) {
       console.error(error);
+      return null;
     });
   },
   //Check IN USER

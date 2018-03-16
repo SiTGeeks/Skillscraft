@@ -11,17 +11,21 @@
         <a class="taskbar-btn button btn-red">End Workshop</a>
         <a class="taskbar-btn button btn-red">Delete Workshop</a>
       </div>
-      <form action="./adminWorkshop.html">
+      <form action="/sc-admin">
         <div class="cont-left">
           <h class="item-desc-title">Description</h>
-          <textarea class="input input-item input-desc" type="text" name="description" ></textarea>
+          <textarea class="input input-item input-desc" type="text" name="description" ><%- ws['desc'] %>
+          </textarea>
           <a class="popup-register-btn button btn-red" data-popup-open="popup-1">Save Changes</a>
         </div>
         <div class="cont-right">
-          <input class="item-row input-item" type="text" name="title" placeholder="Title">
-          <input class="item-row input-item" type="text" name="location" placeholder="Location">
-          <input class="item-row input-item" type="text" name="date" placeholder="date">
-          <input class="item-row input-item" type="text" name="time" placeholder="time">
+          <input class="item-row input-item" type="text" name="title" placeholder="Title"
+          value= '<%- ws["title"] %>'>
+          <input class="item-row input-item" type="text" name="category" placeholder="category">
+          <input class="item-row input-item" type="text" name="date" placeholder="date"
+          value='<%- ws["date"] %>'>
+          <input class="item-row input-item" type="text" name="time" placeholder="time"
+          value='<%- ws["time"] %>'>
           <input class="item-row input-item" type="text" name="Level" placeholder="Level">
         </div>
       </form>
@@ -34,6 +38,20 @@
           <span class="col contact-title">Contact</span>
           <span class="col email">Email</span>
         </li>
+        <% for(var i=0; i<registered.length; i++){ %>
+          <li class="edit-item">
+            <span class="col name-title"><%- registered[i]['name'] %></span>
+            <span class="col contact-title"><%- registered[i]['contact'] %></span>
+            <span class="col email"><%- registered[i]['email'] %></span>
+            <span class="col delete"><a class="button-small" onclick="deleteRegistration(
+              '<%- ws['id'] %>',
+              '<%- registered[i]['name'] %>',
+              '<%- registered[i]['contact'] %>',
+              '<%- registered[i]['email'] %>',
+              this
+            )"><i class="fas fa-trash"></i></a></span>
+          </li>
+        <% } %>
       </ul>
     </div>
   </div>
