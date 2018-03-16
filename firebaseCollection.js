@@ -197,9 +197,8 @@ module.exports = {
             emailAddress: user.emailAddress,
             isAdmin: user.isAdmin;
           }
-          callback();
+          callback(user);
         }
-        console.log(user);
       });
     }, function(error) {
         callback(null);
