@@ -1,7 +1,7 @@
 function generateItem(title, desc, occupied, vacancy, location, date, time, id) {
-    var link = "-L7Ijs5MHcLYZxhyDZQ_";
-    var image = "https://www.chwoodcrafts.com/main/wp-content/uploads/2017/03/ch-woodcraft-custom-cutting-board-2.jpg";
-    var itemImg = '<img class="workshop-img" src="'+image+'">';
+    var itemLink = "-L7Ijs5MHcLYZxhyDZQ_"; //Todo: Store link here, add link param to func
+    var itemImage = "https://www.chwoodcrafts.com/main/wp-content/uploads/2017/03/ch-woodcraft-custom-cutting-board-2.jpg"; //Todo: Store image link here, add link param to func
+    var itemImg = '<img class="workshop-img" src="'+itemImage+'">';
     var itemTitle = '<span class="item-title">'+title+'</span>';
     var itemDesc = '<span class="item-desc">'+desc+'</span>';
     var itemVacancy = '<span class="workshop-item-text item-vacancy"><i class="far fa-user workshop-icon"></i>'+occupied+'/'+vacancy+'</span>';
@@ -10,7 +10,7 @@ function generateItem(title, desc, occupied, vacancy, location, date, time, id) 
     var itemTime = '<span class="workshop-item-text item-time"><i class="far fa-clock workshop-icon"></i>'+time+'</span>';
     var item = '<li class="workshop-item">'
     + '<a href="workshop/ws/'
-    + link
+    + itemLink
     + '">'
     + '<div class="workshop-img-wrapper">'
     + itemTitle
