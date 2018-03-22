@@ -68,7 +68,7 @@ a, a:hover, a:active, a:visited{
 }
 
 .wrapper{
-  padding: 0 20px;
+  padding: 0 20px 100px;
 }
 
 .row {
@@ -91,10 +91,10 @@ a, a:hover, a:active, a:visited{
   font-weight: 700;
   text-align: center;
   text-decoration: none;
-  transition: 100ms ease;
   white-space: nowrap;
   padding-top: 12px;
 
+  transition: 100ms ease;
   -webkit-transition: border 400ms ease;
   -ms-transition: border 400ms ease;
   transition: border 400ms ease;
@@ -269,7 +269,7 @@ a, a:hover, a:active, a:visited{
 
 .input{
   height:40px;
-  border: 1px solid #efefef;
+  border: 1px solid #dfdfdf;
   border-radius: 20px;
   margin-top:10px;
   padding: 10px;

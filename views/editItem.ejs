@@ -7,16 +7,18 @@
   <div class="wrapper cont-item">
     <div class="cont-item-wrapper">
       <div class="taskbar-inner">
-        <a href="" class="taskbar-btn button btn-red">Confirmation Email</a>
+        <a href="" class="taskbar-btn button btn-red">Send Email</a>
         <a class="taskbar-btn button btn-red">End Workshop</a>
         <a class="taskbar-btn button btn-red">Delete Workshop</a>
+        <a class="taskbar-btn button btn-red" data-popup-open="popup-1">Save Changes</a>
       </div>
       <form id="editWorkshopForm" action="/sc-admin/editWorkshop" method="POST">
         <div class="cont-left">
+      <form action="/sc-admin">
+        <div class="cont-left cont-opaque">
           <h class="item-desc-title">Description</h>
-          <textarea class="input input-item input-desc" type="text" name="description" ><%- ws['desc'] %>
+          <textarea class="input input-item input-desc" type="text" name="description"  onkeyup="auto_grow(this)"></textarea>
           </textarea>
-          <a class="popup-register-btn button btn-red" data-popup-open="popup-1">Save Changes</a>
         </div>
         <div class="cont-right">
           <input class="item-row input-item" type="text" name="title" placeholder="Title"
@@ -71,7 +73,7 @@
 
 <script src="/js/modal.js"></script>
 <script src="/js/editItem.js"></script>
-
+<script src="/js/dynamicTextbox.js"></script>
 
 </body>
 </html>

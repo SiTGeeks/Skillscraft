@@ -13,20 +13,21 @@
 
 .cont-left{
   float:left;
-  margin-bottom:20px;
-  margin-right:20px;
   width: calc((100% / 2) - 10px);
-  background-color:white;
-  padding:40px;
-  border-radius: 5px;
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.3);
-
 }
 
 .cont-right{
   float:right;
   width: calc((100% / 2) - 10px);
+}
 
+.cont-opaque{
+  margin-bottom:20px;
+  margin-right:20px;
+  background-color:white;
+  padding:40px;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.3);
 }
 
 .item-desc-title{
@@ -52,12 +53,11 @@
 }
 
 .item-icon{
-    color: #ff5a62;
-    margin-right:20px;
+  color: #ff5a62;
+  margin-right:20px;
 }
 
 .register-btn{
-  margin-top: 40px;
 }
 
 .popup-register{
@@ -83,6 +83,5 @@
   }
   .cont-right{
     width: 100%;
-    margin-top:20px;
   }
 }
