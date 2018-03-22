@@ -10,14 +10,23 @@
         <h class="index-subtitle">Admin Portal</h>
       </div>
       <div class="row admin-link-wrapper">
-        <form action="./sc-admin/login" method="POST">
+        <form action="/sc-admin" method="POST">
           <input class="input admin-username" type="text" name="email" placeholder="E-mail address">
           <input class="input admin-password" type="password" name="password" placeholder="Password">
           <button class="button admin-login btn-red" type="submit" value="Submit">Login</button>
-      </form>
+        </form>
       </div>
     </div>
   </div>
+  <% if (error == "true"){ %>
+  <div class="popup" style="display:block" data-popup="popup-1">
+        <div class="popup-inner  popup-register">
+          <h class="popup-text">Invalid Login</h>
+          <p class="popup-smalltext">The login credentials you provided was invalid.</p>
+          <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
+        </div>
+  </div>
+  <% } %>
   <script src="/js/modal.js"></script>
 </body>
 </html>

@@ -12,11 +12,7 @@ module.export = {
                 content: QRcode,
                 cid: 'qrcode'
             }]
-<<<<<<< HEAD
 		};
-=======
-		}
->>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 	},
 
 	createWorkshopCancelMail: function(workshopDetails){
@@ -29,11 +25,7 @@ module.export = {
 				'<p>Date:' + workshopDetails['date'] + '</p>'+
 				'<p>Time:' + workshopDetails['time'] + '</p>'+
 				'<p>Sorry for any inconvinience caused, hope to see you in the near future.</p>',
-<<<<<<< HEAD
 		};
-=======
-		}
->>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 	},
 
 	createWorkshopReminderMail: function(workshopDetails){
@@ -46,11 +38,7 @@ module.export = {
 				'<p>Date:' + workshopDetails['date'] + '</p>'+
 				'<p>Time:' + workshopDetails['time'] + '</p>'+
 				'<p>See you there!</p>',
-<<<<<<< HEAD
 		};
-=======
-		}
->>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 	},
 
 	createWorkshopRegistrationMail: function(workshopDetails){
@@ -63,12 +51,7 @@ module.export = {
 				'<p>Date:' + workshopDetails['date'] + '</p>'+
 				'<p>Time:' + workshopDetails['time'] + '</p>'+
 				'<p>See you there!</p>'
-<<<<<<< HEAD
 		};
-=======
-
-		}
->>>>>>> 37453866df242fe4aa9192ae7ea3c5bfea9ea196
 	},
 
 	sendMail: function(mail, address){

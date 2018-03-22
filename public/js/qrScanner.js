@@ -1,15 +1,14 @@
-$( document ).ready(function() {
-  initScanner();
-});
+var scanner;
 
 //Initialise Scanner
 function initScanner(){
-  let scanner = new Instascan.Scanner({ video: document.getElementById('qrVideo') });
+  scanner = new Instascan.Scanner({ video: document.getElementById('qrVideo') });
   scanner.addListener('scan', function (content) {
     /*
     Do some call to post with the content as ID
     */
     onQRScan(content);
+    stopScanner();
   });
   Instascan.Camera.getCameras().then(function (cameras) {
     if (cameras.length > 0) {
@@ -22,9 +21,11 @@ function initScanner(){
   });
 }
 
-function onQRScan(content){
-  //DO SOME CHECKS HERE
+function stopScanner(){
+  scanner.stop();
+}
 
+function onQRScan(content){
   $.ajax({
     url: "/ajax/",
     data: {

@@ -6,11 +6,23 @@ const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
 
 module.exports = {
-  unregister: function(registrationEntry, callback){
-    console.log(registrationEntry);
-    var success = true;
-
-    callback(success);
+  unregister: function(workshopId, registrationEntry, callback){
+    var ref =  database.ref(DB_WORKSHOP+'/'+workshopId).child("signedUp");
+    return ref.once("value",function(registrationSnapshot){
+      var success = false;
+      var registrationDetails = {};
+      registrationSnapshot.forEach(function(registration){
+        registrationDetails = registration.val();
+        var nameMatch = registrationDetails["name"] == registrationEntry["name"];
+        var contactMatch = registrationDetails["contact"] == registrationEntry["contact"];
+        var emailMatch = registrationDetails["email"] == registrationEntry["email"];
+        if(nameMatch && contactMatch && emailMatch){
+          ref.child(registration.key).remove();
+          success = true;
+        }
+      });
+      callback(success);
+    }); 
   },
 
   checkInOut: function(authCode, callback){
@@ -22,7 +34,7 @@ module.exports = {
   },
 
   //SIGN USER UP FOR COURSE
-  signUpWorkshop: function(data){
+  signUpWorkshop: function(data, callback){
     let workshopId = data.workshopId
     //Get workshop
     return database.ref(DB_WORKSHOP + '/' + workshopId).once("value", function(workshopSnapshot) {
@@ -35,11 +47,11 @@ module.exports = {
          workshop.signedUp = [data];
        }else{
          //Alr have sign ups add to list
-        workshop.signedUp.push(data);
+          workshop.signedUp.push(data);
        }
        //Update db
        database.ref(DB_WORKSHOP + '/' + workshopId).update(workshop).then(function(result) {
-         callback("Success");
+         callback(true);
        }, function(error) {
          callback(error);
        });
@@ -71,7 +83,7 @@ module.exports = {
   },
 
   getAdminWorkshopWithId: function(id, callback){
-    var ref = database.ref(DB_WORKSHOP).child(id);
+    var ref = database.ref(DB_WORKSHOP+'/'+id);
     return ref.once('value', function(workshopSnapshot) {
       //success callback
       var workshopDetails = workshopSnapshot.val();
@@ -88,12 +100,11 @@ module.exports = {
           "time": workshopDetails.workshopTiming,
           "id":workshopSnapshot.key,
         };
-        //var registrations = workshopDetails.workshopRegistrations;
-        var registrations = [{
-          'name': 'dx',
-          'contact': 123,
-          'email': 'dx@dx.com'
-        }];
+        var registrationsSnapshot = workshopDetails.signedUp;
+        var registrations = [];
+        registrationsSnapshot.forEach(reg=>{
+          registrations.push(reg);
+        });
       }
       callback(formattedWorkshop, registrations);
     });
@@ -128,7 +139,7 @@ module.exports = {
   //0 is bronze, 1 is silver, 2 is gold
 
   createWorkshop: function (workshopName, workshopDescription, workshopVacancy,
-     workshopTiming, workshopLocation, workshopCompletionLevel) {
+     workshopTiming, workshopLocation, workshopCompletionLevel,callback) {
   	var values =
   	{
       workshopName: workshopName,
@@ -140,8 +151,10 @@ module.exports = {
   	}
   	database.ref(DB_WORKSHOP).push(values).then(function(result) {
     	console.log("Workshop Add Success: " + result);
+      callback(true);
   	}, function(error) {
     	console.log("Workshop Add: " + error);
+      callback(false);
   	});
   },
   //UPDATE WORKSHOP
@@ -200,6 +213,7 @@ module.exports = {
           callback(user);
         }
       });
+      callback(null);
     }, function(error) {
         callback(null);
     });

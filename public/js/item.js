@@ -1,9 +1,6 @@
 function register(workshopId){
 
 	if(validateRegisterForm()){ //If passed validation
-
-		resultMsg(false);
-
 		var registrationData = {
 			'name': $("#name").val(),
 			'email': $("#email").val(),
@@ -18,12 +15,18 @@ function register(workshopId){
 				param: registrationData
 			},
 			dataType: "json",
+		    success: function(data) {
+		    	//Success message here
+		    	resultMsg(data);
+		    },
 			error: function(xhr, status){
 				console.log("AJAX ERROR REGISTERING FOR COURSE: " + xhr.status);
 			}
 		});
 	};
 }
+
+
 
 function validateRegisterForm() {
 	event.preventDefault();

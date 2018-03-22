@@ -4,7 +4,10 @@ module.exports = function(app){
 	//get functions
 	app.get("/sc-admin", function(req, res){
 		//admin login page
-		res.render("admin");
+		res.render("admin",
+			{
+				error:"false"
+			});
 		res.end();
 	});
 
@@ -45,7 +48,6 @@ module.exports = function(app){
 				ws: data,
 				registered
 			});
-			console.log(registered);
 			res.end;
 		});
 	});
@@ -62,14 +64,15 @@ module.exports = function(app){
 	});
 
 	//post functions
-	app.post("/sc-admin/login", function(req, res){
+	app.post("/sc-admin", function(req, res){
 		//admin login action
 		//res.redirect('/sc-admin/home')
 		var email = req.body.email;
 		var password = req.body.password;
+		console.log("logging in");
 		dbUtil.loginUser(email, password, function(user){
 			if(!user){
-				res.render('/sc-admin',{error: "Invalid E-mail or password"});
+				res.render('admin',{error: "true"});
 			}else{
 				req.session.user = user;
 				res.redirect('/sc-admin/home');
@@ -102,32 +105,13 @@ module.exports = function(app){
 			function(success){
 				var msg = "";
 				if(success){
-					msg = "";
+					msg = "true";
 				}else{
-					msg = "";
+					msg = "false";
 				}
 				res.redirect('/sc-admin/workshop', success);
 				res.end();
 			});
-	});
-
-	//post functions
-	app.post("/sc-admin/login", function(req, res){
-		//admin login action
-		//res.redirect('/sc-admin/home')
-		var email = req.body.email;
-		var password = req.body.password;
-		dbUtil.loginUser(email, password, function(user){
-			if(!user){
-				res.render('/sc-admin',{error: "Invalid E-mail or password"});
-			}else{
-				req.session.user = user;
-				res.redirect('/sc-admin/home');
-			
-			}
-			res.end();
-		});
-
 	});
 
 	app.post("/sc-admin/editWorkshop",function(req,res){
@@ -143,7 +127,7 @@ module.exports = function(app){
 		var workshopLevel = req.body.level;
 		var workshopDescription = req.body.description;
 		
-		dbUtil.updateWorkshop(workshopId, 
+		dbUtil.createWorkshop(workshopId, 
 				workshopName, 
 				workshopDescription,
 				-1,
@@ -152,13 +136,17 @@ module.exports = function(app){
 			function(success){
 				var msg = "";
 				if(success){
-					msg = "";
+					msg = "success";
 				}else{
-					msg = "";
+					msg = "failed";
 				}
-				res.redirect('/sc-admin/workshop', success);
+				res.redirect('/sc-admin/workshop', msg);
 				res.end();
 			});
+
+	});
+
+	app.post("/sc-admin/createWorkshop",function(req,res){
 
 	});
 

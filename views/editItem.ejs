@@ -11,7 +11,7 @@
         <a class="taskbar-btn button btn-red">End Workshop</a>
         <a class="taskbar-btn button btn-red">Delete Workshop</a>
       </div>
-      <form action="/sc-admin">
+      <form id="editWorkshopForm" action="/sc-admin/editWorkshop" method="POST">
         <div class="cont-left">
           <h class="item-desc-title">Description</h>
           <textarea class="input input-item input-desc" type="text" name="description" ><%- ws['desc'] %>
@@ -60,9 +60,11 @@
 
 <div class="popup" data-popup="popup-1">
   <div class="popup-inner  popup-register">
-    <h class="popup-text">Created</h>
-    <p class="popup-smalltext">The workshop has been created. Browse workshops to edit the workshop.</p>
-    <button class="popup-register-btn button btn-red"  type="submit" value="Submit">Confirm</button>
+    <h class="popup-text">Update</h>
+    <p class="popup-smalltext">Are you sure you want to update the details of this workshop?</p>
+
+    <button class="popup-register-btn button btn-red"  onclick="submitEditItem()">Yes</button>
+    <button class="popup-register-btn button btn-red" >No</button>
     <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
   </div>
 </div>

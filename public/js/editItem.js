@@ -44,3 +44,16 @@ function deleteRegistration(workshopId,name,contact,email,removeBtn){
     }
   });
 }
+
+function submitEditItem(){
+  var workshopDetails = {};
+  var workshopDetailsForm  = $('#editWorkshopForm');
+  workshopDetailsForm.serializeArray().map(function(v) {workshopDetails[v.name] =  v.value;});
+
+  var validForm = true;
+  //some checks with workshop details
+
+  if(validForm){
+    workshopDetailsForm.submit();
+  }
+}

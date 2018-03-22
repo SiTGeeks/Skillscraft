@@ -44,7 +44,10 @@ function getCheckedInUsers(){
 
 function signUpForWorkshop(userDetails){
 	//add user details to users signed up for the course
-	dbUtil.signUpWorkshop(userDetails)
+	dbUtil.signUpWorkshop(userDetails, function(data){
+		res.send(data);
+		res.end;
+	});
 }
 
 function getCourseParticipants(courseIdentity){
@@ -63,8 +66,9 @@ function checkInOut(authCode){
 }
 
 function unregister(registrationEntry){
-	console.log(registrationEntry);
-	dbUtil.unregister(registrationEntry, function(success){
+	var workshopId = registrationEntry['workshopId'];
+	delete registrationEntry['workshopId'];
+	dbUtil.unregister(workshopId,registrationEntry, function(success){
 		res.send(success);
 		res.end;
 	});

@@ -11,7 +11,7 @@
       </div>
       <div class="row index-link-wrapper">
         <div class="col index-link-item">
-          <div class="button-fat btn-white"  data-popup-open="popup-1">Check in/out</div>
+          <div class="button-fat btn-white"  data-popup-open="popup-1" onclick="initScanner()">Check in/out</div>
         </div>
         <div class="col index-link-item">
           <a href="/workshop"><div class="button-fat btn-white">Workshop</div></a>
@@ -27,7 +27,7 @@
         <h class="popup-text">Scanning in progress</h>
         <p class="popup-smalltext">Place your QR code in front of the camera.</p>
         <video id="qrVideo" class="qrVideo"></video>
-        <a class="popup-close" data-popup-close="popup-1" href="#"><i class="fas fa-times"></i></a>
+        <a class="popup-close" data-popup-close="popup-1" href="#"onclick="stopScanner()" ><i class="fas fa-times"></i></a>
       </div>
     </div>
 
