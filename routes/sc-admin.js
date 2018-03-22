@@ -114,7 +114,7 @@ module.exports = function(app){
 			});
 	});
 
-	app.post("/sc-admin/editWorkshop",function(req,res){
+	app.post("/sc-admin/createWorkshop",function(req,res){
 		//back to edit item with message
 		var host = req.headers.host;
 		var hostParts = host.split("/");
@@ -143,10 +143,6 @@ module.exports = function(app){
 				res.redirect('/sc-admin/workshop', msg);
 				res.end();
 			});
-
-	});
-
-	app.post("/sc-admin/createWorkshop",function(req,res){
 
 	});
 
