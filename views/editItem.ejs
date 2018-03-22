@@ -22,9 +22,9 @@
           <input class="item-row input-item" type="text" name="title" placeholder="Title"
           value= '<%- ws["title"] %>'>
           <input class="item-row input-item" type="text" name="category" placeholder="category">
-          <input class="item-row input-item" type="text" name="date" placeholder="date"
+          <input class="item-row input-item" type="text" name="date" placeholder="date" id="datepicker"
           value='<%- ws["date"] %>'>
-          <input class="item-row input-item" type="text" name="time" placeholder="time"
+          <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker"
           value='<%- ws["time"] %>'>
           <input class="item-row input-item" type="text" name="Level" placeholder="Level">
         </div>
@@ -33,7 +33,7 @@
 
     <div class="cont-registered">
       <ul class="edit-list-wrapper">
-        <li class="edit-item dashboard-title">
+        <li class="dashboard-item dashboard-title">
           <span class="col name-title">Name</span>
           <span class="col contact-title">Contact</span>
           <span class="col email">Email</span>
@@ -70,6 +70,11 @@
 <script src="/js/modal.js"></script>
 <script src="/js/editItem.js"></script>
 <script src="/js/dynamicTextbox.js"></script>
-
+<script>
+$( function() {
+  $("#datepicker").datepicker();
+  $('#timepicker').timepicker();
+} );
+</script>
 </body>
 </html>
