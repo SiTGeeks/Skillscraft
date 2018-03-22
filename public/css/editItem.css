@@ -67,6 +67,7 @@
   font-size:12px;
   line-height:1.5;
   font-family: sans-serif;
+  padding-top:10px;
 }
 
 .taskbar{
@@ -83,6 +84,7 @@
   margin:0 5px 0;
   width: auto;
   float:left;
+  width:150px;
 }
 
 .taskbar-inner{

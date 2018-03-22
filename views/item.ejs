@@ -7,12 +7,11 @@
 
   <div class="wrapper cont-item">
     <div class="cont-item-wrapper">
-      <div class="cont-left">
+      <div class="cont-left cont-opaque">
         <h class="item-desc-title">Description</h>
         <p class="item-desc-large">
           <%- ws['desc'] %>
         </p>
-        <div class="register-btn button btn-red"  data-popup-open="popup-1">Register</div>
       </div>
 
       <div class="cont-right">
@@ -20,6 +19,7 @@
         <div class="item-row"><i class="fas fa-map-marker item-icon"></i><%- ws['location'] %></div>
         <div class="item-row"><i class="far fa-calendar item-icon"></i><%- ws['date'] %></div>
         <div class="item-row"><i class="far fa-clock item-icon"></i><%- ws['time'] %></div>
+        <div class="register-btn button btn-red"  data-popup-open="popup-1">Register</div>
       </div>
     </div>
   </div>
