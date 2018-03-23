@@ -1,14 +1,18 @@
 const dbUtil = require('../firebaseCollection');
+const emailUtil = require('../emailUtils');
 var res;
 
 module.exports = function(app){
 	app.get("/ajax", function(req, resp){
 		res = resp
-		handleAjax(req.query.action,req.query.param);
+		handleAjax(req);
 	});
 }
 
-function handleAjax(action, param){
+function handleAjax(req){
+	var action = getQueryActionFromRequest(req);
+	var param = getQueryParamFromRequest(req);
+
 	if(action == "getAllWorkshops"){
 		getAllWorkshops();
 	}else if(action == "getAllCourseAdmin"){
@@ -25,6 +29,12 @@ function handleAjax(action, param){
 		checkInOut(param);
 	}else if(action == "unregister"){
 		unregister(param);
+	}else if(action == "endWorkshop"){
+		sendReminderEmail(getWorkshopIdFromHost(req));
+	}else if(action == "deleteWorkshop"){
+		deleteWorkshop(getWorkshopIdFromHost(req));
+	}else if(action == "reminderEmail"){
+		endWorkshop(getWorkshopIdFromHost(req));
 	}
 }
 
@@ -56,7 +66,7 @@ function getCourseParticipants(courseIdentity){
 
 function checkInOut(authCode){
 	//check in/out user
-	checkInOut = dbUtil.checkInOut(authCode, function(success){
+	dbUtil.checkInOut(authCode, function(success){
 		res.send(success);
 		res.end;
 	});
@@ -72,4 +82,50 @@ function unregister(registrationEntry){
 		res.send(success);
 		res.end;
 	});
+}
+
+function sendReminderEmail(workshopId){
+	dbUtil.getAdminWorkshopWithId(workshopId, function(formattedWorkshop, registrations){
+		var mailContent = emailUtil.createWorkshopReminderMail(formattedWorkshop);
+		for(var i=0; i<registrations.length; i++){
+			var email = registrations[i]["email"];
+			emailUtil.sendMail(mailContent, email);
+		}
+	});
+}
+
+function deleteWorkshop(workshopId){
+	dbUtil.getAdminWorkshopWithId(workshopId, function(formattedWorkshop, registrations){
+		var mailContent = emailUtil.createWorkshopCancelMail(formattedWorkshop);
+		for(var i=0; i<registrations.length; i++){
+			var email = registrations[i]["email"];
+			emailUtil.sendMail(mailContent, email);
+		}
+	});
+}
+
+function endWorksho(workshopId){
+	//TODO
+	dbUtil.getAdminWorkshopWithId(workshopId, function(formattedWorkshop, registrations){
+		var mailContent = emailUtil.createWorkshopCancelMail(formattedWorkshop);
+		for(var i=0; i<registrations.length; i++){
+			var email = registrations[i]["email"];
+			emailUtil.sendMail(mailContent, email);
+		}
+	});
+}
+
+function getWorkshopIdRequest(req){
+	var host = req.headers.host;
+	var hostParts = host.split("/");
+	var workshopId = hostParts[hostParts.length-1];
+	return workshopId;
+}
+
+function getQueryActionFromRequest(req){
+	return req.query.action
+}
+
+function getQueryParamFromRequest(req){
+	return req.query.param
 }

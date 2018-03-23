@@ -57,3 +57,63 @@ function submitEditItem(){
     workshopDetailsForm.submit();
   }
 }
+
+function endWorkshop(){
+  $.ajax({
+    url: "/ajax/",
+    data: {
+        action: "endWorkshop"
+    },
+    dataType: "json",
+    success: function(data) {
+      if(data){
+        //success message
+      }else{
+        //nope
+      }
+    },
+    error: function(xhr, status){
+        console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+    }
+  });
+}
+
+function deleteWorkshop(){
+  $.ajax({
+    url: "/ajax/",
+    data: {
+        action: "unregister"
+    },
+    dataType: "json",
+    success: function(data) {
+      if(data){
+        //success message
+      }else{
+        //nope
+      }
+    },
+    error: function(xhr, status){
+        console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+    }
+  });
+}
+
+function sendReminderEmail(){
+  $.ajax({
+    url: "/ajax/",
+    data: {
+        action: "reminderEmail"
+    },
+    dataType: "json",
+    success: function(data) {
+      if(data){
+        //success message
+      }else{
+        //nope
+      }
+    },
+    error: function(xhr, status){
+        console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+    }
+  });
+}
