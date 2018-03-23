@@ -22,6 +22,7 @@ module.exports = {
           success = true;
         }
       });
+      ref.child("workshopOccupied")
       callback(success);
     }); 
   },
@@ -152,7 +153,8 @@ module.exports = {
       workshopTiming: workshopTiming,
       workshopLocation: workshopLocation,
       workshopCompletionLevel: workshopCompletionLevel,
-      workshopImage: workshopImage
+      workshopImage: workshopImage,
+      workshopOccupied: 0
   	}
   	database.ref(DB_WORKSHOP).push(values).then(function(result) {
     	console.log("Workshop Add Success: " + result);
@@ -163,7 +165,7 @@ module.exports = {
   	});
   },
   //UPDATE WORKSHOP
-  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy,workshopDate, workshopTiming, workshopLocation, workshopLevel, callback){
+  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy,workshopDate, workshopTiming, workshopLocation, workshopLevel, workshopImage, callback){
   	var values =
   	{
       workshopName: workshopName,
@@ -173,7 +175,8 @@ module.exports = {
       workshopTiming: workshopTiming,
       workshopLocation: workshopLocation,
       workshopVacancy: workshopVacancy,
-      workshopLevel: workshopLevel
+      workshopLevel: workshopLevel,
+      workshopImage: workshopImage
   	}
 
   	database.ref(DB_WORKSHOP + '/' + key).update(values).then(function(result) {

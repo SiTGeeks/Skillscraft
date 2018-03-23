@@ -2,7 +2,6 @@
 <% include ../partials/headAdmin %>
 <body>
   <% include ../partials/navigationAdmin %>
-  <% include ../partials/searchbar%>
   <form action="/sc-admin/createWorkshop" id="createWorkshopForm" method="POST">
     <div class="wrapper cont-item">
       <div class="cont-item-wrapper">
@@ -18,7 +17,6 @@
           <input class="item-row input-item" type="text" name="vacancy" placeholder="Vacancy">
           <input class="item-row input-item" type="text" name="date" placeholder="date"  id="datepicker">
           <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker">
-          <input class="item-row input-item" type="text" name="level" placeholder="Level" >
           <select class="item-row input-item"  name="level" id="input-level">
             <option value="None">Select</option>
           </select>

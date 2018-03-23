@@ -1,4 +1,5 @@
 const dbUtil = require('../firebaseCollection');
+const debug = true;
 
 module.exports = function(app){
 	//get functions
@@ -11,21 +12,7 @@ module.exports = function(app){
 		res.end();
 	});
 
-	// app.get("/sc-admin/home", requireLogin, function(req, res){
-	// 	//admin logged in home
-	// 	res.render('dashboard',adminDetail);
-	// });
-	// app.get("/sc-admin/workshop",requireLogin, function(req, res){
-	// 	//admin logged in home
-	// 	res.render('adminworkshop');
-	// });
-	// app.get("/sc-admin/create-workshop", requireLogin, function(req, res){
-	// 	//admin logged in home
-	// 	res.render('addnew');
-	// });
-
-
-	app.get("/sc-admin/home", function(req, res){
+	app.get("/sc-admin/home", requireLogin, function(req, res){
 		//admin logged in home
 		res.render('dashboard',
 		{
@@ -33,7 +20,7 @@ module.exports = function(app){
 		});
 	});
 
-	app.get("/sc-admin/workshop", function(req, res){
+	app.get("/sc-admin/workshop", requireLogin, function(req, res){
 		//admin logged in home
 		res.render("adminworkshop",
 		{
@@ -41,7 +28,7 @@ module.exports = function(app){
 		});
 	});
 
-	app.get("/sc-admin/workshop/ws/:ws", function(req, res){
+	app.get("/sc-admin/workshop/ws/:ws", requireLogin, function(req, res){
 		dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
 			res.render('edititem',
 			{
@@ -52,7 +39,7 @@ module.exports = function(app){
 		});
 	});
 
-	app.get("/sc-admin/create-workshop", function(req, res){
+	app.get("/sc-admin/create-workshop",  requireLogin,function(req, res){
 		//admin logged in home
 		res.render('addnew');
 	});
@@ -82,7 +69,7 @@ module.exports = function(app){
 
 	});
 
-	app.post("/sc-admin/editWorkshop",function(req,res){
+	app.post("/sc-admin/editWorkshop", requireLogin,function(req,res){
 		//back to edit item with message
 		var host = req.headers.referer;
 		var hostParts = host.split("/");
@@ -95,6 +82,7 @@ module.exports = function(app){
 		var workshopTime = req.body.time;
 		var workshopLevel = req.body.level;
 		var workshopDescription = req.body.description;
+		var workshopImage = "workshopImage";
 		
 		dbUtil.updateWorkshop(workshopId, 
 				workshopName, 
@@ -104,6 +92,7 @@ module.exports = function(app){
 				workshopTime,
 				workshopLocation,
 				workshopLevel,
+				workshopImage,
 			function(success){
 				var msg = "";
 				if(success){
@@ -116,7 +105,7 @@ module.exports = function(app){
 			});
 	});
 
-	app.post("/sc-admin/createWorkshop",function(req,res){
+	app.post("/sc-admin/createWorkshop", requireLogin,function(req,res){
 		//back to edit item with message
 		var workshopName = req.body.title;
 		var workshopLocation = req.body.location;
@@ -146,19 +135,18 @@ module.exports = function(app){
 
 	});
 
-	app.post("/sc-admin/createAccounts",requireLogin, function(req,res){
-		//create accounts for course attendees
-
-	});
-
 	app.post("/sc-admin/newAdmin", function(req,res){
 		//new admin account
 	});
 
 }
 
+function createAccount(){
+
+}
+
 function requireLogin(req,res,next){
-	if(!req.user){
+	if(!req.user && !debug){
 		res.redirect('/sc-admin');
 	}else{
 		next();
