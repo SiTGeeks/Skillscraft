@@ -238,32 +238,55 @@ module.exports = {
     });
   },
   //Check IN USER
-  checkInUser: function (name, phoneNumber){
-  	var values =
-  	{
-  		name: name,
-  		phoneNumber: phoneNumber,
-  	}
-  	database.ref(DB_CHECKED_IN).push(values).then(function(result) {
-  		console.log("Workshop Check In Success: " + result);
-  	}, function(error) {
-  		console.log("Workshop Check Out Error: " + error);
-  	});
+  checkInUser: function (authCode, callback){
+    //Get user. find auth code
+    return database.ref(DB_USERS).once('value').then(function(snapshots) {
+      var userFound = false;
+      snapshots.forEach(function(snapshot) {
+        var user = snapshot.val();
+        //Check if authcode found
+        if(user.authCode === authCode){
+          userFound = true;
+          //Authcode found. Add user to current user database
+          var values =
+            {
+              name: user.name,
+              mobileNumber: user.mobileNumber,
+              authCode: user.authCode,
+            }
+            database.ref(DB_CHECKED_IN).push(values).then(function(result) {
+                callback(true);
+            }, function(error) {
+                callback(false);
+            });
+        }
+      });
+      //No user found
+      if(!userFound){
+        callback(false);
+      }
+    }, function(error) {
+        callback(false);
+    });
   },
 
   //CHECKOUT USER
-  checkOutUser: function  (name, phoneNumber){
+  checkOutUser: function  (authCode, callback){
   	//Get checked in user
-  	database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
+  	return database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
   		snapshots.forEach(function(snapshot) {
   			var checkedInUserKey = snapshot.key;
   			var checkedInUser = snapshot.val();
-        if(checkedInUser.name===name && checkedInUser.phoneNumber===phoneNumber){
+
+        if(checkedInUser.authCode === authCode){
           database.ref(DB_CHECKED_IN + '/' + checkedInUserKey).remove();
+          callback(true);
+        }else{
+          callback(false);
         }
   		});
   	}, function(error) {
-  	  console.error(error);
-  	});
-  }
+  	  callback(false);
+    });
+  },
 }
