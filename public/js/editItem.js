@@ -20,6 +20,15 @@
 //   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
 // });
 
+//DEMO
+list = ["DOG", "CAT"];
+generateOptions(list);
+
+//Init date and time picker
+$( function() {
+  $("#datepicker").datepicker();
+  $('#timepicker').timepicker();
+} );
 
 function deleteRegistration(workshopId,name,contact,email,removeBtn){
   var registration = {
@@ -42,5 +51,14 @@ function deleteRegistration(workshopId,name,contact,email,removeBtn){
     error: function(xhr, status){
         console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
     }
+  });
+}
+
+function generateOptions(list){
+  $.each(list, function (i, item) {
+    $('#input-level').append($('<option>', {
+      value: item,
+      text : item
+    }));
   });
 }
