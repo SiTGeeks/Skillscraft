@@ -63,7 +63,8 @@ function signUpForWorkshop(userDetails){
 
 function checkInOut(authCode){
 	//check in/out user
-	dbUtil.checkInOut(authCode, function(success){
+	console.log(authCode);
+	dbUtil.checkInOutUser (authCode, function(success){
 		res.send(success);
 		res.end();
 	});

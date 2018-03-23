@@ -22,17 +22,8 @@ module.exports = {
           success = true;
         }
       });
-      ref.child("workshopOccupied")
       callback(success);
     }); 
-  },
-
-  checkInOut: function(authCode, callback){
-    console.log(authCode);
-    var success = true;
-    // 1. check if user is alr check in
-	  // 2. if yes, remove. if no. add in.
-    callback(success);
   },
 
   //SIGN USER UP FOR COURSE
@@ -77,7 +68,6 @@ module.exports = {
           "image": workshopDetails.workshopImage,
           "date": workshopDetails.workshopDate,
           "time": workshopDetails.workshopTiming,
-          "level": workshopDetails.workshopLevel,
           "id":workshopSnapshot.key
         };
       }
@@ -116,7 +106,7 @@ module.exports = {
   },
   //READ WORKSHOPS FROM FIREBASE
   getWorkshop: function (callback){
-  	//Get all workshop info
+    //Get all workshop info
     var ref = database.ref(DB_WORKSHOP);
     return ref.once('value', function(workshopsSnapshot) {
       //success callback
@@ -145,57 +135,52 @@ module.exports = {
 
   createWorkshop: function (workshopName, workshopDescription, workshopVacancy,
      workshopTiming, workshopLocation, workshopCompletionLevel, workshopImage, callback) {
-  	var values =
-  	{
+    var values =
+    {
       workshopName: workshopName,
       workshopDescription: workshopDescription,
       workshopokVacancy: workshopVacancy,
       workshopTiming: workshopTiming,
       workshopLocation: workshopLocation,
       workshopCompletionLevel: workshopCompletionLevel,
-      workshopImage: workshopImage,
-      workshopOccupied: 0
-  	}
-  	database.ref(DB_WORKSHOP).push(values).then(function(result) {
-    	console.log("Workshop Add Success: " + result);
+      workshopImage: workshopImage
+    }
+    database.ref(DB_WORKSHOP).push(values).then(function(result) {
+      console.log("Workshop Add Success: " + result);
       callback(true);
-  	}, function(error) {
-    	console.log("Workshop Add: " + error);
+    }, function(error) {
+      console.log("Workshop Add: " + error);
       callback(false);
-  	});
+    });
   },
   //UPDATE WORKSHOP
-  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy,workshopDate, workshopTiming, workshopLocation, workshopLevel, workshopImage, callback){
-  	var values =
-  	{
+  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy, workshopTiming, workshopLocation, callback){
+    var values =
+    {
       workshopName: workshopName,
       workshopDescription: workshopDescription,
       workshopVacancy: workshopVacancy,
-      workshopDate: workshopDate,
       workshopTiming: workshopTiming,
-      workshopLocation: workshopLocation,
-      workshopVacancy: workshopVacancy,
-      workshopLevel: workshopLevel,
-      workshopImage: workshopImage
-  	}
+      workshopLocation: workshopLocation
+    }
 
-  	database.ref(DB_WORKSHOP + '/' + key).update(values).then(function(result) {
-    	console.log("Workshop Update Success");
+    database.ref(DB_WORKSHOP + '/' + key).update(values).then(function(result) {
+      console.log("Workshop Update Success: " + result);
       callback(true);
-  	}, function(error) {
-    	console.log("Workshop Update: " + error);
+    }, function(error) {
+      console.log("Workshop Update: " + error);
       callback(false);
-  	});
+    });
   },
   //DELETE WORKSHOP FROM DATABASE
   deleteWorkshop: function (key){
-  	database.ref(DB_WORKSHOP + '/' + key).remove();
+    database.ref(DB_WORKSHOP + '/' + key).remove();
   },
   //USER FUNCTIONS
   //CREATE Users
   createUser: function(name, emailAddress, password, mobileNumber, authCode, isAdmin, workshopName){
     var values =
-  	{
+    {
       name: name,
       emailAddress: emailAddress,
       password: password,
@@ -203,12 +188,12 @@ module.exports = {
       authCode: authCode,
       workshopsCompleted: workshopName,
       isAdmin: isAdmin
-  	}
+    }
     database.ref(DB_USERS).push(values).then(function(result) {
-    	console.log("User Add Success: " + result);
-  	}, function(error) {
-    	console.log("User Add: " + error);
-  	});
+      console.log("User Add Success: " + result);
+    }, function(error) {
+      console.log("User Add: " + error);
+    });
   },
   //Login User
   loginUser: function(emailAddress, password, callback){
@@ -245,55 +230,63 @@ module.exports = {
     });
   },
   //Check IN USER
-  checkInUser: function (authCode, callback){
-    //Get user. find auth code
-    return database.ref(DB_USERS).once('value').then(function(snapshots) {
-      var userFound = false;
+  checkInOutUser: function (authCode, callback){
+    //Check if user exist in check in
+    return database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
+      var isCheckInFound = false;
+      //Check for checkin
       snapshots.forEach(function(snapshot) {
-        var user = snapshot.val();
-        //Check if authcode found
-        if(user.authCode === authCode){
-          userFound = true;
-          //Authcode found. Add user to current user database
-          var values =
-            {
-              name: user.name,
-              mobileNumber: user.mobileNumber,
-              authCode: user.authCode,
-            }
-            database.ref(DB_CHECKED_IN).push(values).then(function(result) {
-                callback(true);
-            }, function(error) {
-                callback(false);
-            });
+        var checkedInUserKey = snapshot.key;
+        var checkedInUser = snapshot.val();
+
+        //Checked in user found
+        if(checkedInUser.authCode === authCode){
+          //Checkout
+          database.ref(DB_CHECKED_IN + '/' + checkedInUserKey).remove();
+          isCheckInFound = true;
+          callback(true);
         }
       });
-      //No user found
-      if(!userFound){
-        callback(false);
+      //No checkin user found. Check in current user with auth code
+      if(!isCheckInFound){
+        //Look for user
+        database.ref(DB_USERS).once('value').then(function(snapshots) {
+        var userFound = false;
+        snapshots.forEach(function(snapshot) {
+          var user = snapshot.val();
+          //Check if authcode found
+          if(user.authCode === authCode){
+            userFound = true;
+            //Authcode found. Add user to current user database
+            var values =
+              {
+                name: user.name,
+                contact: user.mobileNumber,
+                authCode: user.authCode,
+                qualifications: user.qualifications,
+              }
+              database.ref(DB_CHECKED_IN).push(values).then(function(result) {
+                //Check in
+                callback(true);
+              }, function(error) {
+                //Check in error
+                callback(false);
+              });
+            }
+          });
+          //No user found
+          if(!userFound){
+            //Invalid auth code. no user found
+            callback(false);
+          }
+        }, function(error) {
+          //Retrieve user info error
+          callback(false);
+        });
       }
     }, function(error) {
-        callback(false);
-    });
-  },
-
-  //CHECKOUT USER
-  checkOutUser: function  (authCode, callback){
-  	//Get checked in user
-  	return database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
-  		snapshots.forEach(function(snapshot) {
-  			var checkedInUserKey = snapshot.key;
-  			var checkedInUser = snapshot.val();
-
-        if(checkedInUser.authCode === authCode){
-          database.ref(DB_CHECKED_IN + '/' + checkedInUserKey).remove();
-          callback(true);
-        }else{
-          callback(false);
-        }
-  		});
-  	}, function(error) {
-  	  callback(false);
+      //Get checkin user error
+      callback(false);
     });
   },
 }
