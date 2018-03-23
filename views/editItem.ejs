@@ -48,13 +48,52 @@
               '<%- registered[i]['contact'] %>',
               '<%- registered[i]['email'] %>',
               this
+      <form action="/sc-admin">
+        <div class="cont-left cont-opaque">
+          <h class="item-desc-title">Description</h>
+          <textarea class="input input-item input-desc" type="text" name="description"  onkeyup="auto_grow(this)"></textarea>
+        </textarea>
+      </div>
+      <div class="cont-right">
+        <input class="item-row input-item" type="text" name="title" placeholder="Title"
+        value= '<%- ws["title"] %>'>
+        <input class="item-row input-item" type="text" name="category" placeholder="category">
+        <input class="item-row input-item" type="text" name="date" placeholder="date" id="datepicker"
+        value='<%- ws["date"] %>'>
+        <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker"
+        value='<%- ws["time"] %>'>
+        <select class="item-row input-item"  name="level" id="input-level">
+          <option value="None">Select</option>
+        </select>
+      </div>
+    </form>
+  </div>
+
+  <div class="cont-registered">
+    <ul class="edit-list-wrapper">
+      <li class="dashboard-item dashboard-title">
+        <span class="col name-title">Name</span>
+        <span class="col contact-title">Contact</span>
+        <span class="col email">Email</span>
+      </li>
+      <% for(var i=0; i<registered.length; i++){ %>
+        <li class="edit-item">
+          <span class="col name-title"><%- registered[i]['name'] %></span>
+          <span class="col contact-title"><%- registered[i]['contact'] %></span>
+          <span class="col email"><%- registered[i]['email'] %></span>
+          <span class="col delete"><a class="button-small" onclick="deleteRegistration(
+            '<%- ws['id'] %>',
+            '<%- registered[i]['name'] %>',
+            '<%- registered[i]['contact'] %>',
+            '<%- registered[i]['email'] %>',
+            this
             )"><i class="fas fa-trash"></i></a></span>
           </li>
-        <% } %>
-      </ul>
+          <% } %>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 <div class="popup" data-popup="popup-1">
@@ -105,12 +144,6 @@
 <script src="/js/modal.js"></script>
 <script src="/js/editItem.js"></script>
 <script src="/js/dynamicTextbox.js"></script>
-<script>
-$( function() {
-  $("#datepicker").datepicker();
-  $('#timepicker').timepicker();
-} );
 
-</script>
 </body>
 </html>
