@@ -21,7 +21,7 @@
 // });
 
 //DEMO
-list = ["DOG", "CAT"];
+list = ["Bronze", "Silver","Gold"];
 generateOptions(list);
 
 //Init date and time picker
@@ -130,7 +130,7 @@ function sendReminderEmail(){
     }
   });
 }
-=======
+
 function generateOptions(list){
   $.each(list, function (i, item) {
     $('#input-level').append($('<option>', {

@@ -84,13 +84,14 @@ module.exports = function(app){
 
 	app.post("/sc-admin/editWorkshop",function(req,res){
 		//back to edit item with message
-		var host = req.headers.host;
+		var host = req.headers.referer;
 		var hostParts = host.split("/");
 		var workshopId = hostParts[hostParts.length-1];
 
 		var workshopName = req.body.title;
-		var workshopCategory = req.body.category;
+		var workshopLocation = req.body.location;
 		var workshopDate = req.body.date;
+		var workshopVacancy = req.body.vacancy;
 		var workshopTime = req.body.time;
 		var workshopLevel = req.body.level;
 		var workshopDescription = req.body.description;
@@ -98,9 +99,11 @@ module.exports = function(app){
 		dbUtil.updateWorkshop(workshopId, 
 				workshopName, 
 				workshopDescription,
-				-1,
+				workshopVacancy,
+				workshopDate,
 				workshopTime,
 				workshopLocation,
+				workshopLevel,
 			function(success){
 				var msg = "";
 				if(success){
@@ -108,7 +111,7 @@ module.exports = function(app){
 				}else{
 					msg = "false";
 				}
-				res.redirect('/sc-admin/workshop', success);
+				res.redirect('/sc-admin/workshop');
 				res.end();
 			});
 	});

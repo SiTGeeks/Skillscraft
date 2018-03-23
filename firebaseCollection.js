@@ -76,6 +76,7 @@ module.exports = {
           "image": workshopDetails.workshopImage,
           "date": workshopDetails.workshopDate,
           "time": workshopDetails.workshopTiming,
+          "level": workshopDetails.workshopLevel,
           "id":workshopSnapshot.key
         };
       }
@@ -162,18 +163,21 @@ module.exports = {
   	});
   },
   //UPDATE WORKSHOP
-  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy, workshopTiming, workshopLocation, callback){
+  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy,workshopDate, workshopTiming, workshopLocation, workshopLevel, callback){
   	var values =
   	{
       workshopName: workshopName,
       workshopDescription: workshopDescription,
       workshopVacancy: workshopVacancy,
+      workshopDate: workshopDate,
       workshopTiming: workshopTiming,
-      workshopLocation: workshopLocation
+      workshopLocation: workshopLocation,
+      workshopVacancy: workshopVacancy,
+      workshopLevel: workshopLevel
   	}
 
   	database.ref(DB_WORKSHOP + '/' + key).update(values).then(function(result) {
-    	console.log("Workshop Update Success: " + result);
+    	console.log("Workshop Update Success");
       callback(true);
   	}, function(error) {
     	console.log("Workshop Update: " + error);

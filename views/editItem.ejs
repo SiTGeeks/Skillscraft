@@ -12,52 +12,19 @@
         <a class="taskbar-btn button btn-red" data-popup-open="popup-3" id="deleteWorkshop">Delete Workshop</a>
         <a class="taskbar-btn button btn-red" data-popup-open="popup-4" id="saveChanges">Save Changes</a>
       </div>
-      <form id="editWorkshopForm" action="/sc-admin/editWorkshop" method="POST">
-          <div class="cont-left cont-opaque">
-            <h class="item-desc-title">Description</h>
-            <textarea class="input input-item input-desc" type="text" name="description"  onkeyup="auto_grow(this)"><%- ws["desc"] %>
-            </textarea>
-          </div>
-        <div class="cont-right">
-          <input class="item-row input-item" type="text" name="title" placeholder="Title"
-          value= '<%- ws["title"] %>'>
-          <input class="item-row input-item" type="text" name="category" placeholder="category">
-          <input class="item-row input-item" type="text" name="date" placeholder="date" id="datepicker"
-          value='<%- ws["date"] %>'>
-          <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker"
-          value='<%- ws["time"] %>'>
-          <input class="item-row input-item" type="text" name="Level" placeholder="Level">
-        </div>
-      </form>
-    </div>
-    <div class="cont-registered">
-      <ul class="edit-list-wrapper">
-        <li class="dashboard-item dashboard-title">
-          <span class="col name-title">Name</span>
-          <span class="col contact-title">Contact</span>
-          <span class="col email">Email</span>
-        </li>
-        <% for(var i=0; i<registered.length; i++){ %>
-          <li class="edit-item">
-            <span class="col name-title"><%- registered[i]['name'] %></span>
-            <span class="col contact-title"><%- registered[i]['contact'] %></span>
-            <span class="col email"><%- registered[i]['email'] %></span>
-            <span class="col delete"><a class="button-small" onclick="deleteRegistration(
-              '<%- ws['id'] %>',
-              '<%- registered[i]['name'] %>',
-              '<%- registered[i]['contact'] %>',
-              '<%- registered[i]['email'] %>',
-              this
-      <form action="/sc-admin">
+      <form action="/sc-admin/editWorkshop" method="POST" id="editWorkshopForm">
         <div class="cont-left cont-opaque">
           <h class="item-desc-title">Description</h>
-          <textarea class="input input-item input-desc" type="text" name="description"  onkeyup="auto_grow(this)"></textarea>
+          <textarea class="input input-item input-desc" type="text" name="description"  onkeyup="auto_grow(this)"><%- ws["desc"] %></textarea>
         </textarea>
       </div>
       <div class="cont-right">
         <input class="item-row input-item" type="text" name="title" placeholder="Title"
         value= '<%- ws["title"] %>'>
-        <input class="item-row input-item" type="text" name="category" placeholder="category">
+        <input class="item-row input-item" type="text" name="location" placeholder="Location"
+        value= '<%- ws["location"] %>'>
+        <input class="item-row input-item" type="text" name="vacancy" placeholder="Vacancy"
+        value= '<%- ws["vacancy"] %>'>
         <input class="item-row input-item" type="text" name="date" placeholder="date" id="datepicker"
         value='<%- ws["date"] %>'>
         <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker"
@@ -96,11 +63,13 @@
   </div>
 </div>
 
+
+
 <div class="popup" data-popup="popup-1">
   <div class="popup-inner  popup-register">
     <h class="popup-text">Send Email</h>
     <p class="popup-smalltext">Do you want to send a confirmation email to all participants?</p>
-    <button class="popup-register-btn button btn-red" data-popup-close="popup-1" data-popup-open="popup-5" onclick="sendReminderEmail()">Send</button>
+    <button class="popup-register-btn button btn-red" data-popup-close="popup-1" data-popup-open="popup-5" onclick="sendReminderEmail()" >Send</button>
     <a class="popup-close" data-popup-close="popup-1"><i class="fas fa-times"></i></a>
   </div>
 </div>
@@ -126,7 +95,7 @@
 <div class="popup" data-popup="popup-4">
   <div class="popup-inner  popup-register">
     <h class="popup-text">Save Changes</h>
-    <p class="popup-smalltext">Do you want to save the changes you have made?</p>
+    <p class="popup-smalltext">Do you want to save the changes you made?</p>
     <button class="popup-register-btn button btn-red"  data-popup-close="popup-4" data-popup-open="popup-5" onclick="submitEditItem()">Save</button>
     <a class="popup-close" data-popup-close="popup-4" href="#"><i class="fas fa-times"></i></a>
   </div>
