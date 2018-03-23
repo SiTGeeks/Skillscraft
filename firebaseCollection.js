@@ -129,7 +129,8 @@ module.exports = {
           "location": workshopDetails.workshopLocation,
           "image": "workshopDetails.workshopImage",
           "date": workshopDetails.workshopDate,
-          "time": workshopDetails.workshopTiming
+          "time": workshopDetails.workshopTiming,
+          "id": workshop.key
         };
         workshops.push(formattedWorkshop);
       });
@@ -185,7 +186,7 @@ module.exports = {
   },
   //USER FUNCTIONS
   //CREATE Users
-  createUser: function(name, emailAddress, password, mobileNumber, authCode, isAdmin){
+  createUser: function(name, emailAddress, password, mobileNumber, authCode, isAdmin, workshopName){
     var values =
   	{
       name: name,
@@ -193,7 +194,7 @@ module.exports = {
       password: password,
       mobileNumber: mobileNumber,
       authCode: authCode,
-      skillsCompleted: null,
+      workshopsCompleted: workshopName,
       isAdmin: isAdmin
   	}
     database.ref(DB_USERS).push(values).then(function(result) {

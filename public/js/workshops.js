@@ -9,7 +9,7 @@ function generateItem(title, desc, occupied, vacancy, location, date, time, id) 
     var itemDate = '<span class="workshop-item-text item-date"><i class="far fa-calendar workshop-icon"></i>'+date+'</span>';
     var itemTime = '<span class="workshop-item-text item-time"><i class="far fa-clock workshop-icon"></i>'+time+'</span>';
     var item = '<li class="workshop-item">'
-    + '<a href="ws/'
+    + '<a href="workshop/ws/'
     + itemLink
     + '">'
     + '<div class="workshop-img-wrapper">'
@@ -24,7 +24,7 @@ function generateItem(title, desc, occupied, vacancy, location, date, time, id) 
     + itemDate
     + itemTime
     + '</div>'
-    + '<a href="ws/'+id+'"><div class="workshop-btn button btn-red">View</div></a>'
+    + '<a href="workshop/ws/'+id+'"><div class="workshop-btn button btn-red">View</div></a>'
     + '</li>';
 
     $(".workshop-list-wrapper").append(item);
