@@ -28,10 +28,6 @@
   font-size: 13px;
 }
 
-.dashboard-title{
-  background-color: #191919;
-  color:#efefef;
-}
 
 .col{
   width:calc(100% / 4);

@@ -9,6 +9,7 @@
   width:100%;
   margin: 0 auto;
   padding-top: 100px;
+  overflow: hidden;
 }
 
 .workshop-item{
@@ -35,6 +36,7 @@
 
 .workshop-img{
   width:100%;
+  filter: brightness(50%);
 }
 
 .workshop-item-text{
@@ -56,6 +58,7 @@
   text-align: center;
   top: 50%;
   transform: translateY(-50%);
+  z-index:2;
 }
 
 .workshop-item-text{

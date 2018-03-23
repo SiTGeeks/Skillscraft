@@ -15,9 +15,9 @@
         <div class="cont-right">
           <input class="item-row input-item" type="text" name="title" placeholder="Title">
           <input class="item-row input-item" type="text" name="location" placeholder="Location">
-          <input class="item-row input-item" type="text" name="date" placeholder="date">
-          <input class="item-row input-item" type="text" name="time" placeholder="time">
-          <input class="item-row input-item" type="text" name="Level" placeholder="Level">
+          <input class="item-row input-item" type="text" name="date" placeholder="date"  id="datepicker">
+          <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker">
+          <input class="item-row input-item" type="text" name="Level" placeholder="Level" >
           <div class="cont-left">
             <div class="file-input-wrapper">
               <button class="btn-file-input upload-btn button btn-red">
@@ -44,6 +44,11 @@
     <script src="/js/addNewWorkshop.js"></script>
     <script src="/js/modal.js"></script>
     <script src="/js/dynamicTextbox.js"></script>
-
+    <script>
+    $( function() {
+      $("#datepicker").datepicker();
+      $('#timepicker').timepicker();
+    } );
+    </script>
   </body>
   </html>

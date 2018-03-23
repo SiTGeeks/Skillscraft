@@ -1,6 +1,4 @@
 .dashboard-list-wrapper{
-  margin: 100px auto;
-  max-width:1024px;
 }
 
 .dashboard-list-wrapper li{
@@ -15,11 +13,21 @@
   padding: 18px 10px;
   color:#191919;
   font-size: 13px;
+  border: 1px solid #efefef;
+  border-radius: 2px;
 }
 
 .dashboard-title{
-  background-color: #191919;
-  color:#efefef;
+  background-color: #ff5a62;
+  color:white;
+  font-weight: 700;
+}
+
+.dashboard-message{
+  text-align: center;
+  font-size: 18px;
+  margin: 20px;
+font-weight:700;
 }
 
 .col{
