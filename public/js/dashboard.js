@@ -15,13 +15,27 @@ function generateItem(name, contact, skills) {
   $(".dashboard-list-wrapper").append(item);
 }
 
+function generateItems(checkedInUsers){
+  for(var i=0; i<checkedInUsers.length; i++){
+    checkedInUser = checkedInUsers[i];
+    generateItem(checkedInUser['name'],checkedInUser['contact'],checkedInUser['qualifications'].split(','));
+  }
+}
+
 //Generate list of items
 $( document ).ready(function() {
-  console.log( "ready!!" );
-  var skills1 = ["Wood", "Paper", "Metal"];
-  var skills2 = ["Wood", "Paper", "MetalPaper","Wood", "PaperPaperPaper", "Metal"];
-  var skills3 = ["Wood", "Paper", "Metal","Wood", "PaperPaper", "Metal","PaperWood", "Paper", "Metal"];
-  generateItem('Clement', '97577347', skills1);
-  generateItem('Clement', '97577347', skills2);
-  generateItem('Clement', '97577347', skills3);
+  $.ajax({
+      url: "/ajax/",
+      data: {
+          action: "getCheckedInUsers",
+          param: ""
+      },
+      dataType: "json",
+      success: function(data) {
+          generateItems(data);
+      },
+      error: function(xhr, status){
+          console.log("AJAX ERROR GETTING CHECKED IN USERS: " + xhr.status);
+      }
+  });
 });

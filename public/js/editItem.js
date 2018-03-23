@@ -62,7 +62,8 @@ function endWorkshop(){
   $.ajax({
     url: "/ajax/",
     data: {
-        action: "endWorkshop"
+        action: "endWorkshop",
+        param: window.location.toString()
     },
     dataType: "json",
     success: function(data) {
@@ -82,7 +83,8 @@ function deleteWorkshop(){
   $.ajax({
     url: "/ajax/",
     data: {
-        action: "unregister"
+        action: "deleteWorkshop",
+        param: window.location.toString()
     },
     dataType: "json",
     success: function(data) {
@@ -99,10 +101,12 @@ function deleteWorkshop(){
 }
 
 function sendReminderEmail(){
+  console.log("email");
   $.ajax({
     url: "/ajax/",
     data: {
-        action: "reminderEmail"
+        action: "reminderEmail",
+        param: window.location.toString()
     },
     dataType: "json",
     success: function(data) {

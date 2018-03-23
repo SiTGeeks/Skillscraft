@@ -23,52 +23,50 @@ function handleAjax(req){
 		getCheckedInUsers();
 	}else if(action == "signup"){
 		signUpForWorkshop(param);
-	}else if(action == "getCourseParticipants"){
-		getCourseParticipants(param);
 	}else if(action == "checkin"){
 		checkInOut(param);
 	}else if(action == "unregister"){
 		unregister(param);
-	}else if(action == "endWorkshop"){
-		sendReminderEmail(getWorkshopIdFromHost(req));
-	}else if(action == "deleteWorkshop"){
-		deleteWorkshop(getWorkshopIdFromHost(req));
 	}else if(action == "reminderEmail"){
-		endWorkshop(getWorkshopIdFromHost(req));
+		sendReminderEmail(getWorkshopIdFromURL(param));
+	}else if(action == "deleteWorkshop"){
+		deleteWorkshop(getWorkshopIdFromURL(param));
+	}else if(action == "endWorkshop"){
+		endWorkshop(getWorkshopIdFromURL(param));
 	}
 }
 
 function getAllWorkshops(){
 	//get all course from db
-	workshopPromise = dbUtil.getWorkshop(function(data){
+	dbUtil.getWorkshop(function(data){
 		//work with data here
 		res.send(data);
-		res.end;
+		res.end();
 	});
 }
 
 function getCheckedInUsers(){
 	//get all checked in users & details from db
-
+	dbUtil.getCheckedInUsers(function(data){
+		console.log(data);
+		res.send(data);
+		res.end();
+	});
 }
 
 function signUpForWorkshop(userDetails){
 	//add user details to users signed up for the course
 	dbUtil.signUpWorkshop(userDetails, function(data){
 		res.send(data);
-		res.end;
+		res.end();
 	});
-}
-
-function getCourseParticipants(courseIdentity){
-	//get all users interested in a course
 }
 
 function checkInOut(authCode){
 	//check in/out user
 	dbUtil.checkInOut(authCode, function(success){
 		res.send(success);
-		res.end;
+		res.end();
 	});
 	//do db function to
 
@@ -80,45 +78,52 @@ function unregister(registrationEntry){
 	delete registrationEntry['workshopId'];
 	dbUtil.unregister(workshopId,registrationEntry, function(success){
 		res.send(success);
-		res.end;
+		res.end();
 	});
 }
 
 function sendReminderEmail(workshopId){
 	dbUtil.getAdminWorkshopWithId(workshopId, function(formattedWorkshop, registrations){
 		var mailContent = emailUtil.createWorkshopReminderMail(formattedWorkshop);
+		console.log("Sending reminder email to:");
+		var emails = [];
 		for(var i=0; i<registrations.length; i++){
 			var email = registrations[i]["email"];
-			emailUtil.sendMail(mailContent, email);
+			emails.push(email);
 		}
+		emailUtil.sendMail(mailContent, emails.toString());
 	});
 }
 
 function deleteWorkshop(workshopId){
 	dbUtil.getAdminWorkshopWithId(workshopId, function(formattedWorkshop, registrations){
 		var mailContent = emailUtil.createWorkshopCancelMail(formattedWorkshop);
+		var emails = [];
 		for(var i=0; i<registrations.length; i++){
 			var email = registrations[i]["email"];
-			emailUtil.sendMail(mailContent, email);
+			emails.push(email);
 		}
+		if(emails.length > 0){
+			emailUtil.sendMail(mailContent, emails.toString());
+		}
+		dbUtil.deleteWorkshop(workshopId);
 	});
 }
 
-function endWorksho(workshopId){
-	//TODO
+function endWorkshop(workshopId){
 	dbUtil.getAdminWorkshopWithId(workshopId, function(formattedWorkshop, registrations){
-		var mailContent = emailUtil.createWorkshopCancelMail(formattedWorkshop);
 		for(var i=0; i<registrations.length; i++){
+			var authQR; //GENERATE QR HERE 
+			var mailContent = emailUtil.createWorkshopCancelMail(authQR);
 			var email = registrations[i]["email"];
 			emailUtil.sendMail(mailContent, email);
 		}
 	});
 }
 
-function getWorkshopIdRequest(req){
-	var host = req.headers.host;
-	var hostParts = host.split("/");
-	var workshopId = hostParts[hostParts.length-1];
+function getWorkshopIdFromURL(url){
+	var urlParts = url.split("/");
+	var workshopId = urlParts[urlParts.length-1];
 	return workshopId;
 }
 

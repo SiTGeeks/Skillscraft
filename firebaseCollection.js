@@ -16,7 +16,8 @@ module.exports = {
         var nameMatch = registrationDetails["name"] == registrationEntry["name"];
         var contactMatch = registrationDetails["contact"] == registrationEntry["contact"];
         var emailMatch = registrationDetails["email"] == registrationEntry["email"];
-        if(nameMatch && contactMatch && emailMatch){
+        //match all fields and ensure only 1 entry is removed
+        if(nameMatch && contactMatch && emailMatch && !success){
           ref.child(registration.key).remove();
           success = true;
         }
@@ -102,9 +103,12 @@ module.exports = {
         };
         var registrationsSnapshot = workshopDetails.signedUp;
         var registrations = [];
-        registrationsSnapshot.forEach(reg=>{
-          registrations.push(reg);
-        });
+        if(registrationsSnapshot){
+          registrationsSnapshot.forEach(reg=>{
+            console.log(reg);
+            registrations.push(reg);
+          });  
+        }
       }
       callback(formattedWorkshop, registrations);
     });
@@ -219,16 +223,18 @@ module.exports = {
     });
   },
   //GET CHECKED IN USERS
-  getCheckedInUsers: function (){
-    database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
+  getCheckedInUsers: function (callback){
+    return database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
       //Retrievd workshops
+      var checkedInUsers = [];
       snapshots.forEach(function(snapshot) {
         var checkedInUser = snapshot.val();
-        console.log(JSON.stringify(checkedInUser.key));
+        checkedInUsers.push(checkedInUser);
       });
+      callback(checkedInUsers);
     }, function(error) {
       console.error(error);
-      return null;
+      callback([]);
     });
   },
   //Check IN USER
@@ -244,19 +250,7 @@ module.exports = {
   		console.log("Workshop Check Out Error: " + error);
   	});
   },
-  //GET CHECKED IN USERS
-  getCheckedInUsers: function (){
-  	database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
-      //Retrievd workshops
-      snapshots.forEach(function(snapshot) {
-        var checkedInUser = snapshot.val();
-        console.log(JSON.stringify(checkedInUser.key));
-      });
-  	}, function(error) {
-  		console.error(error);
-  		return null;
-  	});
-  },
+
   //CHECKOUT USER
   checkOutUser: function  (name, phoneNumber){
   	//Get checked in user
