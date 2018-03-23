@@ -5,8 +5,8 @@ function submitWorkshopDetails(){
 
 	var validForm = true;
 	//some checks with workshop details
-
 	if(validForm){
+		console.log(workshopDetails);
 		workshopDetailsForm.submit();
 	}
 }

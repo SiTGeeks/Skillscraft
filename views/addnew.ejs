@@ -3,7 +3,7 @@
 <body>
   <% include ../partials/navigationAdmin %>
   <% include ../partials/searchbar%>
-  <form action="./sc-admin/editWorkshop" id="createWorkshopForm">
+  <form action="/sc-admin/createWorkshop" id="createWorkshopForm" method="POST">
     <div class="wrapper cont-item">
       <div class="cont-item-wrapper">
 
@@ -15,9 +15,10 @@
         <div class="cont-right">
           <input class="item-row input-item" type="text" name="title" placeholder="Title">
           <input class="item-row input-item" type="text" name="location" placeholder="Location">
+          <input class="item-row input-item" type="text" name="vacancy" placeholder="Vacancy">
           <input class="item-row input-item" type="text" name="date" placeholder="date"  id="datepicker">
           <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker">
-          <input class="item-row input-item" type="text" name="Level" placeholder="Level" >
+          <input class="item-row input-item" type="text" name="level" placeholder="Level" >
           <div class="cont-left">
             <div class="file-input-wrapper">
               <button class="btn-file-input upload-btn button btn-red">
@@ -35,8 +36,8 @@
       <div class="popup" data-popup="popup-1">
         <div class="popup-inner  popup-register">
           <h class="popup-text">Created</h>
-          <p class="popup-smalltext">The workshop has been created. Browse workshops to edit the workshop.</p>
-          <button class="popup-register-btn button btn-red"  type="submit" value="Submit">Confirm</button>
+          <p class="popup-smalltext">Are you sure you want to create this workshop?</p>
+          <button class="popup-register-btn button btn-red"  onclick="submitWorkshopDetails()">Confirm</button>
           <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
         </div>
       </div>

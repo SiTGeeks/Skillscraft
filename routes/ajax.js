@@ -48,7 +48,6 @@ function getAllWorkshops(){
 function getCheckedInUsers(){
 	//get all checked in users & details from db
 	dbUtil.getCheckedInUsers(function(data){
-		console.log(data);
 		res.send(data);
 		res.end();
 	});

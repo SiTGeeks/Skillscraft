@@ -30,7 +30,7 @@ module.exports = {
     console.log(authCode);
     var success = true;
     // 1. check if user is alr check in
-	// 2. if yes, remove. if no. add in.
+	  // 2. if yes, remove. if no. add in.
     callback(success);
   },
 
@@ -105,7 +105,6 @@ module.exports = {
         var registrations = [];
         if(registrationsSnapshot){
           registrationsSnapshot.forEach(reg=>{
-            console.log(reg);
             registrations.push(reg);
           });  
         }
@@ -128,10 +127,9 @@ module.exports = {
           "occupied": workshopDetails.workshopOccupied,
           "vacancy": workshopDetails.workshopVacancy,
           "location": workshopDetails.workshopLocation,
-          "image": workshopDetails.workshopImage,
+          "image": "workshopDetails.workshopImage",
           "date": workshopDetails.workshopDate,
-          "time": workshopDetails.workshopTiming,
-          "id":workshop.key
+          "time": workshopDetails.workshopTiming
         };
         workshops.push(formattedWorkshop);
       });
@@ -143,7 +141,7 @@ module.exports = {
   //0 is bronze, 1 is silver, 2 is gold
 
   createWorkshop: function (workshopName, workshopDescription, workshopVacancy,
-     workshopTiming, workshopLocation, workshopCompletionLevel,callback) {
+     workshopTiming, workshopLocation, workshopCompletionLevel, workshopImage, callback) {
   	var values =
   	{
       workshopName: workshopName,
@@ -151,7 +149,8 @@ module.exports = {
       workshopokVacancy: workshopVacancy,
       workshopTiming: workshopTiming,
       workshopLocation: workshopLocation,
-      workshopCompletionLevel: workshopCompletionLevel
+      workshopCompletionLevel: workshopCompletionLevel,
+      workshopImage: workshopImage
   	}
   	database.ref(DB_WORKSHOP).push(values).then(function(result) {
     	console.log("Workshop Add Success: " + result);

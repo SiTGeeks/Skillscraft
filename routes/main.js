@@ -36,13 +36,4 @@ app.get("/workshop/ws/:ws", function(req, res){
 	// res.end();
 });
 
-//post functions
-app.post("/workshp/signup/ws", function(req,res){
-	course = "";
-	name = req.body.name;
-	email = req.body.email;
-	contact = req.body.contact;
-
-	db.signUpCourse(course, name, email, contact);
-});
 };

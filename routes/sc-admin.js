@@ -76,7 +76,6 @@ module.exports = function(app){
 			}else{
 				req.session.user = user;
 				res.redirect('/sc-admin/home');
-			
 			}
 			res.end();
 		});
@@ -116,23 +115,21 @@ module.exports = function(app){
 
 	app.post("/sc-admin/createWorkshop",function(req,res){
 		//back to edit item with message
-		var host = req.headers.host;
-		var hostParts = host.split("/");
-		var workshopId = hostParts[hostParts.length-1];
-
 		var workshopName = req.body.title;
-		var workshopCategory = req.body.category;
+		var workshopLocation = req.body.location;
+		var workshopVacancy = req.body.vacancy;
 		var workshopDate = req.body.date;
 		var workshopTime = req.body.time;
 		var workshopLevel = req.body.level;
 		var workshopDescription = req.body.description;
-		
-		dbUtil.createWorkshop(workshopId, 
+		dbUtil.createWorkshop( 
 				workshopName, 
 				workshopDescription,
-				-1,
+				workshopVacancy,
 				workshopTime,
 				workshopLocation,
+				workshopLevel,
+				"workshopImage",
 			function(success){
 				var msg = "";
 				if(success){
@@ -140,7 +137,7 @@ module.exports = function(app){
 				}else{
 					msg = "failed";
 				}
-				res.redirect('/sc-admin/workshop', msg);
+				res.redirect('/sc-admin/workshop');
 				res.end();
 			});
 
