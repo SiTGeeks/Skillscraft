@@ -26,15 +26,6 @@ module.exports = {
       callback(success);
     });
   },
-
-  checkInOut: function(authCode, callback){
-    console.log(authCode);
-    var success = true;
-    // 1. check if user is alr check in
-	  // 2. if yes, remove. if no. add in.
-    callback(success);
-  },
-
   //SIGN USER UP FOR COURSE
   signUpWorkshop: function(data, callback){
     let workshopId = data.workshopId
@@ -59,7 +50,6 @@ module.exports = {
        });
      });
   },
-
   //LOOK FOR COURSE WITH ID
   getWorkshopWithId: function(id, callback){
     var ref = database.ref(DB_WORKSHOP).child(id);
@@ -138,10 +128,8 @@ module.exports = {
       callback(workshops);
     });
   },
-
   //ADDD WORKSHOP TO DATABASE
   //0 is bronze, 1 is silver, 2 is gold
-
   createWorkshop: function (workshopName, workshopDescription, workshopVacancy,
      workshopTiming, workshopLocation, workshopCompletionLevel, workshopImage, callback) {
   	var values =
@@ -185,8 +173,7 @@ module.exports = {
   deleteWorkshop: function (key){
   	database.ref(DB_WORKSHOP + '/' + key).remove();
   },
-  //USER FUNCTIONS
-  //CREATE Users
+  //CREATE User
   createUser: function(name, emailAddress, password, mobileNumber, authCode, isAdmin, workshopName){
     var values =
   	{
@@ -203,6 +190,36 @@ module.exports = {
   	}, function(error) {
     	console.log("User Add: " + error);
   	});
+  },
+  //UPDATE USER
+  updateUser: function (key, name, emailAddress, mobileNumber, callback){
+    return database.ref(DB_USERS).once('value').then(function(snapshots) {
+      //Check for users
+      snapshots.forEach(function(snapshot) {
+        var userKey = snapshot.key;
+        var user = snapshot.val();
+
+        //Update user if email add matches
+        if(user.emailAddress === emailAddress){
+          user.name = name;
+          user.emailAddress = emailAddress;
+          user.mobileNumber = mobileNumber;
+          //Update user
+          database.ref(DB_USERS + '/' + key).update(user).then(function(result) {
+            console.log("User Update Success: " + result);
+            callback(true);
+          }, function(error) {
+            console.log("User Update: " + error);
+            callback(false);
+          });
+        }else{
+          callback(false);
+        }
+      });
+    }, function(error) {
+      //Get checkin user error
+      callback(false);
+    });
   },
   //Login User
   loginUser: function(emailAddress, password, callback){
@@ -223,7 +240,6 @@ module.exports = {
         callback(null);
     });
   },
-
   //GET QUALIFICATIONS
   getQualifications: function (callback){
     //Get all workshop info
@@ -238,7 +254,6 @@ module.exports = {
       callback(qualifications);
     });
   },
-
   //GET CHECKED IN USERS
   getCheckedInUsers: function (callback){
     return database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
