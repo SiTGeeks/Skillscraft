@@ -38,6 +38,24 @@ module.exports = function(app){
 		});
 	});
 
+
+	app.get("/sc-admin/users", function(req, res){
+		//admin logged in home
+		res.render("users",
+		{
+			bannerText:"Manage Users"
+		});
+	});
+
+
+	app.get("/sc-admin/user/id", function(req, res){
+		//admin logged in home
+		res.render("profile",
+		{
+			bannerText:"User Profile"
+		});
+	});
+
 	app.get("/sc-admin/workshop/ws/:ws", function(req, res){
 		dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
 			res.render('edititem',
@@ -73,7 +91,7 @@ module.exports = function(app){
 			}else{
 				req.session.user = user;
 				res.redirect('/sc-admin/home');
-			
+
 			}
 			res.end();
 		});
@@ -92,13 +110,13 @@ module.exports = function(app){
 		var workshopTime = req.body.time;
 		var workshopLevel = req.body.level;
 		var workshopDescription = req.body.description;
-		
-		dbUtil.updateWorkshop(workshopId, 
-				workshopName, 
-				workshopDescription,
-				-1,
-				workshopTime,
-				workshopLocation,
+
+		dbUtil.updateWorkshop(workshopId,
+			workshopName,
+			workshopDescription,
+			-1,
+			workshopTime,
+			workshopLocation,
 			function(success){
 				var msg = "";
 				if(success){
@@ -109,74 +127,74 @@ module.exports = function(app){
 				res.redirect('/sc-admin/workshop', success);
 				res.end();
 			});
-	});
+		});
 
-	//post functions
-	app.post("/sc-admin/login", function(req, res){
-		//admin login action
-		//res.redirect('/sc-admin/home')
-		var email = req.body.email;
-		var password = req.body.password;
-		dbUtil.loginUser(email, password, function(user){
-			if(!user){
-				res.render('/sc-admin',{error: "Invalid E-mail or password"});
+		//post functions
+		app.post("/sc-admin/login", function(req, res){
+			//admin login action
+			//res.redirect('/sc-admin/home')
+			var email = req.body.email;
+			var password = req.body.password;
+			dbUtil.loginUser(email, password, function(user){
+				if(!user){
+					res.render('/sc-admin',{error: "Invalid E-mail or password"});
+				}else{
+					req.session.user = user;
+					res.redirect('/sc-admin/home');
+
+				}
+				res.end();
+			});
+
+		});
+
+		app.post("/sc-admin/editWorkshop",function(req,res){
+			//back to edit item with message
+			var host = req.headers.host;
+			var hostParts = host.split("/");
+			var workshopId = hostParts[hostParts.length-1];
+
+			var workshopName = req.body.title;
+			var workshopCategory = req.body.category;
+			var workshopDate = req.body.date;
+			var workshopTime = req.body.time;
+			var workshopLevel = req.body.level;
+			var workshopDescription = req.body.description;
+
+			dbUtil.updateWorkshop(workshopId,
+				workshopName,
+				workshopDescription,
+				-1,
+				workshopTime,
+				workshopLocation,
+				function(success){
+					var msg = "";
+					if(success){
+						msg = "";
+					}else{
+						msg = "";
+					}
+					res.redirect('/sc-admin/workshop', success);
+					res.end();
+				});
+
+			});
+
+			app.post("/sc-admin/createAccounts",requireLogin, function(req,res){
+				//create accounts for course attendees
+
+			});
+
+			app.post("/sc-admin/newAdmin", function(req,res){
+				//new admin account
+			});
+
+		}
+
+		function requireLogin(req,res,next){
+			if(!req.user){
+				res.redirect('/sc-admin');
 			}else{
-				req.session.user = user;
-				res.redirect('/sc-admin/home');
-			
+				next();
 			}
-			res.end();
-		});
-
-	});
-
-	app.post("/sc-admin/editWorkshop",function(req,res){
-		//back to edit item with message
-		var host = req.headers.host;
-		var hostParts = host.split("/");
-		var workshopId = hostParts[hostParts.length-1];
-
-		var workshopName = req.body.title;
-		var workshopCategory = req.body.category;
-		var workshopDate = req.body.date;
-		var workshopTime = req.body.time;
-		var workshopLevel = req.body.level;
-		var workshopDescription = req.body.description;
-		
-		dbUtil.updateWorkshop(workshopId, 
-				workshopName, 
-				workshopDescription,
-				-1,
-				workshopTime,
-				workshopLocation,
-			function(success){
-				var msg = "";
-				if(success){
-					msg = "";
-				}else{
-					msg = "";
-				}
-				res.redirect('/sc-admin/workshop', success);
-				res.end();
-			});
-
-	});
-
-	app.post("/sc-admin/createAccounts",requireLogin, function(req,res){
-		//create accounts for course attendees
-
-	});
-
-	app.post("/sc-admin/newAdmin", function(req,res){
-		//new admin account
-	});
-
-}
-
-function requireLogin(req,res,next){
-	if(!req.user){
-		res.redirect('/sc-admin');
-	}else{
-		next();
-	}
-}
+		}

@@ -1,0 +1,71 @@
+<!doctype html>
+<% include ../partials/headAdmin %>
+<body>
+  <% include ../partials/navigationAdmin %>
+  <% include ../partials/searchbar %>
+  <div class="wrapper cont-workshop">
+    <form action="./adminWorkshop.html">
+      <div class="cont-center-profile">
+        <div class="profile-image-wrapper">
+          <img id="profile-image" src="/img/profile.svg">
+        </div>
+
+        <input class="item-row input-item" type="text" name="name" placeholder="Name">
+        <input class="item-row input-item" type="text" name="Email" placeholder="Email">
+        <input class="item-row input-item" type="text" name="Contact" placeholder="Contact">
+
+        <div class="cont-opaque-qualifications">
+          <ul class="edit-list-wrapper">
+            <li class="dashboard-item dashboard-title">
+              <span class="col ">Qualifications</span>
+            </li>
+            <li class="edit-item">
+              <span class="col name-title">Wood</span>
+                <a class="button-small" onclick=""></a><i class="fas fa-trash float-right"></i></a>
+            </ul>
+          </div>
+
+      <div class="cont-left">
+        <div class="file-input-wrapper">
+          <button class="btn-file-input upload-btn button btn-red">
+            <i class="fas fa-upload"></i> Upload Image</button>
+            <input id="image-input" type="file" name="file" />
+          </div>
+        </div>
+        <div class="cont-right">
+          <div class="create-btn button btn-red" data-popup-open="popup-1">Save Changes</div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="popup" data-popup="popup-1">
+    <div class="popup-inner  popup-register">
+      <h class="popup-text">Saved</h>
+      <p class="popup-smalltext">The changes made have been saved. Click to return to manage users.</p>
+      <a href="../users" class="popup-register-btn button btn-red"  type="submit" value="Submit">Confirm</a>
+      <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
+    </div>
+  </div>
+
+  <script src="/js/users.js"></script>
+  <script src="/js/modal.js"></script>
+
+  <script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        $('#profile-image').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  $("#image-input").change(function() {
+    readURL(this);
+  });
+  </script>
+</body>
+</html>

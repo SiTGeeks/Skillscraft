@@ -1,0 +1,33 @@
+<!doctype html>
+<% include ../partials/headAdmin %>
+<body>
+  <% include ../partials/navigationAdmin %>
+  <% include ../partials/searchbar %>
+  <% include ../partials/banner %>
+
+  <div class="wrapper cont-workshop">
+    <div class="cont-center">
+
+      <div class="">
+        <form action="./users">
+          <button class="button-round search-submit" type="submit" value="Submit">
+            <i class="fas fa-search"></i>
+          </button >
+          <input class="input search-input" type="text" name="search" placeholder="Search by name">
+        </form>
+      </div>
+      <ul class="dashboard-list-wrapper">
+        <li class="dashboard-item dashboard-title">
+          <span class="col-3 name-title">Name</span>
+          <span class="col-3 contact-title">Contact</span>
+          <span class="col-3 email-title">Email</span>
+          <span class="col workshops-title">Qualitications</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="/js/modal.js"></script>
+  <script src="/js/users.js"></script>
+</body>
+</html>
