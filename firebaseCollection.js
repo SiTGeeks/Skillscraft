@@ -4,6 +4,7 @@ const database = firebase.database;
 const DB_WORKSHOP = "Workshop";
 const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
+const DB_QUALIFICATIONS = "Qualifications";
 
 module.exports = {
   unregister: function(workshopId, registrationEntry, callback){
@@ -23,7 +24,7 @@ module.exports = {
         }
       });
       callback(success);
-    }); 
+    });
   },
 
   checkInOut: function(authCode, callback){
@@ -58,8 +59,8 @@ module.exports = {
        });
      });
   },
-  
-  //LOOK FOR COURSE WITH ID 
+
+  //LOOK FOR COURSE WITH ID
   getWorkshopWithId: function(id, callback){
     var ref = database.ref(DB_WORKSHOP).child(id);
     return ref.once('value', function(workshopSnapshot) {
@@ -106,7 +107,7 @@ module.exports = {
         if(registrationsSnapshot){
           registrationsSnapshot.forEach(reg=>{
             registrations.push(reg);
-          });  
+          });
         }
       }
       callback(formattedWorkshop, registrations);
@@ -222,6 +223,22 @@ module.exports = {
         callback(null);
     });
   },
+
+  //GET QUALIFICATIONS
+  getQualifications: function (callback){
+    //Get all workshop info
+    var ref = database.ref(DB_QUALIFICATIONS);
+    return ref.once('value', function(snapshots) {
+      //success callback
+      var qualifications = [];
+      snapshots.forEach(snapshot=>{
+        var qualificationName = snapshot.val();
+        qualifications.push(qualificationName);
+      });
+      callback(qualifications);
+    });
+  },
+
   //GET CHECKED IN USERS
   getCheckedInUsers: function (callback){
     return database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
@@ -238,55 +255,65 @@ module.exports = {
     });
   },
   //Check IN USER
-  checkInUser: function (authCode, callback){
-    //Get user. find auth code
-    return database.ref(DB_USERS).once('value').then(function(snapshots) {
-      var userFound = false;
+  checkInOutUser: function (authCode, callback){
+    //Check if user exist in check in
+    return database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
+      var isCheckInFound = false;
+      //Check for checkin
       snapshots.forEach(function(snapshot) {
-        var user = snapshot.val();
-        //Check if authcode found
-        if(user.authCode === authCode){
-          userFound = true;
-          //Authcode found. Add user to current user database
-          var values =
-            {
-              name: user.name,
-              mobileNumber: user.mobileNumber,
-              authCode: user.authCode,
-            }
-            database.ref(DB_CHECKED_IN).push(values).then(function(result) {
-                callback(true);
-            }, function(error) {
-                callback(false);
-            });
+        var checkedInUserKey = snapshot.key;
+        var checkedInUser = snapshot.val();
+
+        //Checked in user found
+        if(checkedInUser.authCode === authCode){
+          //Checkout
+          console.log("CHECKOUT");
+          database.ref(DB_CHECKED_IN + '/' + checkedInUserKey).remove();
+          isCheckInFound = true;
+          callback(true);
         }
       });
-      //No user found
-      if(!userFound){
-        callback(false);
+      //No checkin user found. Check in current user with auth code
+      if(!isCheckInFound){
+        //Look for user
+        database.ref(DB_USERS).once('value').then(function(snapshots) {
+        var userFound = false;
+        snapshots.forEach(function(snapshot) {
+          var user = snapshot.val();
+          //Check if authcode found
+          if(user.authCode === authCode){
+            console.log("CHECKIN");
+            userFound = true;
+            //Authcode found. Add user to current user database
+            var values =
+              {
+                name: user.name,
+                contact: user.mobileNumber,
+                authCode: user.authCode,
+                qualifications: user.qualifications,
+              }
+              database.ref(DB_CHECKED_IN).push(values).then(function(result) {
+                //Check in
+                callback(true);
+              }, function(error) {
+                //Check in error
+                callback(false);
+              });
+            }
+          });
+          //No user found
+          if(!userFound){
+            //Invalid auth code. no user found
+            callback(false);
+          }
+        }, function(error) {
+          //Retrieve user info error
+          callback(false);
+        });
       }
     }, function(error) {
-        callback(false);
-    });
-  },
-
-  //CHECKOUT USER
-  checkOutUser: function  (authCode, callback){
-  	//Get checked in user
-  	return database.ref(DB_CHECKED_IN).once('value').then(function(snapshots) {
-  		snapshots.forEach(function(snapshot) {
-  			var checkedInUserKey = snapshot.key;
-  			var checkedInUser = snapshot.val();
-
-        if(checkedInUser.authCode === authCode){
-          database.ref(DB_CHECKED_IN + '/' + checkedInUserKey).remove();
-          callback(true);
-        }else{
-          callback(false);
-        }
-  		});
-  	}, function(error) {
-  	  callback(false);
+      //Get checkin user error
+      callback(false);
     });
   },
 }
