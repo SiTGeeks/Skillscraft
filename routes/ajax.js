@@ -64,6 +64,7 @@ function signUpForWorkshop(userDetails){
 function checkInOut(authCode){
 	//check in/out user
 	dbUtil.checkInOut(authCode, function(success){
+		console.log(success);
 		res.send(success);
 		res.end();
 	});
@@ -112,7 +113,7 @@ function deleteWorkshop(workshopId){
 function endWorkshop(workshopId){
 	dbUtil.getAdminWorkshopWithId(workshopId, function(formattedWorkshop, registrations){
 		for(var i=0; i<registrations.length; i++){
-			var authQR; //GENERATE QR HERE 
+			var authQR; //GENERATE QR HERE
 			var mailContent = emailUtil.createWorkshopCancelMail(authQR);
 			var email = registrations[i]["email"];
 			emailUtil.sendMail(mailContent, email);

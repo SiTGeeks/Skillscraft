@@ -37,7 +37,7 @@ app.use(function(req, res, next) {
 		if (user) {
 			req.user = user;
 			delete req.user.password;
-			req.session.user = user; 
+			req.session.user = user;
 			res.locals.user = user;
 		}
 		next();
@@ -62,10 +62,8 @@ require('./routes')(app);
 
 app.listen(port, function(){
 	console.log("Listening to port "+port);
-	dbUtil.checkInOutUser("WERTYUIJHGFDSA", function(result){
-		console.log(result)
-	})
+	// dbUtil.checkInOutUser("ABCDEFG", function(result){
+	// 	console.log(result)
+	// })
 	//dbUtil.loginUser("skillcraft@sc.com","skillcraft");
 });
-
-
