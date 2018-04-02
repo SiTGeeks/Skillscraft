@@ -3,14 +3,15 @@ const firebase = require("firebase");
 const Storage = require('@google-cloud/storage');
 
 const config = {
-	apiKey: "AIzaSyBQZsMFuR4rYWWyq_NSVjzYeSpjWhEKGmY",
-    authDomain: "skillcrafttesting.firebaseapp.com",
-    databaseURL: "https://skillcrafttesting.firebaseio.com",
-    projectId: "skillcrafttesting",
-    storageBucket: "skillcrafttesting.appspot.com",
-    messagingSenderId: "1013997108947"
+	var config = {
+		apiKey: "AIzaSyDSuN1fqMhrv1-ozD2RL5YTt9xIclKHCXI",
+		authDomain: "skillscraft-c5065.firebaseapp.com",
+		databaseURL: "https://skillscraft-c5065.firebaseio.com",
+		projectId: "skillscraft-c5065",
+		storageBucket: "skillscraft-c5065.appspot.com",
+		messagingSenderId: "584167045036"
+	};
 };
-
 
 //Google cloud storag
 const storage = new Storage({

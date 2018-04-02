@@ -62,9 +62,9 @@ require('./routes')(app);
 
 app.listen(port, function(){
 	console.log("Listening to port "+port);
-	// dbUtil.checkOutUser("WERTYUIJHGFDSA", function(result){
-	// 	console.log(result)
-	// })
+	dbUtil.checkInOutUser("WERTYUIJHGFDSA", function(result){
+		console.log(result)
+	})
 	//dbUtil.loginUser("skillcraft@sc.com","skillcraft");
 });
 
