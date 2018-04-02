@@ -3,7 +3,6 @@ const firebase = require("firebase");
 const Storage = require('@google-cloud/storage');
 
 const config = {
-	var config = {
 		apiKey: "AIzaSyDSuN1fqMhrv1-ozD2RL5YTt9xIclKHCXI",
 		authDomain: "skillscraft-c5065.firebaseapp.com",
 		databaseURL: "https://skillscraft-c5065.firebaseio.com",
