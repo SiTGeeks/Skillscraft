@@ -1,4 +1,5 @@
 var firebase = require('./firebaseConfig');
+const qrUtil = require('./QRUtils');
 const database = firebase.database;
 
 const DB_WORKSHOP = "Workshop";
@@ -289,4 +290,31 @@ module.exports = {
       callback(false);
     });
   },
+
+  createUpdateAccount: function(regDetails, workshop,callback){
+    var ref =  database.ref(DB_USERS).once('value');
+    ref.then(function(snapshots){
+      var user = snapshots.orderByChild("emailAddress").equalTo(regDetails['email']);
+      if(user!=null){
+        user.qualifications = user.qualifications + "," + workshop;
+        database.ref(DB_WORKSHOP + '/' + user.key).update(values).then(function(result) {
+          console.log("User Update Success: " + result);
+          callback(true);
+        }, function(error) {
+          console.log("User Update: " + error);
+          callback(false);
+        });
+      }else{
+        var newAccount = {
+          authCode: qrUtil.generateAuthCode(),
+          emailAddress: regDetails['email'],
+          isAdmin: false,
+          mobileNumber: regDetails['contact'],
+          name: regDetails['name'],
+          qualifications: workshop
+        }
+        ref.append(newAccount);
+      }
+    });
+  }
 }

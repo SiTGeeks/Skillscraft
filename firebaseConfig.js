@@ -9,7 +9,6 @@ const config = {
 		projectId: "skillscraft-c5065",
 		storageBucket: "skillscraft-c5065.appspot.com",
 		messagingSenderId: "584167045036"
-	};
 };
 
 //Google cloud storag

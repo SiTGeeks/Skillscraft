@@ -1,5 +1,7 @@
 const dbUtil = require('../firebaseCollection');
 const emailUtil = require('../emailUtils');
+
+
 var res;
 
 module.exports = function(app){
@@ -113,12 +115,16 @@ function deleteWorkshop(workshopId){
 function endWorkshop(workshopId){
 	dbUtil.getAdminWorkshopWithId(workshopId, function(formattedWorkshop, registrations){
 		for(var i=0; i<registrations.length; i++){
-			var authQR; //GENERATE QR HERE 
-			var mailContent = emailUtil.createWorkshopCancelMail(authQR);
-			var email = registrations[i]["email"];
-			emailUtil.sendMail(mailContent, email);
+			dbUtil.createUpdateAccount(registrations[i], formattedWorkshop["title"], function(newAccount){
+				if(newAccount){
+					// var mailContent = emailUtil.createWorkshopCancelMail(authQR);
+					// var email = registrations[i]["email"];
+					// emailUtil.sendMail(mailContent, email);
+				}
+			});
 		}
 	});
+	//deleteWorkshop(workshopId);
 }
 
 function getWorkshopIdFromURL(url){
