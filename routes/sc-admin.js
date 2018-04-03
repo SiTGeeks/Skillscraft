@@ -28,7 +28,24 @@ module.exports = function(app){
 		});
 	});
 
-	app.get("/sc-admin/workshop/ws/:ws", requireLogin, function(req, res){
+	app.get("/sc-admin/users", function(req, res){
+		//admin logged in home
+		res.render("users",
+		{
+			bannerText:"Manage Users"
+		});
+	});
+
+
+	app.get("/sc-admin/user/id", function(req, res){
+		//admin logged in home
+		res.render("profile",
+		{
+			bannerText:"User Profile"
+		});
+	});
+
+	app.get("/sc-admin/workshop/ws/:ws", function(req, res){
 		dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
 			res.render('edititem',
 			{
@@ -84,7 +101,8 @@ module.exports = function(app){
 		var workshopDescription = req.body.description;
 		var workshopImage = "workshopImage";
 		
-		dbUtil.updateWorkshop(workshopId, 
+		dbUtil.updateWorkshop(
+				workshopId, 
 				workshopName, 
 				workshopDescription,
 				workshopVacancy,
@@ -116,39 +134,39 @@ module.exports = function(app){
 		var workshopDescription = req.body.description;
 		dbUtil.createWorkshop( 
 				workshopName, 
-				workshopDescription,
-				workshopVacancy,
-				workshopTime,
-				workshopLocation,
-				workshopLevel,
-				"workshopImage",
-			function(success){
-				var msg = "";
-				if(success){
-					msg = "success";
+		});
+
+		//post functions
+		app.post("/sc-admin/login", function(req, res){
+			//admin login action
+			//res.redirect('/sc-admin/home')
+			var email = req.body.email;
+			var password = req.body.password;
+			dbUtil.loginUser(email, password, function(user){
+				if(!user){
+					res.render('/sc-admin',{error: "Invalid E-mail or password"});
 				}else{
-					msg = "failed";
+					req.session.user = user;
+					res.redirect('/sc-admin/home');
+
 				}
-				res.redirect('/sc-admin/workshop');
 				res.end();
 			});
 
-	});
+		});
 
 	app.post("/sc-admin/newAdmin", function(req,res){
 		//new admin account
 	});
 
-}
+		}
 
-function createAccount(){
 
-}
-
-function requireLogin(req,res,next){
-	if(!req.user && !debug){
-		res.redirect('/sc-admin');
-	}else{
-		next();
+	function requireLogin(req,res,next){
+		if(!req.user && !debug){
+			res.redirect('/sc-admin');
+		}else{
+			next();
+		}
 	}
-}
+
