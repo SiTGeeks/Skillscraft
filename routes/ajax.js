@@ -35,8 +35,18 @@ function handleAjax(req){
 		deleteWorkshop(getWorkshopIdFromURL(param));
 	}else if(action == "endWorkshop"){
 		endWorkshop(getWorkshopIdFromURL(param));
+	}else if(action == "getAllUsers"){
+		getAllUsers();
 	}
 }
+
+function getAllUsers(){
+	dbUtil.getAllUsers(function(data){
+		res.send(data);
+		res.end();
+	})
+}
+
 
 function getAllWorkshops(){
 	//get all course from db

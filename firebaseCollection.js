@@ -7,6 +7,43 @@ const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
 
 module.exports = {
+  getAllUsers: function(callback){
+    var ref = database.ref(DB_USERS)
+    return ref.once("value", function(usersSnapshot){
+      var users = [];
+      usersSnapshot.forEach(function(userSnapshot){
+          var user = {};
+          userDetails = userSnapshot.val();
+          user["name"] = userDetails["name"];
+          user["email"] = userDetails["emailAddress"];
+          user["contact"] = userDetails["mobileNumber"];
+          user["skills"] = userDetails["qualifications"];
+          user["id"] = userSnapshot.key;
+          users.push(user);
+      });
+      callback(users);
+    });
+  },
+
+  getUserById: function(id, callback){
+    var ref = database.ref(DB_USERS).child(id);
+    return ref.once('value', function(userSnapshot) {
+      //success callback
+      var userDetails = userSnapshot.val();
+      var formattedUser = {};
+      if(userDetails){
+        formattedUser = {
+          "name": userDetails["name"],
+          "email": userDetails["emailAddress"],
+          "contact": userDetails["mobileNumber"],
+          "skills": userDetails["qualifications"].split(','),
+          "id":userSnapshot.key
+        };
+      }
+      callback(formattedUser);
+    });
+  },
+
   unregister: function(workshopId, registrationEntry, callback){
     var ref =  database.ref(DB_WORKSHOP+'/'+workshopId).child("signedUp");
     return ref.once("value",function(registrationSnapshot){

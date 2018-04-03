@@ -10,18 +10,21 @@
           <img id="profile-image" src="/img/profile.svg">
         </div>
 
-        <input class="item-row input-item" type="text" name="name" placeholder="Name">
-        <input class="item-row input-item" type="text" name="Email" placeholder="Email">
-        <input class="item-row input-item" type="text" name="Contact" placeholder="Contact">
+        <input class="item-row input-item" type="text" name="name" placeholder="Name" value="<%- user['name'] %>">
+        <input class="item-row input-item" type="text" name="Email" placeholder="Email" value="<%- user['email'] %>">
+        <input class="item-row input-item" type="text" name="Contact" placeholder="Contact" value="<%- user['contact'] %>">
 
         <div class="cont-opaque-qualifications">
           <ul class="edit-list-wrapper">
             <li class="dashboard-item dashboard-title">
               <span class="col ">Qualifications</span>
             </li>
+            <% for(var i=0; i<user['skills'].length; i++){%>
             <li class="edit-item">
-              <span class="col name-title">Wood</span>
+              <span class="col name-title"><%- user['skills'][i] %></span>
                 <a class="button-small" onclick=""></a><i class="fas fa-trash float-right"></i></a>
+            </li>
+            <% } %>
             </ul>
           </div>
 

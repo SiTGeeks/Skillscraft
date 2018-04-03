@@ -1,5 +1,5 @@
 function generateItem(user) {
-  var itemLink = "user/id"
+  var itemLink = "user/"+user.id;
   var itemName = '<span class="col-3 name">'+user.name+'</span>';
   var itemContact = '<span class="col-3 number">'+user.contact+'</span>';
   var itemEmail = '<span class="col-3 number">'+user.email+'</span>';
@@ -23,28 +23,28 @@ function generateItem(user) {
   $(".dashboard-list-wrapper").append(item);
 }
 
-//func to generate list
-// function generateItems(workshops){
-//     for(var i=0; i < users.length; i++){
-//         var user = users[i];
-//         generateItem(user);
-//     }
-// }
+function generateItems(users){
+    for(var i=0; i < users.length; i++){
+        var user = users[i];
+        user["skills"] = user["skills"].split(",");
+        generateItem(user);
+    }
+}
 
 //Generate list of items
 $( document ).ready(function() {
-  console.log( "ready!!" );
-
-  user = {
-    "name":"John",
-    "email":"ctjsctjs@gmail.com",
-    "contact":"97577347",
-    "skills":[
-      "Wood", "Paper", "Metal"
-    ]
-  };
-
-  generateItem(user);
-  generateItem(user);
+  $.ajax({
+    url: "/ajax/",
+    data: {
+      action: "getAllUsers"
+    },
+    dataType: "json",
+    success: function(data) {
+      generateItems(data);
+    },
+    error: function(xhr, status){
+      console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+    }
+  });
 
 });
