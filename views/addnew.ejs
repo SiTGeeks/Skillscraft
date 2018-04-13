@@ -19,6 +19,9 @@
           <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker">
           <select class="item-row input-item"  name="level" id="input-level">
             <option value="None">Select</option>
+            <% for(var i=0; i<qualificationList.length; i++){ %>
+              <option value="None"><%- qualificationList[i] %></option>
+            <% } %>
           </select>
           <div class="cont-left">
             <div class="file-input-wrapper">
