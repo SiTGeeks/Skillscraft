@@ -5,8 +5,22 @@ const database = firebase.database;
 const DB_WORKSHOP = "Workshop";
 const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
-
+const DB_QUALIFICATIONS = "Qualifications";
 module.exports = {
+
+  getQualifications: function(callback){
+    var ref = database.ref(DB_QUALIFICATIONS)
+    return ref.once("value", function(snapshots){
+      var retrievedQualificationList = [];
+      snapshots.forEach(function(snapshot){
+          retrievedQualification = snapshot.val();
+          retrievedQualification["id"] = snapshot.key;
+          retrievedQualificationList.push(retrievedQualification);
+      });
+      callback(retrievedQualificationList);
+    });
+  },
+
   getAllUsers: function(callback){
     var ref = database.ref(DB_USERS)
     return ref.once("value", function(usersSnapshot){
@@ -61,7 +75,7 @@ module.exports = {
         }
       });
       callback(success);
-    }); 
+    });
   },
 
   //SIGN USER UP FOR COURSE
@@ -88,8 +102,8 @@ module.exports = {
        });
      });
   },
-  
-  //LOOK FOR COURSE WITH ID 
+
+  //LOOK FOR COURSE WITH ID
   getWorkshopWithId: function(id, callback){
     var ref = database.ref(DB_WORKSHOP).child(id);
     return ref.once('value', function(workshopSnapshot) {
@@ -136,7 +150,7 @@ module.exports = {
         if(registrationsSnapshot){
           registrationsSnapshot.forEach(reg=>{
             registrations.push(reg);
-          });  
+          });
         }
       }
       callback(formattedWorkshop, registrations);
