@@ -9,7 +9,9 @@
         <div class="profile-image-wrapper">
           <img id="profile-image" src="/img/profile.svg">
         </div>
-
+        <div class="qr-image-wrapper">
+          <img id="qr-image" src="http://qrcode.kaywa.com/img.php?s=20&d=Hello">
+        </div>
         <input class="item-row input-item" type="text" name="name" placeholder="Name" value="<%- user['name'] %>">
         <input class="item-row input-item" type="text" name="Email" placeholder="Email" value="<%- user['email'] %>">
         <input class="item-row input-item" type="text" name="Contact" placeholder="Contact" value="<%- user['contact'] %>">
@@ -26,37 +28,36 @@
                   <i class="fas fa-trash float-right"></i></a>
             </li>
             <% } %>
-            </ul>
-          </div>
-
-      <div class="cont-left">
-        <div class="file-input-wrapper">
-          <button class="btn-file-input upload-btn button btn-red">
-            <i class="fas fa-upload"></i> Upload Image</button>
-            <input id="image-input" type="file" name="file" />
-          </div>
+          </ul>
         </div>
-        <div class="cont-right">
-          <div class="create-btn button btn-red" data-popup-open="popup-1">Save Changes</div>
+
+          <div class="cont-left">
+            <div class="file-input-wrapper">
+              <button class="btn-file-input upload-btn button btn-red">
+                <i class="fas fa-upload"></i> Upload Image</button>
+                <input id="image-input" type="file" name="file" />
+              </div>
+            </div>
+            <div class="cont-right">
+              <div class="create-btn button btn-red" data-popup-open="popup-1">Save Changes</div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="popup" data-popup="popup-1">
+        <div class="popup-inner  popup-register">
+          <h class="popup-text">Saved</h>
+          <p class="popup-smalltext">The changes made have been saved. Click to return to manage users.</p>
+          <a href="../users" class="popup-register-btn button btn-red"  type="submit" value="Submit">Confirm</a>
+          <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
         </div>
       </div>
-    </form>
-  </div>
-
-  <div class="popup" data-popup="popup-1">
-    <div class="popup-inner  popup-register">
-      <h class="popup-text">Saved</h>
-      <p class="popup-smalltext">The changes made have been saved. Click to return to manage users.</p>
-      <a href="../users" class="popup-register-btn button btn-red"  type="submit" value="Submit">Confirm</a>
-      <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
-    </div>
-  </div>
 
   <% include ../partials/footer %>
   <script src="/js/users.js"></script>
   <script src="/js/profile.js"></script>
   <script src="/js/modal.js"></script>
-  <script src="/js/profile.js"></script>
 
-</body>
+  </body>
 </html>
