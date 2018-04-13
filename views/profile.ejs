@@ -22,7 +22,8 @@
             <% for(var i=0; i<user['skills'].length; i++){%>
             <li class="edit-item">
               <span class="col name-title"><%- user['skills'][i] %></span>
-                <a class="button-small" onclick=""></a><i class="fas fa-trash float-right"></i></a>
+                <a class="button-small" onclick= "removeCompetency('<%- user['skills'][i] %>', '<%- user['id'] %>')">
+                  <i class="fas fa-trash float-right"></i></a>
             </li>
             <% } %>
             </ul>
@@ -52,6 +53,7 @@
   </div>
 
   <script src="/js/users.js"></script>
+  <script src="/js/profile.js"></script>
   <script src="/js/modal.js"></script>
 
   <script>

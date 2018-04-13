@@ -37,6 +37,8 @@ function handleAjax(req){
 		endWorkshop(getWorkshopIdFromURL(param));
 	}else if(action == "getAllUsers"){
 		getAllUsers();
+	}else if(action == "removeCompetency"){
+		removeCompetency(param);
 	}
 }
 
@@ -120,6 +122,10 @@ function deleteWorkshop(workshopId){
 		}
 		dbUtil.deleteWorkshop(workshopId);
 	});
+}
+
+function removeCompetency(params){
+	console.log(params['competency']);
 }
 
 function endWorkshop(workshopId){

@@ -28,7 +28,7 @@ module.exports = function(app){
 		});
 	});
 
-	app.get("/sc-admin/users", function(req, res){
+	app.get("/sc-admin/users", requireLogin, function(req, res){
 		//admin logged in home
 		res.render("users",
 		{
@@ -37,7 +37,7 @@ module.exports = function(app){
 	});
 
 
-	app.get("/sc-admin/user/:id", function(req, res){
+	app.get("/sc-admin/user/:id",requireLogin, function(req, res){
 		//admin logged in home
 		dbUtil.getUserById(req.params.id,function(user){
 			res.render("profile",
@@ -50,7 +50,7 @@ module.exports = function(app){
 
 	});
 
-	app.get("/sc-admin/workshop/ws/:ws", function(req, res){
+	app.get("/sc-admin/workshop/ws/:ws",requireLogin, function(req, res){
 		dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
 			res.render('edititem',
 			{
@@ -61,7 +61,7 @@ module.exports = function(app){
 		});
 	});
 
-	app.get("/sc-admin/create-workshop",  requireLogin,function(req, res){
+	app.get("/sc-admin/create-workshop", requireLogin,function(req, res){
 		//admin logged in home
 		res.render('addnew');
 	});
