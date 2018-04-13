@@ -8,14 +8,7 @@
   <div class="wrapper cont-workshop">
     <div class="cont-center">
 
-      <div class="">
-        <form action="./users">
-          <button class="button-round search-submit" type="submit" value="Submit">
-            <i class="fas fa-search"></i>
-          </button >
-          <input class="input search-input" type="text" name="search" placeholder="Search by name">
-        </form>
-      </div>
+      <input class="input search-input keyup-input" type="text" name="search" placeholder="Search by name"  oninput="filterFunc(this)">
       <ul class="dashboard-list-wrapper">
         <li class="dashboard-item dashboard-title">
           <span class="col-3 name-title">Name</span>

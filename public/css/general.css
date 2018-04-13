@@ -349,6 +349,10 @@ a, a:hover, a:active, a:visited{
   float: right;
 }
 
+.keyup-input{
+  margin-bottom: 20px;
+}
+
 @media (max-width: 720px) {
   .search-input{
     width: calc( 100% - 60px );

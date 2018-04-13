@@ -24,11 +24,23 @@ function generateItem(user) {
 }
 
 function generateItems(users){
-    for(var i=0; i < users.length; i++){
-        var user = users[i];
-        user["skills"] = user["skills"].split(",");
-        generateItem(user);
+  for(var i=0; i < users.length; i++){
+    var user = users[i];
+    user["skills"] = user["skills"].split(",");
+    generateItem(user);
+  }
+}
+
+//Onkeyup filter search function for user list
+function filterFunc(event) {
+  var userInput = event.value.toUpperCase();
+  $('.name').each(function() {
+    if (this.textContent.toUpperCase().indexOf(userInput) > -1) {
+      $(this).parent().css({"display":""});
+    } else {
+      $(this).parent().css({"display":"none"});
     }
+  });
 }
 
 //Generate list of items
@@ -46,5 +58,4 @@ $( document ).ready(function() {
       console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
     }
   });
-
 });
