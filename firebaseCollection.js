@@ -110,11 +110,15 @@ module.exports = {
       //success callback
       var workshopDetails = workshopSnapshot.val();
       var formattedWorkshop = {};
+      var occupied = 0;
+      if(workshopDetails.signedUp != undefined){
+        occupied = workshopDetails.signedUp.length;
+      }
       if(workshopDetails){
         formattedWorkshop = {
           "title": workshopDetails.workshopName,
           "desc": workshopDetails.workshopDescription,
-          "occupied": workshopDetails.workshopOccupied,
+          "occupied": occupied,
           "vacancy": workshopDetails.workshopVacancy,
           "location": workshopDetails.workshopLocation,
           "image": workshopDetails.workshopImage,
@@ -133,11 +137,15 @@ module.exports = {
       //success callback
       var workshopDetails = workshopSnapshot.val();
       var formattedWorkshop = {};
+      var occupied = 0;
+      if(workshopDetails.signedUp != undefined){
+        occupied = workshopDetails.signedUp.length;
+      }
       if(workshopDetails){
         formattedWorkshop = {
           "title": workshopDetails.workshopName,
           "desc": workshopDetails.workshopDescription,
-          "occupied": workshopDetails.workshopOccupied,
+          "occupied": occupied,
           "vacancy": workshopDetails.workshopVacancy,
           "location": workshopDetails.workshopLocation,
           "image": workshopDetails.workshopImage,
@@ -157,7 +165,7 @@ module.exports = {
     });
   },
   //READ WORKSHOPS FROM FIREBASE
-  getWorkshop: function (callback){
+  getWorkshops: function (callback){
     //Get all workshop info
     var ref = database.ref(DB_WORKSHOP);
     return ref.once('value', function(workshopsSnapshot) {
@@ -165,10 +173,14 @@ module.exports = {
       var workshops = [];
       workshopsSnapshot.forEach(workshop=>{
         var workshopDetails = workshop.val();
+        var occupied = 0;
+        if(workshopDetails.signedUp != undefined){
+          occupied = workshopDetails.signedUp.length;
+        }
         var formattedWorkshop = {
           "title": workshopDetails.workshopName,
           "desc": workshopDetails.workshopDescription,
-          "occupied": workshopDetails.workshopOccupied,
+          "occupied": occupied,
           "vacancy": workshopDetails.workshopVacancy,
           "location": workshopDetails.workshopLocation,
           "image": "workshopDetails.workshopImage",
@@ -185,16 +197,17 @@ module.exports = {
   //ADDD WORKSHOP TO DATABASE
   //0 is bronze, 1 is silver, 2 is gold
 
-  createWorkshop: function (workshopName, workshopDescription, workshopVacancy,
-     workshopTiming, workshopLocation, workshopCompletionLevel, workshopImage, callback) {
+  createWorkshop: function (workshopName, workshopDescription, workshopLocation,
+     workshopVacancy, workshopDate, workshopTiming, workshopLevel, workshopImage, callback) {
     var values =
     {
       workshopName: workshopName,
       workshopDescription: workshopDescription,
-      workshopokVacancy: workshopVacancy,
-      workshopTiming: workshopTiming,
       workshopLocation: workshopLocation,
-      workshopCompletionLevel: workshopCompletionLevel,
+      workshopVacancy: workshopVacancy,
+      workshopDate: workshopDate,
+      workshopTiming: workshopTiming,
+      workshopLevel: workshopLevel,
       workshopImage: workshopImage
     }
     database.ref(DB_WORKSHOP).push(values).then(function(result) {

@@ -137,20 +137,22 @@ module.exports = function(app){
 	app.post("/sc-admin/createWorkshop", requireLogin,function(req,res){
 		//back to edit item with message
 		var workshopName = req.body.title;
+		var workshopDescription = req.body.description;
 		var workshopLocation = req.body.location;
 		var workshopVacancy = req.body.vacancy;
 		var workshopDate = req.body.date;
 		var workshopTime = req.body.time;
 		var workshopLevel = req.body.level;
-		var workshopDescription = req.body.description;
+
 		dbUtil.createWorkshop(
 				workshopName,
 				workshopDescription,
-				workshopVacancy,
-				workshopTime,
 				workshopLocation,
+				workshopVacancy,
+				workshopDate,
+				workshopTime,
 				workshopLevel,
-				"workshopImage",
+				null,
 			function(success){
 				var msg = "";
 				if(success){
