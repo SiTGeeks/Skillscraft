@@ -21,9 +21,6 @@
 // });
 
 //DEMO
-list = ["Bronze", "Silver","Gold"];
-generateOptions(list);
-
 //Init date and time picker
 $( function() {
   $("#datepicker").datepicker();
@@ -128,14 +125,5 @@ function sendReminderEmail(){
     error: function(xhr, status){
         console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
     }
-  });
-}
-
-function generateOptions(list){
-  $.each(list, function (i, item) {
-    $('#input-level').append($('<option>', {
-      value: item,
-      text : item
-    }));
   });
 }

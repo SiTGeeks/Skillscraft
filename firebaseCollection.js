@@ -5,8 +5,22 @@ const database = firebase.database;
 const DB_WORKSHOP = "Workshop";
 const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
-
+const DB_QUALIFICATIONS = "Qualifications";
 module.exports = {
+
+  getQualifications: function(callback){
+    var ref = database.ref(DB_QUALIFICATIONS)
+    return ref.once("value", function(snapshots){
+      var retrievedQualificationList = [];
+      snapshots.forEach(function(snapshot){
+          retrievedQualification = snapshot.val();
+          retrievedQualification["id"] = snapshot.key;
+          retrievedQualificationList.push(retrievedQualification);
+      });
+      callback(retrievedQualificationList);
+    });
+  },
+
   getAllUsers: function(callback){
     var ref = database.ref(DB_USERS)
     return ref.once("value", function(usersSnapshot){
@@ -61,7 +75,7 @@ module.exports = {
         }
       });
       callback(success);
-    }); 
+    });
   },
 
   //SIGN USER UP FOR COURSE
@@ -88,19 +102,23 @@ module.exports = {
        });
      });
   },
-  
-  //LOOK FOR COURSE WITH ID 
+
+  //LOOK FOR COURSE WITH ID
   getWorkshopWithId: function(id, callback){
     var ref = database.ref(DB_WORKSHOP).child(id);
     return ref.once('value', function(workshopSnapshot) {
       //success callback
       var workshopDetails = workshopSnapshot.val();
       var formattedWorkshop = {};
+      var occupied = 0;
+      if(workshopDetails.signedUp != undefined){
+        occupied = workshopDetails.signedUp.length;
+      }
       if(workshopDetails){
         formattedWorkshop = {
           "title": workshopDetails.workshopName,
           "desc": workshopDetails.workshopDescription,
-          "occupied": workshopDetails.workshopOccupied,
+          "occupied": occupied,
           "vacancy": workshopDetails.workshopVacancy,
           "location": workshopDetails.workshopLocation,
           "image": workshopDetails.workshopImage,
@@ -119,11 +137,15 @@ module.exports = {
       //success callback
       var workshopDetails = workshopSnapshot.val();
       var formattedWorkshop = {};
+      var occupied = 0;
+      if(workshopDetails.signedUp != undefined){
+        occupied = workshopDetails.signedUp.length;
+      }
       if(workshopDetails){
         formattedWorkshop = {
           "title": workshopDetails.workshopName,
           "desc": workshopDetails.workshopDescription,
-          "occupied": workshopDetails.workshopOccupied,
+          "occupied": occupied,
           "vacancy": workshopDetails.workshopVacancy,
           "location": workshopDetails.workshopLocation,
           "image": workshopDetails.workshopImage,
@@ -136,14 +158,14 @@ module.exports = {
         if(registrationsSnapshot){
           registrationsSnapshot.forEach(reg=>{
             registrations.push(reg);
-          });  
+          });
         }
       }
       callback(formattedWorkshop, registrations);
     });
   },
   //READ WORKSHOPS FROM FIREBASE
-  getWorkshop: function (callback){
+  getWorkshops: function (callback){
     //Get all workshop info
     var ref = database.ref(DB_WORKSHOP);
     return ref.once('value', function(workshopsSnapshot) {
@@ -151,10 +173,14 @@ module.exports = {
       var workshops = [];
       workshopsSnapshot.forEach(workshop=>{
         var workshopDetails = workshop.val();
+        var occupied = 0;
+        if(workshopDetails.signedUp != undefined){
+          occupied = workshopDetails.signedUp.length;
+        }
         var formattedWorkshop = {
           "title": workshopDetails.workshopName,
           "desc": workshopDetails.workshopDescription,
-          "occupied": workshopDetails.workshopOccupied,
+          "occupied": occupied,
           "vacancy": workshopDetails.workshopVacancy,
           "location": workshopDetails.workshopLocation,
           "image": "workshopDetails.workshopImage",
@@ -171,16 +197,17 @@ module.exports = {
   //ADDD WORKSHOP TO DATABASE
   //0 is bronze, 1 is silver, 2 is gold
 
-  createWorkshop: function (workshopName, workshopDescription, workshopVacancy,
-     workshopTiming, workshopLocation, workshopCompletionLevel, workshopImage, callback) {
+  createWorkshop: function (workshopName, workshopDescription, workshopLocation,
+     workshopVacancy, workshopDate, workshopTiming, workshopLevel, workshopImage, callback) {
     var values =
     {
       workshopName: workshopName,
       workshopDescription: workshopDescription,
-      workshopokVacancy: workshopVacancy,
-      workshopTiming: workshopTiming,
       workshopLocation: workshopLocation,
-      workshopCompletionLevel: workshopCompletionLevel,
+      workshopVacancy: workshopVacancy,
+      workshopDate: workshopDate,
+      workshopTiming: workshopTiming,
+      workshopLevel: workshopLevel,
       workshopImage: workshopImage
     }
     database.ref(DB_WORKSHOP).push(values).then(function(result) {
