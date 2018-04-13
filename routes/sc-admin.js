@@ -37,6 +37,14 @@ module.exports = function(app){
 	});
 
 
+		app.get("/sc-admin/competency", requireLogin, function(req, res){
+			//admin logged in home
+			res.render("competency",
+			{
+				bannerText:"Competency"
+			});
+		});
+
 	app.get("/sc-admin/user/:id",requireLogin, function(req, res){
 		//admin logged in home
 		dbUtil.getUserById(req.params.id,function(user){
@@ -54,6 +62,7 @@ module.exports = function(app){
 		dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
 			res.render('edititem',
 			{
+				bannerText:"Edit Workshop",
 				ws: data,
 				registered
 			});
@@ -66,6 +75,7 @@ module.exports = function(app){
 		dbUtil.getQualifications(function(qualificationList){
 			res.render('addnew',
 				{
+					bannerText:"Create Workshop",
 					qualificationList
 				}
 			);
@@ -79,10 +89,10 @@ module.exports = function(app){
 	});
 
 	//post functions
-	
+
 	//create competency
 	app.post("/sc-admin/competency/create", function(req,res){
-		
+
 	});
 
 	app.post("/sc-admin/competency/delete", function(req,res){
