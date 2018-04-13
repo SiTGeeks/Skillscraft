@@ -125,6 +125,9 @@ function deleteWorkshop(workshopId){
 
 function removeCompetency(params){
 	console.log(params['competency'], params['id']);
+	dbUtil.removeCompetencyFromUser((params['competency'], params['id'], function(success){
+
+	});
 }
 
 function endWorkshop(workshopId){

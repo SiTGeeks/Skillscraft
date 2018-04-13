@@ -6,8 +6,8 @@ const DB_WORKSHOP = "Workshop";
 const DB_USERS = "Users";
 const DB_CHECKED_IN = "CheckedIn";
 const DB_QUALIFICATIONS = "Qualifications";
-module.exports = {
 
+module.exports = {
   getQualifications: function(callback){
     var ref = database.ref(DB_QUALIFICATIONS)
     return ref.once("value", function(snapshots){
@@ -380,5 +380,26 @@ module.exports = {
         ref.append(newAccount);
       }
     });
+  },
+
+  removeCompetencyFromUser: function(competency, id, callback){
+    var ref = database.ref(DB_USERS).child(id);
+    ref.once("value", function(){
+      success = true;
+
+      callback(success);
+    });
+  },
+
+  createCompetency: function(qualification){
+    database.ref(DB_QUALIFICATIONS).push(qualification).then(function(result) {
+      console.log("Qualification Add Success: " + result);
+    }, function(error) {
+      console.log("Qualification Add: " + error);
+    });
+  },
+
+  removeCompetency: function(){
+    database.ref(DB_QUALIFICATIONS).child(equalTo
   }
 }
