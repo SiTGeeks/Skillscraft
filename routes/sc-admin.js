@@ -79,6 +79,16 @@ module.exports = function(app){
 	});
 
 	//post functions
+	
+	//create competency
+	app.post("/sc-admin/competency/create", function(req,res){
+		
+	});
+
+	app.post("/sc-admin/competency/delete", function(req,res){
+
+	});
+
 	app.post("/sc-admin", function(req, res){
 		//admin login action
 		//res.redirect('/sc-admin/home')

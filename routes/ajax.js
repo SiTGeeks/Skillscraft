@@ -1,7 +1,6 @@
 const dbUtil = require('../firebaseCollection');
 const emailUtil = require('../emailUtils');
 
-
 var res;
 
 module.exports = function(app){
@@ -125,7 +124,7 @@ function deleteWorkshop(workshopId){
 }
 
 function removeCompetency(params){
-	console.log(params['competency']);
+	console.log(params['competency'], params['id']);
 }
 
 function endWorkshop(workshopId){
@@ -140,7 +139,7 @@ function endWorkshop(workshopId){
 			});
 		}
 	});
-	//deleteWorkshop(workshopId);
+n	//deleteWorkshop(workshopId);
 }
 
 function getWorkshopIdFromURL(url){
