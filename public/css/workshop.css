@@ -121,6 +121,12 @@
   margin: 0 auto;
 }
 
+.msg-empty-workshop{
+  text-align: center;
+  font-size: 18px;
+  display:none;
+}
+
 @media (max-width: 961px) {
   .workshop-item{
     width: calc((100% - 20px)/2);
