@@ -1,0 +1,47 @@
+<!doctype html>
+<% include ../partials/headAdmin %>
+<body>
+  <% include ../partials/navigationAdmin %>
+  <% include ../partials/searchbar %>
+  <% include ../partials/banner %>
+
+  <div class="wrapper cont-workshop">
+    <div class="row row-btn">
+      <a class="button-round btn-add-workshop btn-red" data-popup-open="popup-1">
+        <i class="fas fa-plus"></i>
+      </a>
+    </div>
+    <form action="./adminWorkshop.html">
+      <div class="cont-center-profile">
+
+        <div class="cont-opaque-qualifications">
+          <ul class="edit-list-wrapper">
+            <li class="dashboard-item dashboard-title">
+              <span class="col ">Qualifications</span>
+            </li>
+            <li class="edit-item">
+              <span class="col name-title">DONGXIANG  </span>
+              <a class="button-small" onclick= "DONGXIANG">
+                <i class="fas fa-trash float-right"></i></a>
+              </li>
+            </ul>
+          </div>
+          <div class="popup" data-popup="popup-1">
+            <div class="popup-inner  popup-register">
+              <h class="popup-text">Add competency</h>
+              <form id="registerForm" name="registerForm">
+                <input id="competency" class="input register-input" type="text" name="competency" placeholder="Competency">
+                <span class="error err-contact"></span>
+                <button id="btn-registerForm" class="popup-register-btn button btn-red" onclick="DONGXIANG">Add Competency</button>
+              </form>
+              <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
+            </div>
+          </div>
+
+          <% include ../partials/footer %>
+          <script src="/js/users.js"></script>
+          <script src="/js/profile.js"></script>
+          <script src="/js/modal.js"></script>
+
+        </body>
+        </html>
