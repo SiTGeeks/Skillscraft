@@ -20,7 +20,7 @@
           <select class="item-row input-item"  name="level" id="input-level">
             <option value="None">Select</option>
             <% for(var i=0; i<qualificationList.length; i++){ %>
-              <option value="None"><%- qualificationList[i] %></option>
+              <option value="<%- qualificationList[i] %>"><%-qualificationList[i]%></option>
             <% } %>
           </select>
           <div class="cont-left">
@@ -46,10 +46,10 @@
         </div>
       </div>
     </form>
+    <% include ../partials/footer %>
     <script src="/js/addNewWorkshop.js"></script>
     <script src="/js/modal.js"></script>
     <script src="/js/dynamicTextbox.js"></script>
     <script src="/js/editItem.js"></script>
-
   </body>
   </html>

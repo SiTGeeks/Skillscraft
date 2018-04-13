@@ -51,7 +51,7 @@ function getAllUsers(){
 
 function getAllWorkshops(){
 	//get all course from db
-	dbUtil.getWorkshop(function(data){
+	dbUtil.getWorkshops(function(data){
 		//work with data here
 		res.send(data);
 		res.end();
