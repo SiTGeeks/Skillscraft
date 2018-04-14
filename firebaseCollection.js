@@ -399,7 +399,15 @@ module.exports = {
     });
   },
 
-  removeCompetency: function(){
-    database.ref(DB_QUALIFICATIONS).child(equalTo
+  removeCompetency: function(qualification){
+    database.ref(DB_QUALIFICATIONS).once('value').then(function(snapshots){
+      snapshots.forEach(function(snapshot) {
+        if(snapshot.val() == qualification){
+          snapshot.ref.remove();
+        }
+      });
+    }, function(error) {
+      console.log("Qualification Add: " + error);
+    });
   }
 }

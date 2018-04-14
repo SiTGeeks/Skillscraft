@@ -125,8 +125,9 @@ function deleteWorkshop(workshopId){
 
 function removeCompetency(params){
 	console.log(params['competency'], params['id']);
-	dbUtil.removeCompetencyFromUser((params['competency'], params['id'], function(success){
-
+	dbUtil.removeCompetencyFromUser(params['competency'], params['id'], function(success){
+		res.send(success);
+		res.end();
 	});
 }
 
@@ -142,7 +143,7 @@ function endWorkshop(workshopId){
 			});
 		}
 	});
-n	//deleteWorkshop(workshopId);
+	//deleteWorkshop(workshopId);
 }
 
 function getWorkshopIdFromURL(url){

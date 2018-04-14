@@ -21,7 +21,6 @@ module.exports = function(app){
 	});
 
 	app.get("/sc-admin/workshop", requireLogin, function(req, res){
-		//admin logged in home
 		res.render("adminworkshop",
 		{
 			bannerText:"Browse all workshops"
@@ -29,7 +28,6 @@ module.exports = function(app){
 	});
 
 	app.get("/sc-admin/users", requireLogin, function(req, res){
-		//admin logged in home
 		res.render("users",
 		{
 			bannerText:"Manage Users"
@@ -37,16 +35,17 @@ module.exports = function(app){
 	});
 
 
-		app.get("/sc-admin/competency", requireLogin, function(req, res){
-			//admin logged in home
+	app.get("/sc-admin/competency", requireLogin, function(req, res){
+		dbUtil.getQualifications(function(qualificationList){
 			res.render("competency",
 			{
-				bannerText:"Competency"
-			});
+				bannerText:"Competency",
+				qualifications: qualificationList
+			});		
 		});
+	});
 
 	app.get("/sc-admin/user/:id",requireLogin, function(req, res){
-		//admin logged in home
 		dbUtil.getUserById(req.params.id,function(user){
 			res.render("profile",
 			{
@@ -92,11 +91,13 @@ module.exports = function(app){
 
 	//create competency
 	app.post("/sc-admin/competency/create", function(req,res){
-
+		var newCompetency  = req.body.param;
+		dbUtil.createCompetency(newCompetency);
 	});
 
 	app.post("/sc-admin/competency/delete", function(req,res){
-
+		var competency =  req.body.param;
+		dbUtil.removeCompetency(competency);
 	});
 
 	app.post("/sc-admin", function(req, res){
