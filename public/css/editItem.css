@@ -56,14 +56,16 @@
 }
 
 .input-desc{
-  overflow: hidden;
   resize: none;
-  min-height:60px;
+  height:356px;
   border-radius: 5px;
   font-size:12px;
   line-height:1.5;
   font-family: sans-serif;
   padding-top:10px;
+  margin-bottom: 12px;
+  border: 1px solid #dfdfdf;
+  padding: 10px;
 }
 
 .taskbar{

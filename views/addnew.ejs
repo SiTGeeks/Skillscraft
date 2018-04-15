@@ -8,51 +8,51 @@
   <form action="/sc-admin/createWorkshop" id="createWorkshopForm" method="POST">
     <div class="wrapper cont-item">
       <div class="cont-item-wrapper">
+        <div class="cont-opaque-admin">
+          <div class="cont-left ">
+            <textarea class="input-item input-desc" type="text" name="description" placeholder="Description"></textarea>
+          </div>
 
-        <div class="cont-left cont-opaque">
-          <h class="item-desc-title">Description</h>
-          <textarea class="input input-item input-desc" type="text" name="description"  onkeyup="auto_grow(this)"></textarea>
-        </div>
-
-        <div class="cont-right">
-          <input class="item-row input-item" type="text" name="title" placeholder="Title">
-          <input class="item-row input-item" type="text" name="location" placeholder="Location">
-          <input class="item-row input-item" type="text" name="vacancy" placeholder="Vacancy">
-          <input class="item-row input-item" type="text" name="date" placeholder="date"  id="datepicker">
-          <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker">
-          <select class="item-row input-item"  name="level" id="input-level">
-            <option value="None">Select</option>
-            <% for(var i=0; i<qualificationList.length; i++){ %>
-              <option value="<%- qualificationList[i] %>"><%-qualificationList[i]%></option>
-            <% } %>
-          </select>
-          <div class="cont-left">
-            <div class="file-input-wrapper">
-              <button class="btn-file-input upload-btn button btn-red">
-                <i class="fas fa-upload"></i> Upload Image</button>
-                <input type="file" name="file" />
+          <div class="cont-right">
+            <input class="item-admin-row input-item" type="text" name="title" placeholder="Title">
+            <input class="item-admin-row input-item" type="text" name="location" placeholder="Location">
+            <input class="item-admin-row input-item" type="text" name="vacancy" placeholder="Vacancy">
+            <input class="item-admin-row input-item" type="text" name="date" placeholder="date"  id="datepicker">
+            <input class="item-admin-row input-item" type="text" name="time" placeholder="time" id="timepicker">
+            <select class="item-admin-row-select input-item"  name="level" id="input-level">
+              <option value="None">Select</option>
+              <% for(var i=0; i<qualificationList.length; i++){ %>
+                <option value="<%- qualificationList[i] %>"><%-qualificationList[i]%></option>
+                <% } %>
+              </select>
+              <div class="cont-left">
+                <div class="file-input-wrapper">
+                  <button class="btn-file-input upload-btn button btn-red">
+                    <i class="fas fa-upload"></i> Upload Image</button>
+                    <input type="file" name="file" />
+                  </div>
+                </div>
+                <div class="cont-right">
+                  <div class="create-btn button btn-red" data-popup-open="popup-1">Create Workshop</div>
+                </div>
               </div>
-            </div>
-            <div class="cont-right">
-              <div class="create-btn button btn-red" data-popup-open="popup-1">Create Workshop</div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="popup" data-popup="popup-1">
-        <div class="popup-inner  popup-register">
-          <h class="popup-text">Created</h>
-          <p class="popup-smalltext">Are you sure you want to create this workshop?</p>
-          <button class="popup-register-btn button btn-red"  onclick="submitWorkshopDetails()">Confirm</button>
-          <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
+        <div class="popup" data-popup="popup-1">
+          <div class="popup-inner  popup-register">
+            <h class="popup-text">Created</h>
+            <p class="popup-smalltext">Are you sure you want to create this workshop?</p>
+            <button class="popup-register-btn button btn-red"  onclick="submitWorkshopDetails()">Confirm</button>
+            <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
+          </div>
         </div>
-      </div>
-    </form>
-    <% include ../partials/footer %>
-    <script src="/js/addNewWorkshop.js"></script>
-    <script src="/js/modal.js"></script>
-    <script src="/js/dynamicTextbox.js"></script>
-    <script src="/js/editItem.js"></script>
-  </body>
-  </html>
+      </form>
+      <% include ../partials/footer %>
+      <script type="text/javascript" src="/js/wickedpicker.min.js"></script>
+      <script src="/js/addNewWorkshop.js"></script>
+      <script src="/js/modal.js"></script>
+
+    </body>
+    </html>

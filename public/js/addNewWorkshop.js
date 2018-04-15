@@ -10,3 +10,11 @@ function submitWorkshopDetails(){
 		workshopDetailsForm.submit();
 	}
 }
+
+//Init date and time picker
+
+$( function() {
+  $("#datepicker").datepicker();
+  $('#timepicker').wickedpicker();
+});
+console.log($('.timepicker').wickedpicker('time'));

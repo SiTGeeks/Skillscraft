@@ -19,13 +19,14 @@
 //   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
 //   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
 // });
+var options = {
+  now: "11:23", //hh:mm 24 hour format only, defaults to current time
+}
 
-//DEMO
-//Init date and time picker
 $( function() {
   $("#datepicker").datepicker();
-  $('#timepicker').timepicker();
-} );
+  $('#timepicker').wickedpicker(options);
+});
 
 function deleteRegistration(workshopId,name,contact,email,removeBtn){
   var registration = {
@@ -38,15 +39,15 @@ function deleteRegistration(workshopId,name,contact,email,removeBtn){
   $.ajax({
     url: "/ajax/",
     data: {
-        action: "unregister",
-        param: registration
+      action: "unregister",
+      param: registration
     },
     dataType: "json",
     success: function(data) {
       removeBtn.parentNode.parentNode.remove();
     },
     error: function(xhr, status){
-        console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+      console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
     }
   });
 }
@@ -68,8 +69,8 @@ function endWorkshop(){
   $.ajax({
     url: "/ajax/",
     data: {
-        action: "endWorkshop",
-        param: window.location.toString()
+      action: "endWorkshop",
+      param: window.location.toString()
     },
     dataType: "json",
     success: function(data) {
@@ -80,7 +81,7 @@ function endWorkshop(){
       }
     },
     error: function(xhr, status){
-        console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+      console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
     }
   });
 }
@@ -89,8 +90,8 @@ function deleteWorkshop(){
   $.ajax({
     url: "/ajax/",
     data: {
-        action: "deleteWorkshop",
-        param: window.location.toString()
+      action: "deleteWorkshop",
+      param: window.location.toString()
     },
     dataType: "json",
     success: function(data) {
@@ -101,7 +102,7 @@ function deleteWorkshop(){
       }
     },
     error: function(xhr, status){
-        console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+      console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
     }
   });
 }
@@ -111,8 +112,8 @@ function sendReminderEmail(){
   $.ajax({
     url: "/ajax/",
     data: {
-        action: "reminderEmail",
-        param: window.location.toString()
+      action: "reminderEmail",
+      param: window.location.toString()
     },
     dataType: "json",
     success: function(data) {
@@ -123,7 +124,7 @@ function sendReminderEmail(){
       }
     },
     error: function(xhr, status){
-        console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
+      console.log("AJAX ERROR GETTING COURSES: " + xhr.status);
     }
   });
 }

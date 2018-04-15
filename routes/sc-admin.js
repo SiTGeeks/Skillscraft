@@ -41,7 +41,7 @@ module.exports = function(app){
 			{
 				bannerText:"Competency",
 				qualifications: qualificationList
-			});		
+			});
 		});
 	});
 

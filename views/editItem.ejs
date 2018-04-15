@@ -2,35 +2,38 @@
 <% include ../partials/headAdmin %>
 <body>
   <% include ../partials/navigationAdmin %>
-
+  <% include ../partials/searchbar %>
+  <% include ../partials/banner %>
   <div class="wrapper cont-item">
     <div class="cont-item-wrapper">
       <div class="taskbar-inner">
         <a class="taskbar-btn button btn-red" data-popup-open="popup-1" id="sendEmail">Send Email</a>
         <a class="taskbar-btn button btn-red" data-popup-open="popup-2" id="endWorkshop">End Workshop</a>
         <a class="taskbar-btn button btn-red" data-popup-open="popup-3" id="deleteWorkshop">Delete Workshop</a>
-        <a class="taskbar-btn button btn-red" data-popup-open="popup-4" id="saveChanges">Save Changes</a>
       </div>
       <form action="/sc-admin/editWorkshop" method="POST" id="editWorkshopForm">
-        <div class="cont-left cont-opaque">
-          <h class="item-desc-title">Description</h>
-          <textarea class="input input-item input-desc" type="text" name="description"  onkeyup="auto_grow(this)"><%- ws["desc"] %></textarea>
-        </textarea>
-      </div>
-      <div class="cont-right">
-        <input class="item-row input-item" type="text" name="title" placeholder="Title"
-        value= '<%- ws["title"] %>'>
-        <input class="item-row input-item" type="text" name="location" placeholder="Location"
-        value= '<%- ws["location"] %>'>
-        <input class="item-row input-item" type="text" name="vacancy" placeholder="Vacancy"
-        value= '<%- ws["vacancy"] %>'>
-        <input class="item-row input-item" type="text" name="date" placeholder="date" id="datepicker"
-        value='<%- ws["date"] %>'>
-        <input class="item-row input-item" type="text" name="time" placeholder="time" id="timepicker"
-        value='<%- ws["time"] %>'>
-        <select class="item-row input-item"  name="level" id="input-level">
-          <option value="None">Select</option>
-        </select>
+        <div class="cont-opaque-admin">
+          <div class="cont-left">
+            <textarea class=" input-item input-desc" type="text" name="description"><%- ws["desc"] %></textarea>
+          </textarea>
+        </div>
+        <div class="cont-right">
+          <input class="item-admin-row input-item" type="text" name="title" placeholder="Title"
+          value= '<%- ws["title"] %>'>
+          <input class="item-admin-row input-item" type="text" name="location" placeholder="Location"
+          value= '<%- ws["location"] %>'>
+          <input class="item-admin-row input-item" type="text" name="vacancy" placeholder="Vacancy"
+          value= '<%- ws["vacancy"] %>'>
+          <input class="item-admin-row input-item" type="text" name="date" placeholder="date" id="datepicker"
+          value='<%- ws["date"] %>'>
+          <input class="item-admin-row input-item" type="text" name="time" placeholder="time" id="timepicker"
+          value='<%- ws["time"] %>'>
+          <select class="item-admin-row-select input-item"  name="level" id="input-level">
+            <option value="None">Select</option>
+          </select>
+          <div class="button btn-red" data-popup-open="popup-4" id="saveChanges">Save Changes</div>
+
+        </div>
       </div>
     </form>
   </div>
@@ -110,6 +113,7 @@
 </div>
 
 <% include ../partials/footer %>
+<script type="text/javascript" src="/js/wickedpicker.min.js"></script>
 <script src="/js/modal.js"></script>
 <script src="/js/editItem.js"></script>
 <script src="/js/dynamicTextbox.js"></script>
