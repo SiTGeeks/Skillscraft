@@ -1,6 +1,9 @@
-const firebase = require("firebase");
+// const firebase = require("firebase");
 // Imports the Google Cloud client library
 const Storage = require('@google-cloud/storage');
+const admin = require('firebase-admin');
+
+const serviceAccount = require("./serviceAccountKey.json");
 
 const config = {
 		apiKey: "AIzaSyDSuN1fqMhrv1-ozD2RL5YTt9xIclKHCXI",
@@ -28,7 +31,21 @@ const bucket = storage.bucket('skillcrafttesting.appspot.com').getFiles()
     .catch(err => {
       // console.error('ERROR:', err);
     });
-firebase.initializeApp(config)
+
+		// Initialize the default app
+		var defaultApp = admin.initializeApp({
+		  credential: admin.credential.cert(serviceAccount),
+		  databaseURL: "https://skillscraft-c5065.firebaseio.com",
+			apiKey: "AIzaSyDSuN1fqMhrv1-ozD2RL5YTt9xIclKHCXI",
+			authDomain: "skillscraft-c5065.firebaseapp.com",
+			projectId: "skillscraft-c5065",
+			storageBucket: "skillscraft-c5065.appspot.com",
+			messagingSenderId: "584167045036"
+		});
+
+		console.log(defaultApp.name);  // '[DEFAULT]'
+
 module.exports = {
-  database: firebase.database(),
+  database: defaultApp.database(),
+	auth: defaultApp.auth()
 };
