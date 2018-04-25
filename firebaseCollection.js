@@ -420,7 +420,7 @@ module.exports = {
     });
   },
 
-  removeCompetency: function(qualification){
+  removeCompetency: function(qualification, callback){
     console.log("remove competen:" + qualification);
     database.ref(DB_QUALIFICATIONS).once('value').then(function(snapshots){
       snapshots.forEach(function(snapshot) {
@@ -428,7 +428,9 @@ module.exports = {
           snapshot.ref.remove();
         }
       });
+      callback(true);
     }, function(error) {
+      callback(false);
       console.log("Qualification remove: " + error);
     });
   }

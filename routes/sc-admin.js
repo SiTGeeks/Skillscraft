@@ -97,7 +97,10 @@ module.exports = function(app){
 
 	app.post("/sc-admin/competency/delete", function(req,res){
 		var competency =  req.body.param;
-		dbUtil.removeCompetency(competency);
+		dbUtil.removeCompetency(competency, function(success){
+			res.send(success);
+			res.end();
+		});
 	});
 
 	app.post("/sc-admin", function(req, res){

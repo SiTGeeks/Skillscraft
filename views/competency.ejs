@@ -19,11 +19,13 @@
             <li class="dashboard-item dashboard-title">
               <span class="col ">Qualifications</span>
             </li>
-            <li class="edit-item">
-              <span class="col name-title">DONGXIANG </span>
-              <a class="button-small" onclick= "DONGXIANG">
-                <i class="fas fa-trash float-right"></i></a>
+            <% for(var i=0; i<qualifications.length; i++){%>
+              <li class="edit-item">
+                <span class="col name-title"><%- qualifications[i] %></span>
+                  <a class="button-small" onclick= "deleteCompetency('<%- qualifications[i] %>', this)">
+                    <i class="fas fa-trash float-right"></i></a>
               </li>
+            <% } %>
             </ul>
           </div>
           <div class="popup" data-popup="popup-1">
@@ -32,7 +34,7 @@
               <form id="registerForm" name="registerForm">
                 <input id="competency" class="input register-input" type="text" name="competency" placeholder="Competency">
                 <span class="error err-contact"></span>
-                <button id="btn-registerForm" class="popup-register-btn button btn-red" onclick="DONGXIANG">Add Competency</button>
+                <button id="btn-registerForm" class="popup-register-btn button btn-red" onclick="addCompetency()">Add Competency</button>
               </form>
               <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
             </div>
@@ -42,6 +44,6 @@
           <script src="/js/users.js"></script>
           <script src="/js/profile.js"></script>
           <script src="/js/modal.js"></script>
-
+          <script src="/js/competency.js"></script>
         </body>
         </html>

@@ -1,5 +1,4 @@
-function deleteCompetency(competency){
-	console.log(competency);
+function deleteCompetency(competency, button){
 	$.ajax({
 	    url: "/sc-admin/competency/delete",
 	   	type: "POST",
@@ -9,12 +8,14 @@ function deleteCompetency(competency){
 	    },
 	    dataType: "json",
 	    success: function(data) {
+				console.log("resut: " + data);
+				location.reload();
 	    },
 	    error: function(xhr, status){
 	      console.log("AJAX ERROR DELETING COMPETENCY: " + xhr.status);
 	    }
  	 });
-	location.reload();
+
 }
 
 function addCompetency(competency){
