@@ -383,11 +383,32 @@ module.exports = {
   },
 
   removeCompetencyFromUser: function(competency, id, callback){
+    console.log("fbcollet remove");
     var ref = database.ref(DB_USERS).child(id);
-    ref.once("value", function(){
-      success = true;
+    ref.once('value').then(function(snapshots){
+      console.log(competency);
+      var userInfo = snapshots.val();
+      var qualificationList = userInfo.qualifications.split(',');
+      //Check comeptency in list
+      var index = qualificationList.indexOf(competency);
+      if(index != -1){
+        qualificationList.splice(index, 1);
+        console.log(qualificationList);
+        userInfo.qualifications = qualificationList.join();
+      }
+      console.log(userInfo);
 
-      callback(success);
+      //Update user data
+      ref.update(userInfo).then(function(result) {
+        console.log("Competency Update Success: " + result);
+        callback(true);
+      }, function(error) {
+        console.log("Competency Update: " + error);
+        callback(false);
+      });
+    }, function(error) {
+      console.log("Competency Update: " + error);
+      callback(false);
     });
   },
 
@@ -400,6 +421,7 @@ module.exports = {
   },
 
   removeCompetency: function(qualification){
+    console.log("remove competen:" + qualification);
     database.ref(DB_QUALIFICATIONS).once('value').then(function(snapshots){
       snapshots.forEach(function(snapshot) {
         if(snapshot.val() == qualification){
@@ -407,7 +429,7 @@ module.exports = {
         }
       });
     }, function(error) {
-      console.log("Qualification Add: " + error);
+      console.log("Qualification remove: " + error);
     });
   }
 }

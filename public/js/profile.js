@@ -1,4 +1,4 @@
-function removeCompetency(competency,id){
+function removeCompetency(competency,id, item){
 	params = {
       	'competency': competency,
       	'id': id
@@ -11,6 +11,10 @@ function removeCompetency(competency,id){
 	    },
 	    dataType: "json",
 	    success: function(data) {
+				if(data === true){
+					item.parentNode.remove()
+				}
+				console.log("result succ?:" + data);
 	    },
 	    error: function(xhr, status){
 	      console.log("AJAX ERROR REMOVING COMPETENCY: " + xhr.status);

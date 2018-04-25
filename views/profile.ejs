@@ -24,7 +24,7 @@
             <% for(var i=0; i<user['skills'].length; i++){%>
             <li class="edit-item">
               <span class="col name-title"><%- user['skills'][i] %></span>
-                <a class="button-small" onclick= "removeCompetency('<%- user['skills'][i] %>', '<%- user['id'] %>')">
+                <a class="button-small" onclick= "removeCompetency('<%- user['skills'][i] %>', '<%- user['id'] %>', this)">
                   <i class="fas fa-trash float-right"></i></a>
             </li>
             <% } %>
