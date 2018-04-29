@@ -12,9 +12,12 @@ function submitWorkshopDetails(){
 }
 
 //Init date and time picker
+var options = {
+  twentyFour: true
+}
 
 $( function() {
   $("#datepicker").datepicker();
-  $('#timepicker').wickedpicker();
+  $('#timepicker').wickedpicker(options);
 });
 console.log($('.timepicker').wickedpicker('time'));

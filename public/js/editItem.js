@@ -19,8 +19,11 @@
 //   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
 //   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
 // });
+var getTime = $("#timepicker").val();
+console.log(getTime);
 var options = {
-  now: "11:23", //hh:mm 24 hour format only, defaults to current time
+  now: getTime, //hh:mm 24 hour format only, defaults to current time
+  twentyFour: true
 }
 
 $( function() {
