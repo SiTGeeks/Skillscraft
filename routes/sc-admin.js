@@ -1,5 +1,5 @@
 const dbUtil = require('../firebaseCollection');
-const debug = true;
+const debug = false;
 
 module.exports = function(app){
 	//get functions
@@ -59,13 +59,16 @@ module.exports = function(app){
 
 	app.get("/sc-admin/workshop/ws/:ws",requireLogin, function(req, res){
 		dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
-			res.render('edititem',
-			{
-				bannerText:"Edit Workshop",
-				ws: data,
-				registered
+			dbUtil.getQualifications(function(qualificationList){
+				res.render('edititem',
+				{
+					bannerText:"Edit Workshop",
+					ws: data,
+					registered,
+					qualificationList,
+				});
+				res.end();
 			});
-			res.end();
 		});
 	});
 
@@ -82,9 +85,9 @@ module.exports = function(app){
 	});
 
 
-	app.get("/sc-admin/logout", function(req,req){
+	app.get("/sc-admin/logout", function(req,res){
 		req.session.reset();
-		req.redirect("/sc-admin/");
+		res.redirect("/sc-admin/");
 	});
 
 	//post functions
@@ -125,8 +128,7 @@ module.exports = function(app){
 		//back to edit item with message
 		var host = req.headers.referer;
 		var hostParts = host.split("/");
-		var workshopId = hostParts[hostParts.length-1];
-
+		var workshopId = hostParts[hostParts.length-1];;
 		var workshopName = req.body.title;
 		var workshopLocation = req.body.location;
 		var workshopDate = req.body.date;
@@ -140,10 +142,10 @@ module.exports = function(app){
 				workshopId,
 				workshopName,
 				workshopDescription,
+				workshopLocation,
 				workshopVacancy,
 				workshopDate,
 				workshopTime,
-				workshopLocation,
 				workshopLevel,
 				workshopImage,
 			function(success){
@@ -189,28 +191,34 @@ module.exports = function(app){
 		});
 	});
 
-	//post functions
-	app.post("/sc-admin/login", function(req, res){
-		//admin login action
-		//res.redirect('/sc-admin/home')
-		var email = req.body.email;
-		var password = req.body.password;
-		dbUtil.loginUser(email, password, function(user){
-			if(!user){
-				res.render('/sc-admin',{error: "Invalid E-mail or password"});
-			}else{
-				req.session.user = user;
-				res.redirect('/sc-admin/home');
+	app.post("/sc-admin/editProfile", requireLogin, function(req,res){
+		const { name, Email, Contact, id} = req.body;
+		console.log(name);
+		console.log(Email);
+		console.log(Contact);
+		console.log(id);
 
-			}
-			res.end();
-		});
-
+		console.log('update profile');
+		dbUtil.updateUser(
+			id,
+			name,
+			Email,
+			Contact,
+			function(success){
+				var msg = "";
+				if(success){
+					msg = "true";
+				}else{
+					msg = "false";
+				}
+				res.redirect('/sc-admin/users');
+				res.end();
+			});
 	});
 }
 
 function requireLogin(req,res,next){
-	if(!req.user && !debug){
+	if(!req.session.user && !debug){
 		res.redirect('/sc-admin');
 	}else{
 		next();

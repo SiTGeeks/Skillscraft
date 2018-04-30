@@ -37,6 +37,36 @@ function generateItems(workshops){
     }
 }
 
+$.urlParam = function(name){
+  var results = new RegExp('[\?&]' + name + '=([^]*)').exec(window.location.href);
+  if (results==null){
+    return null;
+  }
+  else{
+    return results[1] || 0;
+  }
+}
+
+//Filter for search function
+function filterFunc() {
+  var searchKey = $.urlParam('search');
+
+  if (searchKey != null){
+    //Get input and convert to uppercase
+    var userInput = $('.search-input').val(decodeURIComponent($.urlParam('search'))).val().toUpperCase();
+
+    $('.item-title').each(function() {
+      var itemName = this.textContent.toUpperCase();
+      if (itemName.indexOf(userInput) < 0) {
+        $(this).parent().parent().parent().remove();
+      }
+    });
+    if ($(".workshop-list-wrapper").html()==""){
+      $(".msg-empty-workshop").show();
+    }
+  }
+}
+
 //Generate list of items
 $( document ).ready(function() {
     var result
@@ -49,6 +79,7 @@ $( document ).ready(function() {
         dataType: "json",
         success: function(data) {
             generateItems(data);
+            filterFunc();
         },
         error: function(xhr, status){
             console.log("AJAX ERROR GETTING COURSES: " + xhr.status);

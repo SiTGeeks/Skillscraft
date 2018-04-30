@@ -22,6 +22,18 @@ function removeCompetency(competency,id, item){
   	});
 }
 
+function submitEditProfile(){
+  var profileDetails = {};
+  var profileDetailsForm  = $('#editProfileForm');
+  profileDetailsForm.serializeArray().map(function(v) {profileDetails[v.name] =  v.value;});
+  var validForm = true;
+
+  if(validForm){
+    document.forms["editProfileForm"].submit();
+  }
+}
+
+
 function readURL(input) {
   if (input.files && input.files[0]) {
     var reader = new FileReader();

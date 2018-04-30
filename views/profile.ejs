@@ -4,7 +4,7 @@
   <% include ../partials/navigationAdmin %>
   <% include ../partials/searchbar %>
   <div class="wrapper cont-workshop">
-    <form action="./adminWorkshop.html">
+    <form action="/sc-admin/editProfile" id="editProfileForm" method="POST"  >
       <div class="cont-center-profile">
         <div class="profile-image-wrapper">
           <img id="profile-image" src="/img/profile.svg">
@@ -15,7 +15,7 @@
         <input class="item-row input-item" type="text" name="name" placeholder="Name" value="<%- user['name'] %>">
         <input class="item-row input-item" type="text" name="Email" placeholder="Email" value="<%- user['email'] %>">
         <input class="item-row input-item" type="text" name="Contact" placeholder="Contact" value="<%- user['contact'] %>">
-
+        <input hidden name="id" value="<%- user['id'] %>">
         <div class="cont-opaque-qualifications">
           <ul class="edit-list-wrapper">
             <li class="dashboard-item dashboard-title">
@@ -49,7 +49,7 @@
         <div class="popup-inner  popup-register">
           <h class="popup-text">Saved</h>
           <p class="popup-smalltext">The changes made have been saved. Click to return to manage users.</p>
-          <a href="../users" class="popup-register-btn button btn-red"  type="submit" value="Submit">Confirm</a>
+          <a class="popup-register-btn button btn-red"  type="submit" onclick="submitEditProfile()" value="Submit">Confirm</a>
           <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
         </div>
       </div>

@@ -30,6 +30,13 @@
           value='<%- ws["time"] %>'>
           <select class="item-admin-row-select input-item"  name="level" id="input-level">
             <option value="None">Select</option>
+            <% for(var i=0; i<qualificationList.length; i++){ %>
+              <% if(qualificationList[i] === ws['level']){ %>
+                <option selected="selected" value="<%- qualificationList[i] %>"><%-qualificationList[i]%></option>
+              <% } else { %>
+                <option value="<%- qualificationList[i] %>"><%-qualificationList[i]%></option>
+              <% } %>
+            <% } %>
           </select>
           <div class="button btn-red" data-popup-open="popup-4" id="saveChanges">Save Changes</div>
 

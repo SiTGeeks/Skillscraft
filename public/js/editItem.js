@@ -19,8 +19,11 @@
 //   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
 //   generateItem('Clement', '97577347', 'ctjsctjs@gmail.com');
 // });
+var getTime = $("#timepicker").val();
+
 var options = {
-  now: "11:23", //hh:mm 24 hour format only, defaults to current time
+  now: getTime, //hh:mm 24 hour format only, defaults to current time
+  twentyFour: true,
 }
 
 $( function() {
@@ -61,7 +64,7 @@ function submitEditItem(){
   //some checks with workshop details
 
   if(validForm){
-    workshopDetailsForm.submit();
+    document.forms["editWorkshopForm"].submit();
   }
 }
 

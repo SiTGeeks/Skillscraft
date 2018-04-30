@@ -149,6 +149,7 @@ module.exports = {
           "vacancy": workshopDetails.workshopVacancy,
           "location": workshopDetails.workshopLocation,
           "image": workshopDetails.workshopImage,
+          "level": workshopDetails.workshopLevel,
           "date": workshopDetails.workshopDate,
           "time": workshopDetails.workshopTiming,
           "id":workshopSnapshot.key,
@@ -219,14 +220,19 @@ module.exports = {
     });
   },
   //UPDATE WORKSHOP
-  updateWorkshop: function (key, workshopName, workshopDescription, workshopVacancy, workshopTiming, workshopLocation, callback){
+  updateWorkshop: function (key, workshopName, workshopDescription, workshopLocation,
+     workshopVacancy, workshopDate, workshopTiming, workshopLevel,
+    workshopImage,callback){
     var values =
     {
       workshopName: workshopName,
       workshopDescription: workshopDescription,
+      workshopLocation: workshopLocation,
       workshopVacancy: workshopVacancy,
+      workshopDate: workshopDate,
       workshopTiming: workshopTiming,
-      workshopLocation: workshopLocation
+      workshopLevel: workshopLevel,
+      workshopImage: workshopImage
     }
 
     database.ref(DB_WORKSHOP + '/' + key).update(values).then(function(result) {
@@ -433,5 +439,21 @@ module.exports = {
       callback(false);
       console.log("Qualification remove: " + error);
     });
-  }
+  },
+  updateUser: function (id, name, email, contact, callback){
+    var values =
+    {
+      name: name,
+      emailAddress: email,
+      mobileNumber: contact,
+    }
+
+    database.ref(DB_USERS + '/' + id).update(values).then(function(result) {
+      console.log("Profile Update Success: " + result);
+      callback(true);
+    }, function(error) {
+      console.log("Profile Update: " + error);
+      callback(false);
+    });
+  },
 }
