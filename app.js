@@ -1,5 +1,5 @@
 const host = '127.0.0.1';
-const port = 3000;
+var port = process.env.PORT || 8000;
 
 const express = require('express');
 const bodyParser = require('body-parser');
