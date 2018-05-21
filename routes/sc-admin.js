@@ -21,7 +21,7 @@ module.exports = function(app){
 	});
 
 	app.get("/sc-admin/workshop", requireLogin, function(req, res){
-		res.render("adminworkshop",
+		res.render("adminWorkshop",
 		{
 			bannerText:"Browse all workshops"
 		});
