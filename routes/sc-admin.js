@@ -58,18 +58,18 @@ module.exports = function(app){
 	});
 
 	app.get("/sc-admin/workshop/ws/:ws",requireLogin, function(req, res){
-		// dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
+		dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
 			dbUtil.getQualifications(function(qualificationList){
 				res.render('edititem',
 				{
-					bannerText:"Edit Workshop",
-					ws: 'one',
-					registered:'one',
+					bannerText: data["Edit Workshop"],
+					ws: data,
+					registered,
 					qualificationList,
 				});
 				res.end();
 			});
-		// });
+		});
 	});
 
 	app.get("/sc-admin/create-workshop", requireLogin,function(req, res){
