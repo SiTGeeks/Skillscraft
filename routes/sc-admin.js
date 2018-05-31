@@ -63,8 +63,8 @@ module.exports = function(app){
 				res.render('edititem',
 				{
 					bannerText:"Edit Workshop",
-					ws: data,
-					registered,
+					ws: 'one',
+					registered:'one',
 					qualificationList,
 				});
 				res.end();
