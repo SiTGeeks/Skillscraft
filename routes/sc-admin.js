@@ -70,6 +70,7 @@ module.exports = function(app){
 			// 	});
 			// 	res.end();
 			// });
+			res.end();
 		});
 	});
 
