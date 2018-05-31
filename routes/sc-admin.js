@@ -59,16 +59,17 @@ module.exports = function(app){
 
 	app.get("/sc-admin/workshop/ws/:ws",requireLogin, function(req, res){
 		dbUtil.getAdminWorkshopWithId(req.params.ws, function(data, registered){
-			dbUtil.getQualifications(function(qualificationList){
-				res.render('edititem',
-				{
-					bannerText:"Edit Workshop",
-					ws: data,
-					registered,
-					qualificationList,
-				});
-				res.end();
-			});
+			console.log('dosmth')
+			// dbUtil.getQualifications(function(qualificationList){
+			// 	res.render('edititem',
+			// 	{
+			// 		bannerText:"Edit Workshop",
+			// 		ws: data,
+			// 		registered,
+			// 		qualificationList,
+			// 	});
+			// 	res.end();
+			// });
 		});
 	});
 
