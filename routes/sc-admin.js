@@ -62,12 +62,12 @@ module.exports = function(app){
 			dbUtil.getQualifications(function(qualificationList){
 				res.render('edititem',
 				{
-					bannerText: data["Edit Workshop"],
+					bannerText:"Edit Workshop",
 					ws: data,
 					registered,
 					qualificationList,
 				});
-				res.end();
+				// res.end();
 			});
 		});
 	});
