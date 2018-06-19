@@ -33,6 +33,35 @@ function submitEditProfile(){
   }
 }
 
+function addCompetencyUser(id, item){
+	var e = document.getElementById("input-add-qualification");
+	var competency = e.options[e.selectedIndex].text;
+	if(competency === 'Select'){
+		return;
+	}
+	console.log('add competency:' + competency)
+	params = {
+      	'competency': competency,
+      	'id': id
+	}
+	$.ajax({
+	    url: "/ajax/",
+	    data: {
+	      action: "addCompetencyUser",
+	      param: params
+	    },
+	    dataType: "json",
+	    success: function(data) {
+				if(data === true){
+					location.reload();
+				}
+				console.log("result succ?:" + data);
+	    },
+	    error: function(xhr, status){
+	      console.log("AJAX ERROR REMOVING COMPETENCY: " + xhr.status);
+	    }
+  	});
+}
 
 function readURL(input) {
   if (input.files && input.files[0]) {

@@ -13,7 +13,6 @@ module.exports = function(app){
 function handleAjax(req){
 	var action = getQueryActionFromRequest(req);
 	var param = getQueryParamFromRequest(req);
-
 	if(action == "getAllWorkshops"){
 		getAllWorkshops();
 	}else if(action == "getAllCourseAdmin"){
@@ -38,6 +37,8 @@ function handleAjax(req){
 		getAllUsers();
 	}else if(action == "removeCompetency"){
 		removeCompetency(param);
+	}else if(action =="addCompetencyUser"){
+		addCompetencyUser(param);
 	}
 }
 
@@ -126,6 +127,15 @@ function deleteWorkshop(workshopId){
 function removeCompetency(params){
 	console.log(params['competency'], params['id']);
 	dbUtil.removeCompetencyFromUser(params['competency'], params['id'], function(success){
+		res.send(success);
+		res.end();
+	});
+}
+
+function addCompetencyUser(params){
+	console.log('ajax add competecy user')
+	console.log(params['competency'], params['id']);
+	dbUtil.addCompetencyToUser(params['competency'], params['id'], function(success){
 		res.send(success);
 		res.end();
 	});

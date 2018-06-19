@@ -30,6 +30,21 @@
             <% } %>
           </ul>
         </div>
+        <!--  add quai-->
+        <div class="cont-opaque-qualifications">
+          <ul class="edit-list-wrapper">
+            <li class="dashboard-item dashboard-title">
+              <span class="col ">Add Qualifications</span>
+            </li>
+            <select class="item-admin-row-select input-item"  name="level" id="input-add-qualification">
+              <option value="None">Select</option>
+              <% for(var i=0; i<qualificationList.length; i++){ %>
+                <option value="<%- qualificationList[i] %>"><%-qualificationList[i]%></option>
+                <% } %>
+              </select>
+                <div class="create-btn button btn-red" onclick="addCompetencyUser('<%- user['id'] %>', this)">Add Qualification</div>
+          </ul>
+        </div>
 
           <div class="cont-left">
             <div class="file-input-wrapper">
@@ -49,7 +64,7 @@
         <div class="popup-inner  popup-register">
           <h class="popup-text">Saved</h>
           <p class="popup-smalltext">The changes made have been saved. Click to return to manage users.</p>
-          <a class="popup-register-btn button btn-red"  type="submit" onclick="submitEditProfile()" value="Submit">Confirm</a>
+          <a class="popup-register-btn button btn-red"  type="submit" onclick="submitEditProfile()" value="Submit">Ok</a>
           <a class="popup-close" data-popup-close="popup-1" type="submit" value="Submit" href="#"><i class="fas fa-times"></i></a>
         </div>
       </div>

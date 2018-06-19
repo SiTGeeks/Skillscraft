@@ -388,6 +388,32 @@ module.exports = {
     });
   },
 
+  addCompetencyToUser: function(competency, id, callback){
+    console.log("add competency to user");
+    var ref = database.ref(DB_USERS).child(id);
+    ref.once('value').then(function(snapshots){
+      console.log('adding: ' + competency);
+      var userInfo = snapshots.val();
+      var qualificationList = userInfo.qualifications.split(',');
+      //Check comeptency in list
+      qualificationList.push(competency)
+      userInfo.qualifications = qualificationList.join();
+      console.log(userInfo);
+
+      //Update user data
+      ref.update(userInfo).then(function(result) {
+        console.log("Competency Update Success: " + result);
+        callback(true);
+      }, function(error) {
+        console.log("Competency Update: " + error);
+        callback(false);
+      });
+    }, function(error) {
+      console.log("Competency Update: " + error);
+      callback(false);
+    });
+  },
+
   removeCompetencyFromUser: function(competency, id, callback){
     console.log("fbcollet remove");
     var ref = database.ref(DB_USERS).child(id);

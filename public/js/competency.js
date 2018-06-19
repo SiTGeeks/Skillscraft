@@ -15,7 +15,6 @@ function deleteCompetency(competency, button){
 	      console.log("AJAX ERROR DELETING COMPETENCY: " + xhr.status);
 	    }
  	 });
-
 }
 
 function addCompetency(competency){

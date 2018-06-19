@@ -46,15 +46,17 @@ module.exports = function(app){
 	});
 
 	app.get("/sc-admin/user/:id",requireLogin, function(req, res){
-		dbUtil.getUserById(req.params.id,function(user){
-			res.render("profile",
-			{
-				bannerText:"User Profile",
-				user: user
+		dbUtil.getQualifications(function(qualificationList){
+			dbUtil.getUserById(req.params.id,function(user){
+				res.render("profile",
+				{
+					bannerText:"User Profile",
+					user: user,
+					qualificationList: qualificationList
+				});
+				res.end();
 			});
-			res.end();
 		});
-
 	});
 
 	app.get("/sc-admin/workshop/ws/:ws",requireLogin, function(req, res){
