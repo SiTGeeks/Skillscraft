@@ -452,15 +452,49 @@ module.exports = {
     });
   },
 
+// Remove competency from db
   removeCompetency: function(qualification, callback){
-    console.log("remove competen:" + qualification);
+    console.log("Removing competency:" + qualification);
+    // Remove competency
     database.ref(DB_QUALIFICATIONS).once('value').then(function(snapshots){
+      console.log('Retriving competency db');
       snapshots.forEach(function(snapshot) {
         if(snapshot.val() == qualification){
           snapshot.ref.remove();
         }
       });
-      callback(true);
+      console.log('Competency removed');
+      // Get all users and remove user competecy
+      database.ref(DB_USERS).once("value", function(usersSnapshot){
+        userSize = usersSnapshot.numChildren();
+        userIndex = 0;
+        console.log('Retriving user db:');
+        usersSnapshot.forEach(function(userSnapshot){
+            //Get qualification
+            var userInfo = userSnapshot.val();
+            var qualificationList = userInfo.qualifications.split(',');
+            //Check comeptency in list
+            var index = qualificationList.indexOf(qualification);
+            if(index != -1){
+              qualificationList.splice(index, 1);
+              console.log(qualificationList);
+              userInfo.qualifications = qualificationList.join();
+            }
+            console.log(userInfo);
+
+            //Update user data
+            database.ref(DB_USERS + '/' + userSnapshot.key).update(userInfo).then(function(result) {
+              console.log('User updated');
+              //Last user
+              if(userIndex == userSize-1){
+                console.log("last user updated");
+                callback(true);
+              }
+              userIndex++;
+            }, function(error) {
+            });
+        });
+      });
     }, function(error) {
       callback(false);
       console.log("Qualification remove: " + error);
