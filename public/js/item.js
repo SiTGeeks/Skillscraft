@@ -49,10 +49,11 @@ function validateRegisterForm() {
 	if (name==""){
 		$(".err-name").html(icon + "Please enter your name.");
 		valid = false;
-	} else if (!isAlpha(name)){
-		$(".err-name").html(icon + "Please enter only alphabetical characters.");
-		valid = false;
 	}
+	// else if (!isAlpha(name)){
+	// 	$(".err-name").html(icon + "Please enter only alphabetical characters.");
+	// 	valid = false;
+	// }
 
 	//Validate email input
 	if (email==""){
@@ -88,7 +89,7 @@ function validateEmail(email) {
 
 //Function to validate contact format using regex
 function validateContact(contact){
-	var filter = /^[9|8][0-9]{7}$/;
+	var filter = /^[9|6|8][0-9]{7}$/;
 	if (filter.test(contact)) {
 		return true;
 	}
